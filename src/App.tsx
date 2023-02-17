@@ -14,23 +14,29 @@ function App() {
   const [typed, setTyped] = useState("");
   const { words, updateWords } = useWords(12);
 
-  const keydownHandler = useCallback(({ key, code }: KeyboardEvent) => {
-    const allowed = isKeyboardAllowed(code);
-    if (!allowed) {
-      return;
-    }
+  const keydownHandler = useCallback(
+    ({ key, code }: KeyboardEvent) => {
+      const allowed = isKeyboardAllowed(code);
+      if (!allowed) {
+        return;
+      }
 
-    switch (key) {
-      case "Backspace":
-        setTyped((typed) => typed.slice(0, -1));
-        break;
-      default:
-        setTyped((typed) => typed.concat(key));
-        break;
-    }
-    console.log(key);
-    console.log(allowed);
-  }, []);
+      switch (key) {
+        case "Backspace":
+          setTyped((typed) => typed.slice(0, -1));
+          break;
+        default:
+          setTyped((typed) => typed.concat(key));
+          break;
+      }
+
+      if (typed.length === words.length - 1) {
+        setTyped("");
+        updateWords();
+      }
+    },
+    [typed.length, updateWords, words.length]
+  );
 
   useEffect(() => {
     window.addEventListener("keydown", keydownHandler);
