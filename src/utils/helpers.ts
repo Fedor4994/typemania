@@ -21,3 +21,12 @@ export const calculateAccurancyPercentage = (errors: number, total: number) => {
   }
   return 0;
 };
+
+export const isKeyboardAllowed = (code: string) => {
+  return (
+    code.startsWith("Key") ||
+    code.startsWith("Digit") ||
+    code === "Backspace" ||
+    code === "Space"
+  );
+};

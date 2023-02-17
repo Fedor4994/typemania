@@ -1,15 +1,44 @@
+import { useCallback, useEffect, useState } from "react";
 import CountdownTimer from "./components/CountdownTimer/CountdownTimer";
-import { faker } from "@faker-js/faker";
 import GeneratedWords from "./components/GeneratedWords/GeneratedWords";
 import RestartButton from "./components/RestartButton/RestartButton";
 import Results from "./components/Results/Results";
 import UserTyping from "./components/UserTyping/UserTyping";
-// import useEngine from "./hooks/useEngine";
-import { calculateAccurancyPercentage } from "./utils/helpers";
+import {
+  calculateAccurancyPercentage,
+  isKeyboardAllowed,
+} from "./utils/helpers";
+import useWords from "./hooks/useWords";
 
 function App() {
-  // const { state, words, timeLeft, typed, total, restart, errors } = useEngine();
-  const words = faker.random.words(20).toLowerCase();
+  const [typed, setTyped] = useState("");
+  const { words, updateWords } = useWords(12);
+
+  const keydownHandler = useCallback(({ key, code }: KeyboardEvent) => {
+    const allowed = isKeyboardAllowed(code);
+    if (!allowed) {
+      return;
+    }
+
+    switch (key) {
+      case "Backspace":
+        setTyped((typed) => typed.slice(0, -1));
+        break;
+      default:
+        setTyped((typed) => typed.concat(key));
+        break;
+    }
+    console.log(key);
+    console.log(allowed);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("keydown", keydownHandler);
+    return () => {
+      window.removeEventListener("keydown", keydownHandler);
+    };
+  }, [keydownHandler]);
+
   return (
     <div
       style={{
@@ -35,12 +64,13 @@ function App() {
           position: "relative",
           display: "flex",
           width: "50%",
+          wordBreak: "break-all",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
         <GeneratedWords words={words} />
-        <UserTyping words={words} userInput={"qweqweqw"} />
+        <UserTyping words={words} userInput={typed} />
       </div>
 
       <RestartButton onRestart={() => {}} />
