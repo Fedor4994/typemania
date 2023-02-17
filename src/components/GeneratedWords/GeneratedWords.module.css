@@ -1,0 +1,8 @@
+.generatedWords {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(100 116 139);
+  font-size: 28px;
+  font-weight: 700;
+}

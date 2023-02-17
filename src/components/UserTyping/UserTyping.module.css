@@ -1,0 +1,29 @@
+.redChar {
+  font-weight: 700;
+  font-size: 28px;
+  color: rgb(239 68 68);
+}
+
+.yellowChar {
+  font-weight: 700;
+  font-size: 28px;
+  color: rgb(250 204 21);
+}
+
+.spaceChar {
+  font-weight: 700;
+  font-size: 28px;
+  background-color: transparent;
+}
+
+.spaceRedChar {
+  font-weight: 700;
+  font-size: 28px;
+  background-color: rgba(239, 68, 68, 0.5);
+}
+
+.userTyping {
+  position: absolute;
+  left: 0;
+  top: 0;
+}

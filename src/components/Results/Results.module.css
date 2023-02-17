@@ -1,0 +1,16 @@
+.resultsList {
+  display: flex;
+  gap: 10px;
+}
+
+.total {
+  color: rgb(250 204 21);
+}
+
+.percentage {
+  color: rgb(250 204 21);
+}
+
+.errors {
+  color: rgb(239 68 68);
+}

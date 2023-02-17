@@ -1,0 +1,7 @@
+.caret {
+  display: inline-block;
+  background-color: rgb(250 204 21);
+  width: 2px;
+  height: 23px;
+  margin-left: 1px;
+}
