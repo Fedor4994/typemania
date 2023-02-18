@@ -10,7 +10,12 @@ const RestartButton = ({ onRestart }: { onRestart: () => void }) => {
     onRestart();
   };
   return (
-    <button ref={buttonRef} className={s.restartButton} onClick={handleClick}>
+    <button
+      tabIndex={-1}
+      ref={buttonRef}
+      className={s.restartButton}
+      onClick={handleClick}
+    >
       <MdRefresh size={30} />
     </button>
   );

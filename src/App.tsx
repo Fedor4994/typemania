@@ -12,10 +12,11 @@ import {
 } from "./utils/helpers";
 import useWords from "./hooks/useWords";
 import useCountdownTimer from "./hooks/useCountdownTimer";
+import EscapeClue from "./components/EscapeClue/EscapeClue";
 
 export type State = "start" | "run" | "finish";
-const NUMBER_OF_WORDS = 15;
-const COUNTDOWN_SECONDS = 30;
+const NUMBER_OF_WORDS = 5;
+const COUNTDOWN_SECONDS = 5;
 
 function App() {
   const [typed, setTyped] = useState("");
@@ -31,6 +32,7 @@ function App() {
     useCountdownTimer(COUNTDOWN_SECONDS);
 
   useEffect(() => {
+    // The end of timer
     if (!timeLeft) {
       resetCountdown();
       setTotalTyped(totalTypedRef.current);
@@ -41,6 +43,7 @@ function App() {
   }, [cursor, resetCountdown, timeLeft, typed, updateWords, words]);
 
   useEffect(() => {
+    // Finish group of words
     if (typed.length === words.length) {
       setTyped("");
       updateWords();
@@ -49,8 +52,25 @@ function App() {
     }
   }, [typed, updateWords, words]);
 
+  const onRestart = useCallback(() => {
+    totalTypedRef.current = 0;
+
+    setTyped("");
+    updateWords();
+    resetCountdown();
+    setTotalTyped(0);
+    setErrors(0);
+    setCursor(0);
+    setState("start");
+  }, [resetCountdown, updateWords]);
+
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
+      if (key === "Escape") {
+        onRestart();
+        return;
+      }
+
       const allowed = isKeyboardAllowed(code);
       if (!allowed || state === "finish") {
         return;
@@ -64,17 +84,15 @@ function App() {
           setTyped((typed) => typed.slice(0, -1));
           totalTypedRef.current -= 1;
           setCursor((prevCursor) => prevCursor - 1);
-
           break;
         default:
           setTyped((typed) => typed.concat(key));
           totalTypedRef.current += 1;
           setCursor((prevCursor) => prevCursor + 1);
-
           break;
       }
     },
-    [startCountdown, state]
+    [onRestart, startCountdown, state]
   );
 
   useEffect(() => {
@@ -122,19 +140,8 @@ function App() {
         <UserTyping words={words} userInput={typed} />
       </div>
 
-      <RestartButton
-        onRestart={() => {
-          totalTypedRef.current = 0;
-
-          setTyped("");
-          updateWords();
-          resetCountdown();
-          setTotalTyped(0);
-          setErrors(0);
-          setCursor(0);
-          setState("start");
-        }}
-      />
+      <RestartButton onRestart={onRestart} />
+      <EscapeClue />
     </div>
   );
 }

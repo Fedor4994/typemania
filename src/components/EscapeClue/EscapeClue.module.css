@@ -1,0 +1,10 @@
+.clue {
+  color: rgb(100 116 139);
+}
+
+.key {
+  background-color: rgb(100 116 139);
+  padding: 4px;
+  border-radius: 5px;
+  color: rgb(30, 41, 59);
+}

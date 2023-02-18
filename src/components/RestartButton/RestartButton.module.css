@@ -2,12 +2,17 @@
   display: block;
   border: none;
   cursor: pointer;
-  padding: 5px 20px;
+  padding: 7px 25px;
   border-radius: 5px;
   color: rgb(100 116 139);
   background-color: transparent;
+  transition: 200ms all ease;
 }
 
 .restartButton:hover {
   background-color: rgba(51, 65, 85, 0.5);
+}
+
+.restartButton:focus {
+  background-color: aliceblue;
 }
