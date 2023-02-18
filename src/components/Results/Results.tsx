@@ -1,21 +1,73 @@
+import { motion } from "framer-motion";
+import { State } from "../../App";
 import { formatPercentage } from "../../utils/helpers";
 import s from "./Results.module.css";
 
 interface ResultProps {
   errors: number;
   accurancyPercentage: number;
-  total: number;
+  speed: number;
+  state: State;
 }
 
-const Results = ({ errors, accurancyPercentage, total }: ResultProps) => {
+const Results = ({
+  errors,
+  accurancyPercentage,
+  speed,
+  state,
+}: ResultProps) => {
+  if (state !== "finish") {
+    return null;
+  }
+
   return (
-    <ul className={s.resultsList}>
-      <li className={s.total}>Typed: {total}</li>
-      <li className={s.errors}>Errors: {errors}</li>
-      <li className={s.percentage}>
+    <motion.ul className={s.resultsList}>
+      <motion.li
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.5,
+          delay: 0,
+        }}
+        className={s.total}
+      >
+        Speed: {speed}
+      </motion.li>
+      <motion.li
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.5,
+          delay: 0.5,
+        }}
+        className={s.errors}
+      >
+        Errors: {errors}
+      </motion.li>
+      <motion.li
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.5,
+          delay: 1,
+        }}
+        className={s.percentage}
+      >
         Accurancy: {formatPercentage(accurancyPercentage)}
-      </li>
-    </ul>
+      </motion.li>
+    </motion.ul>
   );
 };
 

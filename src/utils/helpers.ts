@@ -22,6 +22,15 @@ export const calculateAccurancyPercentage = (errors: number, total: number) => {
   return 0;
 };
 
+export const calculateWordsPerMinute = (
+  correctChars: number,
+  seconds: number
+) => {
+  const coefficient = 60 / seconds;
+  const wpm = (correctChars * coefficient) / 5;
+  return Number(wpm.toFixed(2));
+};
+
 export const isKeyboardAllowed = (code: string) => {
   return (
     code.startsWith("Key") ||

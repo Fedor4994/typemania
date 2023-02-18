@@ -1,64 +1,78 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import CountdownTimer from "./components/CountdownTimer/CountdownTimer";
 import GeneratedWords from "./components/GeneratedWords/GeneratedWords";
 import RestartButton from "./components/RestartButton/RestartButton";
 import Results from "./components/Results/Results";
 import UserTyping from "./components/UserTyping/UserTyping";
 import {
-  countErrors,
   calculateAccurancyPercentage,
+  calculateWordsPerMinute,
+  countErrors,
   isKeyboardAllowed,
 } from "./utils/helpers";
 import useWords from "./hooks/useWords";
 import useCountdownTimer from "./hooks/useCountdownTimer";
 
+export type State = "start" | "run" | "finish";
+const NUMBER_OF_WORDS = 12;
+const COUNTDOWN_SECONDS = 30;
+
 function App() {
   const [typed, setTyped] = useState("");
-  const { words, updateWords } = useWords(12);
-  const [errors, setErrors] = useState(0);
+  const { words, updateWords } = useWords(NUMBER_OF_WORDS);
   const [totalTyped, setTotalTyped] = useState(0);
+  const [state, setState] = useState<State>("start");
+  const [cursor, setCursor] = useState(0);
+  const [errors, setErrors] = useState(0);
 
-  const { timeLeft, startCountdown, resetCountdown } = useCountdownTimer(30);
+  const totalTypedRef = useRef(0);
+
+  const { timeLeft, startCountdown, resetCountdown } =
+    useCountdownTimer(COUNTDOWN_SECONDS);
 
   useEffect(() => {
     if (!timeLeft) {
-      //  TODO: тут я должен сказать здарова, время вышло, вот твои результаты голова
-
-      setTyped("");
-      updateWords();
       resetCountdown();
-      setErrors(0);
-      setTotalTyped(0);
+      setTotalTyped(totalTypedRef.current);
+      const wordsReached = words.substring(0, Math.min(cursor, words.length));
+      setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached));
+      setState("finish");
     }
-  }, [resetCountdown, timeLeft, updateWords]);
+  }, [cursor, resetCountdown, timeLeft, typed, updateWords, words]);
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       const allowed = isKeyboardAllowed(code);
-      if (!allowed) {
+      if (!allowed || state === "finish") {
         return;
       }
-      if (typed.length === 0 && totalTyped === 0) {
+      if (state === "start") {
         startCountdown();
+        setState("run");
       }
       switch (key) {
         case "Backspace":
           setTyped((typed) => typed.slice(0, -1));
+          totalTypedRef.current -= 1;
+          setCursor((prevCursor) => prevCursor - 1);
+
           break;
         default:
           setTyped((typed) => typed.concat(key));
+          totalTypedRef.current += 1;
+          setCursor((prevCursor) => prevCursor + 1);
+
           break;
       }
 
       if (typed.length === words.length - 1) {
         setTyped("");
         updateWords();
-
-        setErrors((prevErrors) => prevErrors + countErrors(typed, words) - 1);
-        setTotalTyped((prevTotalTyped) => prevTotalTyped + typed.length);
+        setCursor(0);
+        setErrors((prevErrors) => prevErrors + countErrors(typed, words));
       }
     },
-    [startCountdown, totalTyped, typed, updateWords, words]
+    [startCountdown, state, typed, updateWords, words]
   );
 
   useEffect(() => {
@@ -83,7 +97,11 @@ function App() {
         <Results
           accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
           errors={errors}
-          total={totalTyped - errors}
+          speed={calculateWordsPerMinute(
+            totalTyped - errors,
+            COUNTDOWN_SECONDS
+          )}
+          state={state}
         />
         <CountdownTimer timeLeft={timeLeft} />
       </div>
@@ -104,11 +122,15 @@ function App() {
 
       <RestartButton
         onRestart={() => {
+          totalTypedRef.current = 0;
+
           setTyped("");
           updateWords();
           resetCountdown();
-          setErrors(0);
           setTotalTyped(0);
+          setErrors(0);
+          setCursor(0);
+          setState("start");
         }}
       />
     </div>
