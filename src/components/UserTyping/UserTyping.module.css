@@ -1,13 +1,13 @@
 .redChar {
   font-weight: 400;
   font-size: 28px;
-  color: rgb(239 68 68);
+  color: #e32b2b;
 }
 
 .yellowChar {
   font-weight: 400;
   font-size: 28px;
-  color: rgb(250 204 21);
+  color: #e9e2f5;
 }
 
 .spaceChar {
@@ -16,7 +16,7 @@
   width: 18px;
   height: 30px;
   background-color: transparent;
-  color: rgb(250 204 21);
+  color: #e9e2f5;
 }
 
 .spaceIcon {
@@ -24,12 +24,10 @@
   bottom: -6px;
 }
 
-.spaceRedChar {
-  display: inline-block;
-
-  width: 18px;
-  height: 28px;
-  background-color: rgba(239, 68, 68, 0.5);
+.redSpaceIcon {
+  position: absolute;
+  bottom: -6px;
+  color: #e32b2b;
 }
 
 .userTyping {

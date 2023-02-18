@@ -13,10 +13,11 @@ import {
 import useWords from "./hooks/useWords";
 import useCountdownTimer from "./hooks/useCountdownTimer";
 import EscapeClue from "./components/EscapeClue/EscapeClue";
+import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 
 export type State = "start" | "run" | "finish";
-const NUMBER_OF_WORDS = 5;
-const COUNTDOWN_SECONDS = 5;
+const NUMBER_OF_WORDS = 28;
+const COUNTDOWN_SECONDS = 30;
 
 function App() {
   const [typed, setTyped] = useState("");
@@ -110,7 +111,7 @@ function App() {
         justifyContent: "center",
         flexDirection: "column",
         height: "100vh",
-        background: "rgb(30, 41, 59)",
+        background: "#1a0e25",
       }}
     >
       <div>
@@ -142,6 +143,7 @@ function App() {
 
       <RestartButton onRestart={onRestart} />
       <EscapeClue />
+      <ThemeSwitcher />
     </div>
   );
 }

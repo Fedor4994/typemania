@@ -17,8 +17,6 @@ const UserTyping = ({
       return s.redChar;
     } else if (isCorrect && !isWhiteSpace) {
       return s.yellowChar;
-    } else if (!isCorrect && isWhiteSpace) {
-      return s.spaceRedChar;
     } else {
       return s.spaceChar;
     }
@@ -27,9 +25,12 @@ const UserTyping = ({
   return (
     <div className={s.userTyping}>
       {typedCharacters.map((char, index) =>
-        char === " " && words[index] === " " ? (
+        words[index] === " " ? (
           <span className={s.spaceChar} key={`${char}_${index}`}>
-            <TbSpace className={s.spaceIcon} size={18} />
+            <TbSpace
+              className={char === " " ? s.spaceIcon : s.redSpaceIcon}
+              size={18}
+            />
           </span>
         ) : (
           <span
