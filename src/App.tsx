@@ -14,7 +14,7 @@ import useWords from "./hooks/useWords";
 import useCountdownTimer from "./hooks/useCountdownTimer";
 
 export type State = "start" | "run" | "finish";
-const NUMBER_OF_WORDS = 12;
+const NUMBER_OF_WORDS = 10;
 const COUNTDOWN_SECONDS = 30;
 
 function App() {
@@ -40,6 +40,15 @@ function App() {
     }
   }, [cursor, resetCountdown, timeLeft, typed, updateWords, words]);
 
+  useEffect(() => {
+    if (typed.length === words.length) {
+      setTyped("");
+      updateWords();
+      setCursor(0);
+      setErrors((prevErrors) => prevErrors + countErrors(typed, words));
+    }
+  }, [typed, updateWords, words]);
+
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       const allowed = isKeyboardAllowed(code);
@@ -64,15 +73,8 @@ function App() {
 
           break;
       }
-
-      if (typed.length === words.length - 1) {
-        setTyped("");
-        updateWords();
-        setCursor(0);
-        setErrors((prevErrors) => prevErrors + countErrors(typed, words));
-      }
     },
-    [startCountdown, state, typed, updateWords, words]
+    [startCountdown, state]
   );
 
   useEffect(() => {
