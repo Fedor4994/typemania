@@ -1,24 +1,34 @@
 .redChar {
-  font-weight: 700;
+  font-weight: 400;
   font-size: 28px;
   color: rgb(239 68 68);
 }
 
 .yellowChar {
-  font-weight: 700;
+  font-weight: 400;
   font-size: 28px;
   color: rgb(250 204 21);
 }
 
 .spaceChar {
-  font-weight: 700;
-  font-size: 28px;
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 30px;
   background-color: transparent;
+  color: rgb(250 204 21);
+}
+
+.spaceIcon {
+  position: absolute;
+  bottom: -6px;
 }
 
 .spaceRedChar {
-  font-weight: 700;
-  font-size: 28px;
+  display: inline-block;
+
+  width: 18px;
+  height: 28px;
   background-color: rgba(239, 68, 68, 0.5);
 }
 

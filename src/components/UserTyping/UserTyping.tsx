@@ -1,3 +1,4 @@
+import { TbSpace } from "react-icons/tb";
 import Caret from "../Caret/Caret";
 import s from "./UserTyping.module.css";
 const UserTyping = ({
@@ -25,14 +26,21 @@ const UserTyping = ({
 
   return (
     <div className={s.userTyping}>
-      {typedCharacters.map((char, index) => (
-        <span
-          className={characterClassName(char, words[index])}
-          key={`${char}_${index}`}
-        >
-          {words[index]}
-        </span>
-      ))}
+      {typedCharacters.map((char, index) =>
+        char === " " && words[index] === " " ? (
+          <span className={s.spaceChar} key={`${char}_${index}`}>
+            <TbSpace className={s.spaceIcon} size={18} />
+          </span>
+        ) : (
+          <span
+            className={characterClassName(char, words[index])}
+            key={`${char}_${index}`}
+          >
+            {words[index]}
+          </span>
+        )
+      )}
+
       <Caret />
     </div>
   );

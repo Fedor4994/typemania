@@ -35,7 +35,7 @@ const Results = ({
         }}
         className={s.total}
       >
-        Speed: {speed}
+        Speed: {speed} wpm
       </motion.li>
       <motion.li
         initial={{

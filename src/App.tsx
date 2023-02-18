@@ -14,7 +14,7 @@ import useWords from "./hooks/useWords";
 import useCountdownTimer from "./hooks/useCountdownTimer";
 
 export type State = "start" | "run" | "finish";
-const NUMBER_OF_WORDS = 10;
+const NUMBER_OF_WORDS = 15;
 const COUNTDOWN_SECONDS = 30;
 
 function App() {
@@ -112,7 +112,7 @@ function App() {
         style={{
           position: "relative",
           display: "flex",
-          width: "50%",
+          width: "70%",
           wordBreak: "break-all",
           alignItems: "center",
           justifyContent: "center",
