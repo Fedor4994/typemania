@@ -1,10 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import s from "./ThemeSwitcher.module.scss";
 
-export type Theme = "white" | "blue" | "green" | "orange" | "purple" | "black";
+export type Theme = "joker" | "aurora" | "cheesecake" | "orange" | "ukraine";
 
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState<Theme>("purple");
+  const [theme, setTheme] = useState<Theme>("joker");
+
+  useEffect(() => {
+    const currentThemeColor = localStorage.getItem("theme-color");
+    if (
+      currentThemeColor === "joker" ||
+      currentThemeColor === "aurora" ||
+      currentThemeColor === "cheesecake" ||
+      currentThemeColor === "orange" ||
+      currentThemeColor === "ukraine"
+    ) {
+      setTheme(currentThemeColor);
+    }
+
+    document.body.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const handleClick = (theme: Theme) => {
+    setTheme(theme);
+    localStorage.setItem("theme-color", theme);
+  };
 
   const isActive = (option: Theme): string => {
     if (theme === option) {
@@ -16,28 +36,24 @@ const ThemeSwitcher = () => {
   return (
     <div className={s.themeOptions}>
       <div
-        onClick={() => setTheme("black")}
-        className={`${s.themeblack} ${isActive("black")}`}
+        onClick={() => handleClick("joker")}
+        className={`${s.themeJoker} ${isActive("joker")}`}
       />
       <div
-        onClick={() => setTheme("white")}
-        className={`${s.themewhite} ${isActive("white")}`}
+        onClick={() => handleClick("orange")}
+        className={`${s.themeOrange} ${isActive("orange")}`}
       />
       <div
-        onClick={() => setTheme("blue")}
-        className={`${s.themeblue} ${isActive("blue")}`}
+        onClick={() => handleClick("ukraine")}
+        className={`${s.themeUkraine} ${isActive("ukraine")}`}
       />
       <div
-        onClick={() => setTheme("orange")}
-        className={`${s.themeorange} ${isActive("orange")}`}
+        onClick={() => handleClick("cheesecake")}
+        className={`${s.themeCheesecake} ${isActive("cheesecake")}`}
       />
       <div
-        onClick={() => setTheme("purple")}
-        className={`${s.themepurple} ${isActive("purple")}`}
-      />
-      <div
-        onClick={() => setTheme("green")}
-        className={`${s.themegreen} ${isActive("green")}`}
+        onClick={() => handleClick("aurora")}
+        className={`${s.themeAurora} ${isActive("aurora")}`}
       />
     </div>
   );

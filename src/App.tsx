@@ -14,9 +14,10 @@ import useWords from "./hooks/useWords";
 import useCountdownTimer from "./hooks/useCountdownTimer";
 import EscapeClue from "./components/EscapeClue/EscapeClue";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
+import Container from "./components/Container/Container";
 
 export type State = "start" | "run" | "finish";
-const NUMBER_OF_WORDS = 28;
+const NUMBER_OF_WORDS = 30;
 const COUNTDOWN_SECONDS = 30;
 
 function App() {
@@ -104,16 +105,7 @@ function App() {
   }, [keydownHandler]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        height: "100vh",
-        background: "#1a0e25",
-      }}
-    >
+    <Container>
       <div>
         <Results
           accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
@@ -131,7 +123,7 @@ function App() {
         style={{
           position: "relative",
           display: "flex",
-          width: "70%",
+          width: "100%",
           wordBreak: "break-all",
           alignItems: "center",
           justifyContent: "center",
@@ -144,7 +136,7 @@ function App() {
       <RestartButton onRestart={onRestart} />
       <EscapeClue />
       <ThemeSwitcher />
-    </div>
+    </Container>
   );
 }
 

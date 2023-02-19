@@ -1,0 +1,45 @@
+:global {
+  body[data-theme="joker"] {
+    --button-color: var(--joker-main-text);
+    --button-hover: rgba(0, 0, 0, 0.2);
+  }
+
+  body[data-theme="aurora"] {
+    --button-color: var(--aurora-main-text);
+    --button-hover: rgba(0, 0, 0, 0.2);
+  }
+
+  body[data-theme="cheesecake"] {
+    --button-color: var(--cheesecake-main-text);
+    --button-hover: rgba(0, 0, 0, 0.2);
+  }
+
+  body[data-theme="orange"] {
+    --button-color: var(--orange-main-text);
+    --button-hover: rgba(0, 0, 0, 0.2);
+  }
+
+  body[data-theme="ukraine"] {
+    --button-color: var(--ukraine-main-text);
+    --button-hover: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.restartButton {
+  display: block;
+  border: none;
+  cursor: pointer;
+  padding: 7px 25px;
+  border-radius: 7px;
+  color: var(--button-color);
+  background-color: transparent;
+  transition: 200ms all ease;
+}
+
+.restartButton:hover {
+  background-color: var(--button-hover);
+}
+
+.restartButton:focus {
+  background-color: aliceblue;
+}

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { MdRefresh } from "react-icons/md";
-import s from "./RestartButton.module.css";
+import s from "./RestartButton.module.scss";
 
 const RestartButton = ({ onRestart }: { onRestart: () => void }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);

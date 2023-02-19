@@ -1,0 +1,29 @@
+:global {
+  body[data-theme="joker"] {
+    --caret-color: var(--joker-secondary-text);
+  }
+
+  body[data-theme="aurora"] {
+    --caret-color: var(--aurora-secondary-text);
+  }
+
+  body[data-theme="cheesecake"] {
+    --caret-color: var(--cheesecake-secondary-text);
+  }
+
+  body[data-theme="orange"] {
+    --caret-color: var(--orange-secondary-text);
+  }
+
+  body[data-theme="ukraine"] {
+    --caret-color: var(--ukraine-secondary-text);
+  }
+}
+
+.caret {
+  display: inline-block;
+  background-color: var(--caret-color);
+  width: 2px;
+  height: 23px;
+  margin-top: 7px;
+}

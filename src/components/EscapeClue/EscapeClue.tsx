@@ -1,4 +1,4 @@
-import s from "./EscapeClue.module.css";
+import s from "./EscapeClue.module.scss";
 
 const EscapeClue = () => {
   return (

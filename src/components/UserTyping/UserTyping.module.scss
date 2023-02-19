@@ -1,0 +1,64 @@
+:global {
+  body[data-theme="joker"] {
+    --error-color: var(--joker-error);
+    --correct-color: var(--joker-correct-text);
+  }
+
+  body[data-theme="aurora"] {
+    --error-color: var(--aurora-error);
+    --correct-color: var(--aurora-correct-text);
+  }
+
+  body[data-theme="cheesecake"] {
+    --error-color: var(--cheesecake-error);
+    --correct-color: var(--cheesecake-correct-text);
+  }
+
+  body[data-theme="orange"] {
+    --error-color: var(--orange-error);
+    --correct-color: var(--orange-correct-text);
+  }
+
+  body[data-theme="ukraine"] {
+    --error-color: var(--ukraine-error);
+    --correct-color: var(--ukraine-correct-text);
+  }
+}
+
+.errorChar {
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--error-color);
+}
+
+.correctChar {
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--correct-color);
+}
+
+.spaceChar {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 30px;
+  background-color: transparent;
+}
+
+.spaceIcon {
+  position: absolute;
+  bottom: -6px;
+  color: var(--correct-color);
+}
+
+.errorSpaceIcon {
+  position: absolute;
+  bottom: -6px;
+  color: var(--error-color);
+}
+
+.userTyping {
+  position: absolute;
+  left: 0;
+  top: 0;
+}

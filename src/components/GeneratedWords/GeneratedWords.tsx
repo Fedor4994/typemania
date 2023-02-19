@@ -1,5 +1,5 @@
 import { TbSpace } from "react-icons/tb";
-import s from "./GeneratedWords.module.css";
+import s from "./GeneratedWords.module.scss";
 
 const GeneratedWords = ({ words }: { words: string }) => {
   return (

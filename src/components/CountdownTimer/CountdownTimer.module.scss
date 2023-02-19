@@ -1,0 +1,25 @@
+:global {
+  body[data-theme="joker"] {
+    --timer-color: var(--joker-secondary-text);
+  }
+
+  body[data-theme="aurora"] {
+    --timer-color: var(--aurora-secondary-text);
+  }
+
+  body[data-theme="cheesecake"] {
+    --timer-color: var(--cheesecake-secondary-text);
+  }
+
+  body[data-theme="orange"] {
+    --timer-color: var(--orange-secondary-text);
+  }
+
+  body[data-theme="ukraine"] {
+    --timer-color: var(--ukraine-secondary-text);
+  }
+}
+
+.countdownTimer {
+  color: var(--timer-color);
+}

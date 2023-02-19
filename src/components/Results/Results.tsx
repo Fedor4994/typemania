@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { State } from "../../App";
 import { formatPercentage } from "../../utils/helpers";
-import s from "./Results.module.css";
+import s from "./Results.module.scss";
 
 interface ResultProps {
   errors: number;

@@ -1,10 +1,65 @@
 @import-normalize;
-/* bring in normalize.css styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  --joker-background: #1a0e25;
+  --joker-main-text: #7554a3;
+  --joker-secondary-text: #99de1e;
+  --joker-correct-text: #e9e2f5;
+  --joker-error: #e32b2b;
+
+  --aurora-background: #011926;
+  --aurora-main-text: #245c69;
+  --aurora-secondary-text: #00b47b;
+  --aurora-correct-text: #00e980;
+  --aurora-error: #b94da1;
+
+  --cheesecake-background: #fdf0d5;
+  --cheesecake-main-text: #d91c81;
+  --cheesecake-secondary-text: #8e2949;
+  --cheesecake-correct-text: #892948;
+  --cheesecake-error: #3af95a;
+
+  --orange-background: #0d1c1c;
+  --orange-main-text: #f60;
+  --orange-secondary-text: #f0e800;
+  --orange-correct-text: #fff;
+  --orange-error: #ff0000;
+
+  --ukraine-background: #0058a3;
+  --ukraine-main-text: #57abdb;
+  --ukraine-secondary-text: #ffcc02;
+  --ukraine-correct-text: #fff;
+  --ukraine-error: #f56674;
+}
 
 body {
   line-height: 1.5;
-  margin: 0;
   font-family: "Ubuntu Mono", monospace;
+}
+
+body[data-theme="joker"] {
+  background-color: var(--joker-background);
+}
+
+body[data-theme="aurora"] {
+  background-color: var(--aurora-background);
+}
+
+body[data-theme="cheesecake"] {
+  background-color: var(--cheesecake-background);
+}
+
+body[data-theme="orange"] {
+  background-color: var(--orange-background);
+}
+
+body[data-theme="ukraine"] {
+  background-color: var(--ukraine-background);
 }
 
 html,
@@ -12,18 +67,8 @@ body {
   height: 100%;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
-}
 ul,
 ol {
-  margin: 0;
   padding: 0;
   list-style: none;
 }

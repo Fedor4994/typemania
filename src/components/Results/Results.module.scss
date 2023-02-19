@@ -1,0 +1,43 @@
+:global {
+  body[data-theme="joker"] {
+    --error-color: var(--joker-error);
+    --main-color: var(--joker-secondary-text);
+  }
+
+  body[data-theme="aurora"] {
+    --error-color: var(--aurora-error);
+    --main-color: var(--aurora-secondary-text);
+  }
+
+  body[data-theme="cheesecake"] {
+    --error-color: var(--cheesecake-error);
+    --main-color: var(--cheesecake-secondary-text);
+  }
+
+  body[data-theme="orange"] {
+    --error-color: var(--orange-error);
+    --main-color: var(--orange-secondary-text);
+  }
+
+  body[data-theme="ukraine"] {
+    --error-color: var(--ukraine-error);
+    --main-color: var(--ukraine-secondary-text);
+  }
+}
+
+.resultsList {
+  display: flex;
+  gap: 10px;
+}
+
+.total {
+  color: var(--main-color);
+}
+
+.percentage {
+  color: var(--main-color);
+}
+
+.errors {
+  color: var(--error-color);
+}

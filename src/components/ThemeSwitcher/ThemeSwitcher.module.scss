@@ -1,6 +1,4 @@
 .themeOptions {
-  max-width: 800px;
-  margin: 0 auto;
   text-align: right;
   padding: 20px 0;
   div {
@@ -16,19 +14,19 @@
       opacity: 1;
     }
   }
-  .themewhite {
-    background-color: #eee;
+  .themeJoker {
+    background-color: var(--joker-main-text);
   }
-  .themeblue {
-    background-color: #1e41c1;
+  .themeAurora {
+    background-color: var(--aurora-main-text);
   }
-  .themeorange {
-    background-color: #b64b1e;
+  .themeCheesecake {
+    background-color: var(--cheesecake-main-text);
   }
-  .themepurple {
-    background-color: #7852ae;
+  .themeOrange {
+    background-color: var(--orange-main-text);
   }
-  .themegreen {
-    background-color: #5faf3b;
+  .themeUkraine {
+    background-color: var(--ukraine-main-text);
   }
 }

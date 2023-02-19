@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import s from "./Caret.module.css";
+import s from "./Caret.module.scss";
 
 const Caret = () => {
   return (

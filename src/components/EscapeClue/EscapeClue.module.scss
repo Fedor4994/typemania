@@ -1,0 +1,37 @@
+:global {
+  body[data-theme="joker"] {
+    --clue-color: var(--joker-main-text);
+    --backgroud-clue-color: var(--joker-background);
+  }
+
+  body[data-theme="aurora"] {
+    --clue-color: var(--aurora-main-text);
+    --backgroud-clue-color: var(--aurora-background);
+  }
+
+  body[data-theme="cheesecake"] {
+    --clue-color: var(--cheesecake-main-text);
+    --backgroud-clue-color: var(--cheesecake-background);
+  }
+
+  body[data-theme="orange"] {
+    --clue-color: var(--orange-main-text);
+    --backgroud-clue-color: var(--orange-background);
+  }
+
+  body[data-theme="ukraine"] {
+    --clue-color: var(--ukraine-main-text);
+    --backgroud-clue-color: var(--ukraine-background);
+  }
+}
+
+.clue {
+  color: var(--clue-color);
+}
+
+.key {
+  background-color: var(--clue-color);
+  padding: 4px;
+  border-radius: 5px;
+  color: var(--backgroud-clue-color);
+}

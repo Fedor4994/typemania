@@ -1,6 +1,6 @@
 import { TbSpace } from "react-icons/tb";
 import Caret from "../Caret/Caret";
-import s from "./UserTyping.module.css";
+import s from "./UserTyping.module.scss";
 const UserTyping = ({
   userInput,
   words,
@@ -14,9 +14,9 @@ const UserTyping = ({
     const isCorrect = actual === expected;
     const isWhiteSpace = expected === " ";
     if (!isCorrect && !isWhiteSpace) {
-      return s.redChar;
+      return s.errorChar;
     } else if (isCorrect && !isWhiteSpace) {
-      return s.yellowChar;
+      return s.correctChar;
     } else {
       return s.spaceChar;
     }
@@ -28,7 +28,7 @@ const UserTyping = ({
         words[index] === " " ? (
           <span className={s.spaceChar} key={`${char}_${index}`}>
             <TbSpace
-              className={char === " " ? s.spaceIcon : s.redSpaceIcon}
+              className={char === " " ? s.spaceIcon : s.errorSpaceIcon}
               size={18}
             />
           </span>
