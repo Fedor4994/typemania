@@ -40,6 +40,8 @@
 body {
   line-height: 1.5;
   font-family: "Ubuntu Mono", monospace;
+  display: flex;
+  flex-direction: column;
 }
 
 body[data-theme="joker"] {

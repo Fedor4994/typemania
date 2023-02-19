@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { State } from "../../App";
+import { State } from "../../views/CountdownPage/CountdownPage";
 import { formatPercentage } from "../../utils/helpers";
 import s from "./Results.module.scss";
 
