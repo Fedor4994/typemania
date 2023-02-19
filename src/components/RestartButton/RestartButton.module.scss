@@ -1,27 +1,27 @@
 :global {
   body[data-theme="joker"] {
     --button-color: var(--joker-main-text);
-    --button-hover: rgba(0, 0, 0, 0.2);
+    --button-hover: rgba(117, 84, 163, 0.2);
   }
 
   body[data-theme="aurora"] {
     --button-color: var(--aurora-main-text);
-    --button-hover: rgba(0, 0, 0, 0.2);
+    --button-hover: rgba(36, 92, 105, 0.2);
   }
 
   body[data-theme="cheesecake"] {
     --button-color: var(--cheesecake-main-text);
-    --button-hover: rgba(0, 0, 0, 0.2);
+    --button-hover: rgba(217, 28, 129, 0.1);
   }
 
   body[data-theme="orange"] {
     --button-color: var(--orange-main-text);
-    --button-hover: rgba(0, 0, 0, 0.2);
+    --button-hover: rgba(255, 102, 0, 0.1);
   }
 
   body[data-theme="ukraine"] {
     --button-color: var(--ukraine-main-text);
-    --button-hover: rgba(0, 0, 0, 0.2);
+    --button-hover: rgba(87, 171, 219, 0.2);
   }
 }
 
