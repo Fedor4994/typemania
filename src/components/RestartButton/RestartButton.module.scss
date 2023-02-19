@@ -23,6 +23,11 @@
     --button-color: var(--ukraine-main-text);
     --button-hover: rgba(87, 171, 219, 0.2);
   }
+
+  body[data-theme="matrix"] {
+    --button-color: var(--matrix-secondary-text);
+    --button-hover: rgba(0, 59, 0, 0.2);
+  }
 }
 
 .restartButton {

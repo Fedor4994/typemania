@@ -18,6 +18,10 @@
   body[data-theme="ukraine"] {
     --timer-color: var(--ukraine-secondary-text);
   }
+
+  body[data-theme="matrix"] {
+    --timer-color: var(--matrix-secondary-text);
+  }
 }
 
 .countdownTimer {

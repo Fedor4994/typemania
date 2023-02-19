@@ -23,6 +23,11 @@
     --error-color: var(--ukraine-error);
     --correct-color: var(--ukraine-correct-text);
   }
+
+  body[data-theme="matrix"] {
+    --error-color: var(--matrix-error);
+    --correct-color: var(--matrix-correct-text);
+  }
 }
 
 .errorChar {

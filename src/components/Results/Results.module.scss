@@ -23,6 +23,11 @@
     --error-color: var(--ukraine-error);
     --main-color: var(--ukraine-secondary-text);
   }
+
+  body[data-theme="matrix"] {
+    --error-color: var(--matrix-error);
+    --main-color: var(--matrix-secondary-text);
+  }
 }
 
 .resultsList {

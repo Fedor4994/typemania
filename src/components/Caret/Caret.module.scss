@@ -18,6 +18,10 @@
   body[data-theme="ukraine"] {
     --caret-color: var(--ukraine-secondary-text);
   }
+
+  body[data-theme="matrix"] {
+    --caret-color: var(--matrix-secondary-text);
+  }
 }
 
 .caret {

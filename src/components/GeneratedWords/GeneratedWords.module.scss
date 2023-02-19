@@ -18,6 +18,10 @@
   body[data-theme="ukraine"] {
     --words-color: var(--ukraine-main-text);
   }
+
+  body[data-theme="matrix"] {
+    --words-color: var(--matrix-main-text);
+  }
 }
 
 .generatedWords {

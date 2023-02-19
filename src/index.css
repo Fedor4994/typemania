@@ -35,6 +35,12 @@
   --ukraine-secondary-text: #ffcc02;
   --ukraine-correct-text: #fff;
   --ukraine-error: #f56674;
+
+  --matrix-background: #000;
+  --matrix-main-text: #003b00;
+  --matrix-secondary-text: #15ff00;
+  --matrix-correct-text: #15ff00;
+  --matrix-error: #ff0000;
 }
 
 body {
@@ -62,6 +68,10 @@ body[data-theme="orange"] {
 
 body[data-theme="ukraine"] {
   background-color: var(--ukraine-background);
+}
+
+body[data-theme="matrix"] {
+  background-color: var(--matrix-background);
 }
 
 html,

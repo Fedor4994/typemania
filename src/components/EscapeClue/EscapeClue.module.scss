@@ -23,6 +23,11 @@
     --clue-color: var(--ukraine-main-text);
     --backgroud-clue-color: var(--ukraine-background);
   }
+
+  body[data-theme="matrix"] {
+    --clue-color: var(--matrix-secondary-text);
+    --backgroud-clue-color: var(--matrix-background);
+  }
 }
 
 .clue {

@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import s from "./ThemeSwitcher.module.scss";
 
-export type Theme = "joker" | "aurora" | "cheesecake" | "orange" | "ukraine";
+export type Theme =
+  | "joker"
+  | "aurora"
+  | "cheesecake"
+  | "orange"
+  | "ukraine"
+  | "matrix";
 
 const ThemeSwitcher = () => {
   const [theme, setTheme] = useState<Theme>("joker");
@@ -13,7 +19,8 @@ const ThemeSwitcher = () => {
       currentThemeColor === "aurora" ||
       currentThemeColor === "cheesecake" ||
       currentThemeColor === "orange" ||
-      currentThemeColor === "ukraine"
+      currentThemeColor === "ukraine" ||
+      currentThemeColor === "matrix"
     ) {
       setTheme(currentThemeColor);
     }
@@ -38,6 +45,10 @@ const ThemeSwitcher = () => {
       <div
         onClick={() => handleClick("joker")}
         className={`${s.themeJoker} ${isActive("joker")}`}
+      />
+      <div
+        onClick={() => handleClick("matrix")}
+        className={`${s.themeMatrix} ${isActive("matrix")}`}
       />
       <div
         onClick={() => handleClick("orange")}
