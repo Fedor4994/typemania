@@ -1,7 +1,16 @@
 .content {
+  display: flex;
   flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.header {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: 1px solid red;
 }
 
 .footer {
+  border: 1px solid red;
   flex: 0 0 auto;
 }
