@@ -11,6 +11,7 @@ const QuotePage = () => {
         currentPage="quote"
         currentValue={quotesCount}
         onChange={setQuotesCount}
+        onRestart={() => {}}
       />
       <h1>QUOTE PAGE</h1>
     </div>

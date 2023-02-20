@@ -6,15 +6,15 @@ import { countErrors, isKeyboardAllowed } from "../utils/helpers";
 
 export type State = "start" | "run" | "finish";
 
-export const useTimerTyping = (numberOfWords: number) => {
+export const useTimerTyping = () => {
   const [typed, setTyped] = useState("");
-  const { words, updateWords } = useWords(numberOfWords);
   const [totalTyped, setTotalTyped] = useState(0);
   const [state, setState] = useState<State>("start");
   const [cursor, setCursor] = useState(0);
   const [errors, setErrors] = useState(0);
 
   const totalTypedRef = useRef(0);
+  const { words, updateWords } = useWords();
 
   const {
     timeLeft,

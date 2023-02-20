@@ -8,14 +8,21 @@ export type CurrentPage = "time" | "words" | "quote";
 const Navigation = ({
   currentPage,
   currentValue,
+  onRestart,
   onChange,
 }: {
   currentPage: CurrentPage;
   currentValue: number;
+  onRestart: () => void;
   onChange: (seconds: number) => void;
 }) => {
   const currentClassName = ({ isActive }: { isActive: boolean }) =>
     isActive ? `${s.navigationIcon} ${s.activeOption}` : s.navigationIcon;
+
+  const handleChange = (value: number) => {
+    onChange(value);
+    onRestart();
+  };
 
   return (
     <div className={s.navigation}>
@@ -45,7 +52,7 @@ const Navigation = ({
       {currentPage === "time" && (
         <ul className={s.navigationList}>
           <li
-            onClick={() => onChange(15)}
+            onClick={() => handleChange(15)}
             className={`${s.navigationIcon} ${
               currentValue === 15 ? s.activeOption : ""
             }`}
@@ -53,7 +60,7 @@ const Navigation = ({
             15
           </li>
           <li
-            onClick={() => onChange(30)}
+            onClick={() => handleChange(30)}
             className={`${s.navigationIcon} ${
               currentValue === 30 ? s.activeOption : ""
             }`}
@@ -61,7 +68,7 @@ const Navigation = ({
             30
           </li>
           <li
-            onClick={() => onChange(60)}
+            onClick={() => handleChange(60)}
             className={`${s.navigationIcon} ${
               currentValue === 60 ? s.activeOption : ""
             }`}
@@ -69,7 +76,7 @@ const Navigation = ({
             60
           </li>
           <li
-            onClick={() => onChange(120)}
+            onClick={() => handleChange(120)}
             className={`${s.navigationIcon} ${
               currentValue === 120 ? s.activeOption : ""
             }`}
@@ -82,7 +89,7 @@ const Navigation = ({
       {currentPage === "words" && (
         <ul className={s.navigationList}>
           <li
-            onClick={() => onChange(10)}
+            onClick={() => handleChange(10)}
             className={`${s.navigationIcon} ${
               currentValue === 10 ? s.activeOption : ""
             }`}
@@ -90,7 +97,7 @@ const Navigation = ({
             10
           </li>
           <li
-            onClick={() => onChange(25)}
+            onClick={() => handleChange(25)}
             className={`${s.navigationIcon} ${
               currentValue === 25 ? s.activeOption : ""
             }`}
@@ -98,7 +105,7 @@ const Navigation = ({
             25
           </li>
           <li
-            onClick={() => onChange(50)}
+            onClick={() => handleChange(50)}
             className={`${s.navigationIcon} ${
               currentValue === 50 ? s.activeOption : ""
             }`}
@@ -106,7 +113,7 @@ const Navigation = ({
             50
           </li>
           <li
-            onClick={() => onChange(100)}
+            onClick={() => handleChange(100)}
             className={`${s.navigationIcon} ${
               currentValue === 100 ? s.activeOption : ""
             }`}
@@ -120,7 +127,7 @@ const Navigation = ({
         <ul className={s.navigationList}>
           <span className={s.sentances}>Sentences:</span>
           <li
-            onClick={() => onChange(1)}
+            onClick={() => handleChange(1)}
             className={`${s.navigationIcon} ${
               currentValue === 1 ? s.activeOption : ""
             }`}
@@ -128,7 +135,7 @@ const Navigation = ({
             1
           </li>
           <li
-            onClick={() => onChange(2)}
+            onClick={() => handleChange(2)}
             className={`${s.navigationIcon} ${
               currentValue === 2 ? s.activeOption : ""
             }`}
@@ -136,7 +143,7 @@ const Navigation = ({
             2
           </li>
           <li
-            onClick={() => onChange(3)}
+            onClick={() => handleChange(3)}
             className={`${s.navigationIcon} ${
               currentValue === 3 ? s.activeOption : ""
             }`}
@@ -144,7 +151,7 @@ const Navigation = ({
             3
           </li>
           <li
-            onClick={() => onChange(4)}
+            onClick={() => handleChange(4)}
             className={`${s.navigationIcon} ${
               currentValue === 4 ? s.activeOption : ""
             }`}

@@ -11,8 +11,6 @@ import UserTyping from "../../components/UserTyping/UserTyping";
 import s from "./CountdownPage.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
 
-const NUMBER_OF_WORDS = 30;
-
 const CountdownPage = () => {
   const {
     errors,
@@ -24,7 +22,7 @@ const CountdownPage = () => {
     typed,
     setCountdownSeconds,
     onRestart,
-  } = useTimerTyping(NUMBER_OF_WORDS);
+  } = useTimerTyping();
 
   return (
     <div className={s.countdownPage}>
@@ -32,6 +30,7 @@ const CountdownPage = () => {
         currentPage="time"
         currentValue={countdownSeconds}
         onChange={setCountdownSeconds}
+        onRestart={onRestart}
       />
       <CountdownTimer timeLeft={timeLeft} />
 
