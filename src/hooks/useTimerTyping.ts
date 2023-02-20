@@ -6,10 +6,7 @@ import { countErrors, isKeyboardAllowed } from "../utils/helpers";
 
 export type State = "start" | "run" | "finish";
 
-export const useTimerTyping = (
-  numberOfWords: number,
-  countdownSeconds: number
-) => {
+export const useTimerTyping = (numberOfWords: number) => {
   const [typed, setTyped] = useState("");
   const { words, updateWords } = useWords(numberOfWords);
   const [totalTyped, setTotalTyped] = useState(0);
@@ -19,8 +16,13 @@ export const useTimerTyping = (
 
   const totalTypedRef = useRef(0);
 
-  const { timeLeft, startCountdown, resetCountdown } =
-    useCountdownTimer(countdownSeconds);
+  const {
+    timeLeft,
+    startCountdown,
+    resetCountdown,
+    countdownSeconds,
+    setCountdownSeconds,
+  } = useCountdownTimer();
 
   useEffect(() => {
     // The end of timer
@@ -93,5 +95,15 @@ export const useTimerTyping = (
     };
   }, [keydownHandler]);
 
-  return { errors, totalTyped, state, timeLeft, words, typed, onRestart };
+  return {
+    errors,
+    totalTyped,
+    state,
+    timeLeft,
+    countdownSeconds,
+    words,
+    typed,
+    onRestart,
+    setCountdownSeconds,
+  };
 };

@@ -1,6 +1,72 @@
+:global {
+  body[data-theme="joker"] {
+    --nav-bar-color: #14081f;
+  }
+
+  body[data-theme="aurora"] {
+    --nav-bar-color: #000c13;
+  }
+
+  body[data-theme="cheesecake"] {
+    --nav-bar-color: #f3e2bf;
+  }
+
+  body[data-theme="orange"] {
+    --nav-bar-color: #5c5555;
+  }
+
+  body[data-theme="ukraine"] {
+    --nav-bar-color: #024f8e;
+  }
+
+  body[data-theme="matrix"] {
+    --nav-bar-color: #021500;
+  }
+}
+
 .navigation {
-  background-color: black;
-  width: 60%;
+  background-color: var(--nav-bar-color);
   margin-top: 15px;
   margin-bottom: 90px;
+  border-radius: 10px;
+  padding: 8px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.navigationList {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+
+  gap: 30px;
+}
+
+.navigationIcon {
+  cursor: pointer;
+  color: var(--header-icon-color);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &:hover {
+    color: var(--header-icon-hover);
+  }
+}
+
+.activeOption {
+  color: var(--header-icon-hover);
+}
+
+.divider {
+  display: block;
+  width: 3px;
+  height: 24px;
+  background-color: var(--header-icon-color);
+}
+
+.sentances {
+  color: var(--header-icon-color);
 }

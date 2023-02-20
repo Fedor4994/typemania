@@ -12,15 +12,27 @@ import s from "./CountdownPage.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
 
 const NUMBER_OF_WORDS = 30;
-const COUNTDOWN_SECONDS = 30;
 
 const CountdownPage = () => {
-  const { errors, totalTyped, state, timeLeft, words, typed, onRestart } =
-    useTimerTyping(NUMBER_OF_WORDS, COUNTDOWN_SECONDS);
+  const {
+    errors,
+    totalTyped,
+    state,
+    timeLeft,
+    countdownSeconds,
+    words,
+    typed,
+    setCountdownSeconds,
+    onRestart,
+  } = useTimerTyping(NUMBER_OF_WORDS);
 
   return (
     <div className={s.countdownPage}>
-      <Navigation />
+      <Navigation
+        currentPage="time"
+        currentValue={countdownSeconds}
+        onChange={setCountdownSeconds}
+      />
       <CountdownTimer timeLeft={timeLeft} />
 
       <div className={s.typingArea}>
@@ -32,7 +44,7 @@ const CountdownPage = () => {
       <Results
         accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
         errors={errors}
-        speed={calculateWordsPerMinute(totalTyped - errors, COUNTDOWN_SECONDS)}
+        speed={calculateWordsPerMinute(totalTyped - errors, countdownSeconds)}
         state={state}
       />
     </div>

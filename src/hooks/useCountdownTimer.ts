@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const useCountdownTimer = (seconds: number) => {
+const useCountdownTimer = () => {
+  const [countdownSeconds, setCountdownSeconds] = useState(30);
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
-  const [timeLeft, setTimeLeft] = useState<number>(seconds);
+  const [timeLeft, setTimeLeft] = useState<number>(countdownSeconds);
 
   const startCountdown = () => {
     setIntervalId(
@@ -14,10 +15,20 @@ const useCountdownTimer = (seconds: number) => {
 
   const resetCountdown = () => {
     clearInterval(intervalId);
-    setTimeLeft(seconds);
+    setTimeLeft(countdownSeconds);
   };
 
-  return { timeLeft, startCountdown, resetCountdown };
+  useEffect(() => {
+    setTimeLeft(countdownSeconds);
+  }, [countdownSeconds]);
+
+  return {
+    timeLeft,
+    startCountdown,
+    resetCountdown,
+    countdownSeconds,
+    setCountdownSeconds,
+  };
 };
 
 export default useCountdownTimer;
