@@ -1,6 +1,36 @@
-.themeOptions {
-  text-align: right;
-  padding: 20px 0;
+:global {
+  body[data-theme="joker"] {
+    --switcher-color: var(--joker-main-text);
+  }
+
+  body[data-theme="aurora"] {
+    --switcher-color: var(--aurora-main-text);
+  }
+
+  body[data-theme="cheesecake"] {
+    --switcher-color: var(--cheesecake-secondary-text);
+  }
+
+  body[data-theme="orange"] {
+    --switcher-color: var(--orange-secondary-text);
+  }
+
+  body[data-theme="ukraine"] {
+    --switcher-color: var(--ukraine-main-text);
+  }
+
+  body[data-theme="matrix"] {
+    --switcher-color: var(--matrix-main-text);
+  }
+}
+
+.dropdown {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  position: relative;
+
   div {
     cursor: pointer;
     width: 20px;
@@ -32,4 +62,17 @@
   .themeMatrix {
     background-color: var(--matrix-secondary-text);
   }
+}
+
+.dropdownContent {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-right: 20px;
+}
+
+.dropbtn {
+  cursor: pointer;
+  margin-bottom: 9px;
+  color: var(--switcher-color);
 }
