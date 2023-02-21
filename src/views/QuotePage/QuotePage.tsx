@@ -2,6 +2,7 @@ import GeneratedWords from "../../components/GeneratedWords/GeneratedWords";
 import Navigation from "../../components/Navigation/Navigation";
 import RestartButton from "../../components/RestartButton/RestartButton";
 import Results from "../../components/Results/Results";
+import Source from "../../components/Source/Source";
 import UserTyping from "../../components/UserTyping/UserTyping";
 import { useQuotesTyping } from "../../hooks/useQuotesTyping";
 
@@ -36,6 +37,7 @@ const QuotePage = () => {
         <GeneratedWords words={currentQuote.text} />
         <UserTyping words={currentQuote.text} userInput={typed} />
       </div>
+      <Source text={currentQuote.source} />
 
       <RestartButton onRestart={onRestart} />
       <Results
