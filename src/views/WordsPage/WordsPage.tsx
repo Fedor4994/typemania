@@ -4,10 +4,12 @@ import Navigation from "../../components/Navigation/Navigation";
 import RestartButton from "../../components/RestartButton/RestartButton";
 import Results from "../../components/Results/Results";
 import UserTyping from "../../components/UserTyping/UserTyping";
+import useStopwatch from "../../hooks/useStopwatch";
 import { State } from "../../hooks/useTimerTyping";
 import useWords from "../../hooks/useWords";
 import {
   calculateAccurancyPercentage,
+  calculateWordsPerMinute,
   countErrors,
   isKeyboardAllowed,
 } from "../../utils/helpers";
@@ -21,15 +23,17 @@ const WordsPage = () => {
 
   const totalTypedRef = useRef(0);
   const { words, updateWords, wordsCount, setWordsCount } = useWords();
+  const { secondsPassed, startStopwatch, resetStopwatch } = useStopwatch();
 
   useEffect(() => {
-    // Finish group of words
+    // Finish words
     if (typed.length === words.length) {
       setTotalTyped(totalTypedRef.current);
       setErrors(countErrors(typed, words));
+      resetStopwatch();
       setState("finish");
     }
-  }, [typed, updateWords, words]);
+  }, [resetStopwatch, typed, updateWords, words]);
 
   const onRestart = useCallback(() => {
     totalTypedRef.current = 0;
@@ -38,8 +42,9 @@ const WordsPage = () => {
     updateWords();
     setTotalTyped(0);
     setErrors(0);
+    resetStopwatch();
     setState("start");
-  }, [updateWords]);
+  }, [resetStopwatch, updateWords]);
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
@@ -54,6 +59,7 @@ const WordsPage = () => {
       }
       if (state === "start") {
         setState("run");
+        startStopwatch();
       }
       switch (key) {
         case "Backspace":
@@ -66,7 +72,7 @@ const WordsPage = () => {
           break;
       }
     },
-    [onRestart, state]
+    [onRestart, startStopwatch, state]
   );
 
   useEffect(() => {
@@ -93,7 +99,7 @@ const WordsPage = () => {
       <Results
         accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
         errors={errors}
-        speed={totalTyped}
+        speed={calculateWordsPerMinute(totalTyped - errors, secondsPassed)}
         state={state}
       />
     </div>

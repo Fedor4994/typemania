@@ -28,7 +28,7 @@ export const calculateWordsPerMinute = (
 ) => {
   const coefficient = 60 / seconds;
   const wpm = (correctChars * coefficient) / 5;
-  return Number(wpm.toFixed(2));
+  return Number(wpm.toFixed(0));
 };
 
 export const isKeyboardAllowed = (code: string) => {
