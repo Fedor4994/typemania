@@ -125,14 +125,13 @@ const Navigation = ({
 
       {currentPage === "quote" && (
         <ul className={s.navigationList}>
-          <span className={s.sentances}>Sentences:</span>
           <li
             onClick={() => handleChange(1)}
             className={`${s.navigationIcon} ${
               currentValue === 1 ? s.activeOption : ""
             }`}
           >
-            1
+            All
           </li>
           <li
             onClick={() => handleChange(2)}
@@ -140,7 +139,7 @@ const Navigation = ({
               currentValue === 2 ? s.activeOption : ""
             }`}
           >
-            2
+            Short
           </li>
           <li
             onClick={() => handleChange(3)}
@@ -148,7 +147,7 @@ const Navigation = ({
               currentValue === 3 ? s.activeOption : ""
             }`}
           >
-            3
+            Medium
           </li>
           <li
             onClick={() => handleChange(4)}
@@ -156,7 +155,7 @@ const Navigation = ({
               currentValue === 4 ? s.activeOption : ""
             }`}
           >
-            4
+            Long
           </li>
         </ul>
       )}

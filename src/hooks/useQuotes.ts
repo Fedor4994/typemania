@@ -8,22 +8,42 @@ export type Quote = {
   text: string;
 };
 
+export type QuoteLength = "short" | "medium" | "long" | "all";
+const arrayOfQuotes: Array<Quote> = quotesFile.quotes;
+
+const generatQuotes = (length: QuoteLength) => {
+  let randomQuote =
+    arrayOfQuotes[Math.floor(Math.random() * arrayOfQuotes.length)];
+  let arr: Array<Quote> = [];
+  switch (length) {
+    case "short":
+      arr = arrayOfQuotes.filter((quote) => quote.length <= 150);
+      return arr[Math.floor(Math.random() * arr.length)];
+    case "medium":
+      arr = arrayOfQuotes.filter(
+        (quote) => quote.length > 150 && quote.length <= 300
+      );
+      return arr[Math.floor(Math.random() * arr.length)];
+    case "long":
+      arr = arrayOfQuotes.filter((quote) => quote.length > 300);
+      return arr[Math.floor(Math.random() * arr.length)];
+
+    case "all":
+      return randomQuote;
+  }
+};
+
 export const useQuotes = () => {
-  const [index, setIndex] = useState(0);
-  const [currentQuote, setCurrentQuote] = useState<Quote>();
-  const arrayOfQuotes: Array<Quote> = quotesFile.quotes;
+  const [quoteLength, setQuoteLength] = useState<QuoteLength>("short");
+  const [currentQuote, setCurrentQuote] = useState<Quote>(
+    generatQuotes(quoteLength)
+  );
+
+  const updateQuotes = () => setCurrentQuote(generatQuotes(quoteLength));
 
   useEffect(() => {
-    if (!currentQuote) {
-      setIndex(Math.floor(Math.random() * arrayOfQuotes.length));
-    }
+    setCurrentQuote(generatQuotes(quoteLength));
+  }, [quoteLength]);
 
-    if (arrayOfQuotes[index].length <= 150) {
-      setCurrentQuote(arrayOfQuotes[index]);
-      console.log(arrayOfQuotes[index]);
-      return;
-    } else {
-      setIndex(Math.floor(Math.random() * arrayOfQuotes.length));
-    }
-  }, [arrayOfQuotes, currentQuote, index]);
+  return { currentQuote, updateQuotes, setQuoteLength };
 };

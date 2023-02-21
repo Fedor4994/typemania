@@ -36,6 +36,17 @@ export const isKeyboardAllowed = (code: string) => {
     code.startsWith("Key") ||
     code.startsWith("Digit") ||
     code === "Backspace" ||
-    code === "Space"
+    code === "Space" ||
+    code === "Period" ||
+    code === "Comma" ||
+    code === "Quote" ||
+    code === "Minus" ||
+    code === "Slash" ||
+    code === "Semicolon" ||
+    code === "BracketLeft" ||
+    code === "BracketRight" ||
+    code === "Backquote" ||
+    code === "Equal" ||
+    code === "Backslash"
   );
 };
