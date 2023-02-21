@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
-import { faker } from "@faker-js/faker";
+import wordsFile from "../data/words.json";
 
 const generateWords = (count: number) => {
-  return faker.random.words(count).toLowerCase();
+  const arrayOfWords: Array<String> = wordsFile.words;
+  let generatedWords: Array<String> = [];
+  for (let i = 0; i <= count; i++) {
+    generatedWords.push(
+      wordsFile.words[Math.floor(Math.random() * arrayOfWords.length)]
+    );
+  }
+  return generatedWords.join(" ");
 };
 
 const useWords = () => {
-  const [wordsCount, setWordsCount] = useState(25);
+  const [wordsCount, setWordsCount] = useState(50);
   const [words, setWords] = useState<string>(generateWords(wordsCount));
 
   const updateWords = () => setWords(generateWords(wordsCount));
