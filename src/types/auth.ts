@@ -4,3 +4,5 @@ export type User = {
   email: string;
   password: string;
 };
+
+export type UserInfo = Pick<User, "name" | "email">;
