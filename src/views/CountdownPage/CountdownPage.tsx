@@ -10,6 +10,7 @@ import Results from "../../components/Results/Results";
 import UserTyping from "../../components/UserTyping/UserTyping";
 import s from "./CountdownPage.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
+import NextButton from "../../components/NextButton/NextButton";
 
 const CountdownPage = () => {
   const {
@@ -22,6 +23,7 @@ const CountdownPage = () => {
     typed,
     setCountdownSeconds,
     onRestart,
+    updateWords,
   } = useTimerTyping();
 
   return (
@@ -39,7 +41,16 @@ const CountdownPage = () => {
         <UserTyping words={words} userInput={typed} />
       </div>
 
-      <RestartButton onRestart={onRestart} />
+      <div className={s.buttonsWrapper}>
+        <RestartButton onRestart={onRestart} />
+        <NextButton
+          handleNextTest={() => {
+            onRestart();
+            updateWords();
+          }}
+        />
+      </div>
+
       <Results
         accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
         errors={errors}

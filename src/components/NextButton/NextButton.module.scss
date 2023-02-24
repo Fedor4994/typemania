@@ -30,7 +30,7 @@
   }
 }
 
-.restartButton {
+.nextButton {
   display: block;
   border: none;
   cursor: pointer;
@@ -43,10 +43,10 @@
   transition: 200ms all ease;
 }
 
-.restartButton:hover {
+.nextButton:hover {
   background-color: var(--button-hover);
 }
 
-.restartButton:focus {
+.nextButton:focus {
   background-color: aliceblue;
 }

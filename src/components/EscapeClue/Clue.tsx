@@ -1,7 +1,13 @@
 import { useLocation } from "react-router-dom";
-import s from "./EscapeClue.module.scss";
+import s from "./Clue.module.scss";
 
-const EscapeClue = () => {
+const Clue = ({
+  keyboardButton,
+  text,
+}: {
+  keyboardButton: string;
+  text: string;
+}) => {
   const location = useLocation();
   const isTypingPage =
     location.pathname === "/" ||
@@ -14,9 +20,9 @@ const EscapeClue = () => {
 
   return (
     <div className={s.clue}>
-      <span className={s.key}>Escape</span> - restart test
+      <span className={s.key}>{keyboardButton}</span> - {text}
     </div>
   );
 };
 
-export default EscapeClue;
+export default Clue;

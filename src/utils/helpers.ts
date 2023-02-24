@@ -47,6 +47,7 @@ export const isKeyboardAllowed = (code: string) => {
     code === "BracketRight" ||
     code === "Backquote" ||
     code === "Equal" ||
-    code === "Backslash"
+    code === "Backslash" ||
+    code === "ArrowRight"
   );
 };

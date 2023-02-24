@@ -49,18 +49,23 @@ export const useTimerTyping = () => {
     totalTypedRef.current = 0;
 
     setTyped("");
-    updateWords();
     resetCountdown();
     setTotalTyped(0);
     setErrors(0);
     setCursor(0);
     setState("start");
-  }, [resetCountdown, updateWords]);
+  }, [resetCountdown]);
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       if (key === "Escape") {
         onRestart();
+        return;
+      }
+
+      if (key === "ArrowRight") {
+        onRestart();
+        updateWords();
         return;
       }
 
@@ -85,7 +90,7 @@ export const useTimerTyping = () => {
           break;
       }
     },
-    [onRestart, startCountdown, state]
+    [onRestart, startCountdown, state, updateWords]
   );
 
   useEffect(() => {
@@ -104,6 +109,7 @@ export const useTimerTyping = () => {
     words,
     typed,
     onRestart,
+    updateWords,
     setCountdownSeconds,
   };
 };

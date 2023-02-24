@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { MdRefresh } from "react-icons/md";
+import { FaRedo } from "react-icons/fa";
 import s from "./RestartButton.module.scss";
 
 const RestartButton = ({ onRestart }: { onRestart: () => void }) => {
@@ -16,7 +16,7 @@ const RestartButton = ({ onRestart }: { onRestart: () => void }) => {
       className={s.restartButton}
       onClick={handleClick}
     >
-      <MdRefresh size={30} />
+      <FaRedo size={24} />
     </button>
   );
 };

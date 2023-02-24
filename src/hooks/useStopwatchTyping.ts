@@ -28,17 +28,22 @@ export const useStopwatchTyping = () => {
     totalTypedRef.current = 0;
 
     setTyped("");
-    updateWords();
     setTotalTyped(0);
     setErrors(0);
     resetStopwatch();
     setState("start");
-  }, [resetStopwatch, updateWords]);
+  }, [resetStopwatch]);
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       if (key === "Escape") {
         onRestart();
+        return;
+      }
+
+      if (key === "ArrowRight") {
+        onRestart();
+        updateWords();
         return;
       }
 
@@ -61,7 +66,7 @@ export const useStopwatchTyping = () => {
           break;
       }
     },
-    [onRestart, startStopwatch, state]
+    [onRestart, startStopwatch, state, updateWords]
   );
 
   useEffect(() => {
@@ -74,6 +79,7 @@ export const useStopwatchTyping = () => {
   return {
     wordsCount,
     setWordsCount,
+    updateWords,
     onRestart,
     words,
     typed,

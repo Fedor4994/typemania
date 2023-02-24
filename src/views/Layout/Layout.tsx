@@ -2,10 +2,10 @@ import { Link, Outlet } from "react-router-dom";
 import { FaInfo, FaCrown, FaKeyboard, FaUserAlt, FaCode } from "react-icons/fa";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { IoMdMail } from "react-icons/io";
-import EscapeClue from "../../components/EscapeClue/EscapeClue";
 import Logo from "../../components/Logo/Logo";
 import ThemeSwitcher from "../../components/ThemeSwitcher/ThemeSwitcher";
 import s from "./Layout.module.scss";
+import Clue from "../../components/EscapeClue/Clue";
 
 const Layout = () => {
   return (
@@ -46,7 +46,10 @@ const Layout = () => {
         <main>
           <Outlet />
         </main>
-        <EscapeClue />
+        <div className={s.clueWrapper}>
+          <Clue keyboardButton="Escape" text="restart test" />
+          <Clue keyboardButton="Right Arrow" text="next test" />
+        </div>
       </div>
       <footer className={s.footer}>
         <ul className={s.footerList}>

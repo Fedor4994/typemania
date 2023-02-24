@@ -1,5 +1,6 @@
 import GeneratedWords from "../../components/GeneratedWords/GeneratedWords";
 import Navigation from "../../components/Navigation/Navigation";
+import NextButton from "../../components/NextButton/NextButton";
 import RestartButton from "../../components/RestartButton/RestartButton";
 import Results from "../../components/Results/Results";
 import UserTyping from "../../components/UserTyping/UserTyping";
@@ -14,6 +15,7 @@ const WordsPage = () => {
   const {
     wordsCount,
     setWordsCount,
+    updateWords,
     onRestart,
     words,
     typed,
@@ -36,7 +38,16 @@ const WordsPage = () => {
         <UserTyping words={words} userInput={typed} />
       </div>
 
-      <RestartButton onRestart={onRestart} />
+      <div className={s.buttonsWrapper}>
+        <RestartButton onRestart={onRestart} />
+        <NextButton
+          handleNextTest={() => {
+            onRestart();
+            updateWords();
+          }}
+        />
+      </div>
+
       <Results
         accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
         errors={errors}

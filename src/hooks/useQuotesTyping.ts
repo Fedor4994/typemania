@@ -48,17 +48,22 @@ export const useQuotesTyping = () => {
     totalTypedRef.current = 0;
 
     setTyped("");
-    updateQuotes();
     setTotalTyped(0);
     setErrors(0);
     resetStopwatch();
     setState("start");
-  }, [resetStopwatch, updateQuotes]);
+  }, [resetStopwatch]);
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       if (key === "Escape") {
         onRestart();
+        return;
+      }
+
+      if (key === "ArrowRight") {
+        onRestart();
+        updateQuotes();
         return;
       }
 
@@ -81,7 +86,7 @@ export const useQuotesTyping = () => {
           break;
       }
     },
-    [onRestart, startStopwatch, state]
+    [onRestart, startStopwatch, state, updateQuotes]
   );
 
   useEffect(() => {
@@ -94,6 +99,7 @@ export const useQuotesTyping = () => {
   return {
     quotesCount,
     setQuotesCount,
+    updateQuotes,
     onRestart,
     currentQuote,
     typed,

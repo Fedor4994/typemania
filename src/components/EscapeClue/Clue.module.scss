@@ -32,15 +32,13 @@
 
 .clue {
   display: block;
-  margin-top: auto;
-  margin-bottom: 20px;
   text-align: center;
   color: var(--clue-color);
 }
 
 .key {
   background-color: var(--clue-color);
-  padding: 4px;
+  padding: 3px 10px;
   border-radius: 5px;
   color: var(--backgroud-clue-color);
 }

@@ -92,3 +92,12 @@
     color: var(--header-icon-hover);
   }
 }
+
+.clueWrapper {
+  display: flex;
+  gap: 120px;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 20px;
+}

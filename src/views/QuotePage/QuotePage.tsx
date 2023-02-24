@@ -1,5 +1,6 @@
 import GeneratedWords from "../../components/GeneratedWords/GeneratedWords";
 import Navigation from "../../components/Navigation/Navigation";
+import NextButton from "../../components/NextButton/NextButton";
 import RestartButton from "../../components/RestartButton/RestartButton";
 import Results from "../../components/Results/Results";
 import Source from "../../components/Source/Source";
@@ -17,6 +18,7 @@ const QuotePage = () => {
     quotesCount,
     setQuotesCount,
     onRestart,
+    updateQuotes,
     currentQuote,
     typed,
     errors,
@@ -39,7 +41,15 @@ const QuotePage = () => {
       </div>
       <Source text={currentQuote.source} />
 
-      <RestartButton onRestart={onRestart} />
+      <div className={s.buttonsWrapper}>
+        <RestartButton onRestart={onRestart} />
+        <NextButton
+          handleNextTest={() => {
+            onRestart();
+            updateQuotes();
+          }}
+        />
+      </div>
       <Results
         accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
         errors={errors}
