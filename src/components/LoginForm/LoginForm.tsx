@@ -17,8 +17,8 @@ const LoginForm = () => {
       .required("Email is a required field"),
     password: yup
       .string()
-      .min(6, "Password must be at least 6 characters")
-      .max(20, "Password must be at most 20 characters")
+      .min(6, "Must be at least 6 characters")
+      .max(20, "Must be at most 20 characters")
       .required("Password is a required field"),
   });
 
@@ -62,13 +62,19 @@ const LoginForm = () => {
               <ImCross />
             </motion.div>
           ) : (
-            <FaCheck className={s.checkIcon} />
+            <motion.div
+              onHoverStart={() => setEmailErrorMessage("Email is valid!" || "")}
+              onHoverEnd={() => setEmailErrorMessage("")}
+              className={s.checkIcon}
+            >
+              <FaCheck />
+            </motion.div>
           )
         ) : (
           ""
         )}
 
-        {emailErrorMessage && (
+        {emailErrorMessage && values.email && (
           <motion.p
             initial={{
               opacity: 0,
@@ -120,13 +126,21 @@ const LoginForm = () => {
               <ImCross />
             </motion.div>
           ) : (
-            <FaCheck className={s.checkIcon} />
+            <motion.div
+              onHoverStart={() =>
+                setPasswordErrorMessage("Password is valid!" || "")
+              }
+              onHoverEnd={() => setPasswordErrorMessage("")}
+              className={s.checkIcon}
+            >
+              <FaCheck />
+            </motion.div>
           )
         ) : (
           ""
         )}
 
-        {passwordErrorMessage && (
+        {passwordErrorMessage && values.password && (
           <motion.p
             initial={{
               opacity: 0,
