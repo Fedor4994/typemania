@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Container from "./components/Container/Container";
@@ -10,8 +11,16 @@ import AboutPage from "./views/AboutPage/AboutPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
 import LoginPage from "./views/LoginPage/LoginPage";
 import ContactsPage from "./views/ContactsPage/ContactsPage";
+import { useAppDispatch } from "./redux/store";
+import { getCurrentUser } from "./redux/auth/auth-operations";
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
+
   return (
     <Container>
       <Routes>

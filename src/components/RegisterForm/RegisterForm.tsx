@@ -5,11 +5,15 @@ import { motion } from "framer-motion";
 import { ImCross } from "react-icons/im";
 import { FaCheck, FaUserPlus } from "react-icons/fa";
 import s from "./RegisterForm.module.scss";
+import { useAppDispatch } from "../../redux/store";
+import { register } from "../../redux/auth/auth-operations";
 
 const RegisterForm = () => {
   const [nameErrorMessage, setNameErrorMessage] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+
+  const dispatch = useAppDispatch();
 
   const NAME_REGEX = /^[A-Za-z0-9 А-Яа-я]+$/;
 
@@ -39,7 +43,7 @@ const RegisterForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(register(values));
     },
   });
 

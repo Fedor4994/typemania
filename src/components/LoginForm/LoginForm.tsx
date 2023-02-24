@@ -5,10 +5,14 @@ import { motion } from "framer-motion";
 import { ImCross } from "react-icons/im";
 import { FaCheck, FaSignInAlt } from "react-icons/fa";
 import s from "./LoginForm.module.scss";
+import { useAppDispatch } from "../../redux/store";
+import { login } from "../../redux/auth/auth-operations";
 
 const LoginForm = () => {
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+
+  const dispatch = useAppDispatch();
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -29,7 +33,7 @@ const LoginForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(login(values));
     },
   });
 
