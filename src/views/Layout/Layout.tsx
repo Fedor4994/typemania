@@ -5,7 +5,7 @@ import { IoMdMail } from "react-icons/io";
 import Logo from "../../components/Logo/Logo";
 import ThemeSwitcher from "../../components/ThemeSwitcher/ThemeSwitcher";
 import s from "./Layout.module.scss";
-import Clue from "../../components/EscapeClue/Clue";
+import Clue from "../../components/Clue/Clue";
 
 const Layout = () => {
   return (

@@ -1,0 +1,101 @@
+@mixin loginInput {
+  border: none;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--clue-color);
+  background-color: var(--nav-bar-color);
+}
+
+.loginForm {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.formTitle {
+  margin-right: auto;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--correct-color);
+}
+
+.validInput {
+  @include loginInput();
+  outline: 1px solid var(--words-color);
+}
+
+.invalidInput {
+  @include loginInput();
+
+  outline: 1px solid var(--error-color);
+}
+
+.emptyInput {
+  @include loginInput();
+
+  outline: none;
+}
+
+.loginLabel {
+  width: 100%;
+  position: relative;
+}
+
+.crossIcon {
+  cursor: pointer;
+  color: var(--error-color);
+  position: absolute;
+  right: 10px;
+  top: 9px;
+}
+
+.checkIcon {
+  color: var(--correct-color);
+  position: absolute;
+  right: 10px;
+  top: 9px;
+}
+
+.loginButton {
+  cursor: pointer;
+  background-color: var(--nav-bar-color);
+  color: var(--correct-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  transition: 200ms all ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
+    background-color: var(--correct-color);
+    color: var(--nav-bar-color);
+  }
+}
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  right: -35px;
+  background-color: #171717;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
