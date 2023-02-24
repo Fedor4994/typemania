@@ -1,13 +1,18 @@
 import { Link, Outlet } from "react-router-dom";
-import { FaInfo, FaCrown, FaKeyboard, FaUserAlt, FaCode } from "react-icons/fa";
+import { FaInfo, FaCrown, FaKeyboard, FaRegUser, FaCode } from "react-icons/fa";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { IoMdMail } from "react-icons/io";
 import Logo from "../../components/Logo/Logo";
 import ThemeSwitcher from "../../components/ThemeSwitcher/ThemeSwitcher";
 import s from "./Layout.module.scss";
 import Clue from "../../components/Clue/Clue";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
+import UserMenu from "../../components/UserMenu/UserMenu";
 
 const Layout = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
     <>
       <div className={s.content}>
@@ -37,11 +42,15 @@ const Layout = () => {
               </li>
             </ul>
           </div>
-          <div className={s.loginIcon}>
-            <Link to="/login">
-              <FaUserAlt className={s.infoIcon} size={18} />
-            </Link>
-          </div>
+          {isLoggedIn ? (
+            <UserMenu />
+          ) : (
+            <div className={s.loginIcon}>
+              <Link to="/login">
+                <FaRegUser className={s.infoIcon} size={18} />
+              </Link>
+            </div>
+          )}
         </header>
         <main>
           <Outlet />

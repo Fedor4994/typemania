@@ -1,0 +1,7 @@
+.userIcon {
+  color: var(--header-icon-color);
+
+  &:hover {
+    color: var(--header-icon-hover);
+  }
+}
