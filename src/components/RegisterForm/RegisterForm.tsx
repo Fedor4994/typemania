@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { ImCross } from "react-icons/im";
 import { FaCheck, FaUserPlus } from "react-icons/fa";
@@ -14,6 +15,7 @@ const RegisterForm = () => {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
   const dispatch = useAppDispatch();
+  const notify = () => toast.error("A user with the same email already exists");
 
   const NAME_REGEX = /^[A-Za-z0-9 А-Яа-я]+$/;
 
@@ -42,8 +44,19 @@ const RegisterForm = () => {
       password: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      dispatch(register(values));
+    onSubmit: (values, { resetForm }) => {
+      dispatch(register(values)).then((data) => {
+        if (data.meta.requestStatus === "rejected") {
+          notify();
+          resetForm({
+            values: {
+              name: values.name,
+              email: "",
+              password: "",
+            },
+          });
+        }
+      });
     },
   });
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { ImCross } from "react-icons/im";
 import { FaCheck, FaSignInAlt } from "react-icons/fa";
@@ -13,6 +14,7 @@ const LoginForm = () => {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
   const dispatch = useAppDispatch();
+  const notify = () => toast.error("Incorrect email or password");
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -32,8 +34,19 @@ const LoginForm = () => {
       password: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      dispatch(login(values));
+    onSubmit: (values, { resetForm }) => {
+      dispatch(login(values)).then((data) => {
+        if (data.meta.requestStatus === "rejected") {
+          notify();
+          console.log(123);
+          resetForm({
+            values: {
+              email: values.email,
+              password: "",
+            },
+          });
+        }
+      });
     },
   });
 

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
 import Container from "./components/Container/Container";
 import Layout from "./views/Layout/Layout";
 import CountdownPage from "./views/CountdownPage/CountdownPage";
@@ -18,6 +17,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import AccountPage from "./views/AccountPage/AccountPage";
 import { useSelector } from "react-redux";
 import { selectIsFetchingUser } from "./redux/auth/auth-selectors";
+import FetchingUserLoader from "./components/FetchingUserLoader/FetchingUserLoader";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -28,7 +30,7 @@ function App() {
   }, [dispatch]);
 
   return isFetchingUser ? (
-    <h1>WAIT WHILE MINIONS DO THEIR WORK</h1>
+    <FetchingUserLoader />
   ) : (
     <Container>
       <Routes>
@@ -54,6 +56,18 @@ function App() {
           />
         </Route>
       </Routes>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      />
     </Container>
   );
 }

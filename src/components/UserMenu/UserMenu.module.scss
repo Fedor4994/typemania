@@ -1,6 +1,25 @@
-.userIcon {
+.logoutIcon {
+  background-color: transparent;
+  border: none;
+  margin-top: 5px;
   color: var(--header-icon-color);
+  cursor: pointer;
+  &:hover {
+    color: var(--header-icon-hover);
+  }
+}
 
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.accountLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--header-icon-color);
   &:hover {
     color: var(--header-icon-hover);
   }

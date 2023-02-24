@@ -12,16 +12,17 @@ const UserMenu = () => {
 
   return (
     <div className={s.userMenu}>
-      <Link to="/account">
+      <Link className={s.accountLink} to="/account">
         <FaUserAlt className={s.userIcon} size={18} />
-        {name}
+        <span>{name}</span>
       </Link>
       <button
+        className={s.logoutIcon}
         onClick={() => {
           dispatch(logOut());
         }}
       >
-        <FaSignOutAlt />
+        <FaSignOutAlt size={20} />
       </button>
     </div>
   );
