@@ -1,5 +1,6 @@
+import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Results from "../../components/Results/Results";
 import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
 import {
@@ -26,9 +27,26 @@ const ResultsPage = () => {
 
   return (
     <div className={s.resultPage}>
-      {!isLoggedIn && <p>Create an account to save your progress!!!</p>}
+      {!isLoggedIn && (
+        <p className={s.signInPlease}>
+          <Link className={s.singInLink} to="/login">
+            Sign in
+          </Link>{" "}
+          to save your results
+        </p>
+      )}
       {isLoading ? (
-        <p>Loading...</p>
+        <div className={s.resultLoader}>
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="var(--main-color)"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            visible={true}
+          />
+        </div>
       ) : (
         <Results
           accurancyPercentage={lastTest?.accuracy || 0}

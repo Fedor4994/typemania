@@ -1,51 +1,196 @@
 :global {
   body[data-theme="joker"] {
-    --error-color: var(--joker-error);
+    --backgroud-color: var(--joker-background);
     --main-color: var(--joker-secondary-text);
+    --circle-color-1: #281539;
+    --circle-color-2: #100817;
   }
 
   body[data-theme="aurora"] {
-    --error-color: var(--aurora-error);
+    --backgroud-color: var(--aurora-background);
     --main-color: var(--aurora-secondary-text);
+    --circle-color-1: #01273b;
+    --circle-color-2: #01131d;
   }
 
   body[data-theme="cheesecake"] {
-    --error-color: var(--cheesecake-error);
-    --main-color: var(--cheesecake-secondary-text);
+    --backgroud-color: var(--cheesecake-background);
+    --main-color: var(--cheesecake-main-text);
+    --circle-color-1: #dad0bd;
+    --circle-color-2: #c0b9ac;
   }
 
   body[data-theme="orange"] {
-    --error-color: var(--orange-error);
-    --main-color: var(--orange-secondary-text);
+    --backgroud-color: var(--orange-background);
+    --main-color: var(--orange-main-text);
+    --circle-color-1: #162e2e;
+    --circle-color-2: #0a1616;
   }
 
   body[data-theme="ukraine"] {
-    --error-color: var(--ukraine-error);
+    --backgroud-color: var(--ukraine-background);
     --main-color: var(--ukraine-secondary-text);
+    --circle-color-1: #2169a8;
+    --circle-color-2: #004582;
   }
 
   body[data-theme="matrix"] {
-    --error-color: var(--matrix-error);
+    --backgroud-color: var(--matrix-background);
     --main-color: var(--matrix-secondary-text);
+    --circle-color-1: #002a00;
+    --circle-color-2: #011201;
   }
+}
+
+@mixin line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: var(--main-color);
 }
 
 .resultsList {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100%;
   gap: 4px;
   margin-top: 20px;
 }
 
-.total {
-  color: var(--main-color);
+.circlesWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.percentage {
+.testType {
   color: var(--main-color);
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.errors {
-  color: var(--error-color);
+.goBack {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--main-color);
+  font-size: 16px;
+}
+
+.progressCircular {
+  margin-top: 130px;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--main-color) 0deg,
+    var(--backgroud-color) 0deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.progressCircular::after {
+  position: absolute;
+  content: "";
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background-color: var(--backgroud-color);
+}
+
+.value {
+  font-size: 50px;
+  font-weight: 600;
+  color: var(--main-color);
+  z-index: 9;
+}
+
+.valueTitle {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--main-color);
+  z-index: 9;
+}
+
+.circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: var(--circle-color-1);
+  .line1 {
+    @include line;
+    transform: translate(-50%, -50%) rotate(30deg);
+  }
+  .line2 {
+    @include line;
+
+    transform: translate(-50%, -50%) rotate(60deg);
+  }
+  .line3 {
+    @include line;
+
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .line4 {
+    @include line;
+
+    transform: translate(-50%, -50%) rotate(120deg);
+  }
+  .line5 {
+    @include line;
+
+    transform: translate(-50%, -50%) rotate(150deg);
+  }
+  .line6 {
+    @include line;
+
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+
+  .insertCircle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: var(--circle-color-2);
+  }
+
+  .insertCircle2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: var(--circle-color-1);
+
+    .timerSeconds {
+      color: var(--main-color);
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
 }

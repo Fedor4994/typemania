@@ -1,0 +1,19 @@
+.signInPlease {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  color: var(--main-color);
+}
+
+.singInLink {
+  color: var(--main-color);
+  text-decoration: underline;
+}
+
+.resultLoader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
