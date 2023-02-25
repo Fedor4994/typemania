@@ -12,10 +12,14 @@ import {
 import { useAppDispatch } from "../redux/store";
 import { addTest } from "../redux/tests/tests-operations";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
+import { setLastTest } from "../redux/tests/testsSlice";
 
 export const useQuotesTyping = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const [typed, setTyped] = useState("");
   const [totalTyped, setTotalTyped] = useState(0);
@@ -23,7 +27,8 @@ export const useQuotesTyping = () => {
   const [state, setState] = useState<State>("start");
 
   const totalTypedRef = useRef(0);
-  const { currentQuote, setQuoteLength, updateQuotes } = useQuotes();
+  const { currentQuote, setQuoteLength, updateQuotes, quoteLength } =
+    useQuotes();
   const { secondsPassed, startStopwatch, resetStopwatch } = useStopwatch();
 
   const [quotesCount, setQuotesCount] = useState(1);
@@ -53,15 +58,27 @@ export const useQuotesTyping = () => {
       resetStopwatch();
 
       if (totalTyped !== 0) {
-        dispatch(
-          addTest({
-            wpm: calculateWordsPerMinute(totalTyped - errors, secondsPassed),
-            accuracy: calculateAccurancyPercentage(errors, totalTyped),
-            time: secondsPassed,
-          })
-        ).then(() => {
-          navigate("/results");
-        });
+        if (isLoggedIn) {
+          dispatch(
+            addTest({
+              wpm: calculateWordsPerMinute(totalTyped - errors, secondsPassed),
+              accuracy: calculateAccurancyPercentage(errors, totalTyped),
+              time: secondsPassed,
+              testType: `Quote, ${quoteLength}`,
+            })
+          );
+        } else {
+          dispatch(
+            setLastTest({
+              wpm: calculateWordsPerMinute(totalTyped - errors, secondsPassed),
+              accuracy: calculateAccurancyPercentage(errors, totalTyped),
+              time: secondsPassed,
+              testType: `Quote, ${quoteLength}`,
+            })
+          );
+        }
+
+        navigate("/results");
       }
 
       setState("finish");
@@ -70,7 +87,9 @@ export const useQuotesTyping = () => {
     currentQuote,
     dispatch,
     errors,
+    isLoggedIn,
     navigate,
+    quoteLength,
     resetStopwatch,
     secondsPassed,
     totalTyped,

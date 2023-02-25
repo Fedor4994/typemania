@@ -19,7 +19,11 @@ const initialState: TestsSlice = {
 const testsSlice = createSlice({
   name: "tests",
   initialState,
-  reducers: {},
+  reducers: {
+    setLastTest(state, { payload }) {
+      state.lastTest = payload;
+    },
+  },
   extraReducers: (builder) =>
     builder
 
@@ -48,3 +52,4 @@ const testsSlice = createSlice({
 });
 
 export default testsSlice.reducer;
+export const { setLastTest } = testsSlice.actions;

@@ -11,10 +11,14 @@ import {
 import { useAppDispatch } from "../redux/store";
 import { addTest } from "../redux/tests/tests-operations";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
+import { setLastTest } from "../redux/tests/testsSlice";
 
 export const useStopwatchTyping = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const [typed, setTyped] = useState("");
   const [totalTyped, setTotalTyped] = useState(0);
@@ -33,15 +37,27 @@ export const useStopwatchTyping = () => {
       resetStopwatch();
 
       if (totalTyped !== 0) {
-        dispatch(
-          addTest({
-            wpm: calculateWordsPerMinute(totalTyped - errors, secondsPassed),
-            accuracy: calculateAccurancyPercentage(errors, totalTyped),
-            time: secondsPassed,
-          })
-        ).then(() => {
-          navigate("/results");
-        });
+        if (isLoggedIn) {
+          dispatch(
+            addTest({
+              wpm: calculateWordsPerMinute(totalTyped - errors, secondsPassed),
+              accuracy: calculateAccurancyPercentage(errors, totalTyped),
+              time: secondsPassed,
+              testType: `Words, ${wordsCount}`,
+            })
+          );
+        } else {
+          dispatch(
+            setLastTest({
+              wpm: calculateWordsPerMinute(totalTyped - errors, secondsPassed),
+              accuracy: calculateAccurancyPercentage(errors, totalTyped),
+              time: secondsPassed,
+              testType: `Words, ${wordsCount}`,
+            })
+          );
+        }
+
+        navigate("/results");
       }
 
       setState("finish");
@@ -49,6 +65,7 @@ export const useStopwatchTyping = () => {
   }, [
     dispatch,
     errors,
+    isLoggedIn,
     navigate,
     resetStopwatch,
     secondsPassed,
@@ -56,6 +73,7 @@ export const useStopwatchTyping = () => {
     typed,
     updateWords,
     words,
+    wordsCount,
   ]);
 
   const onRestart = useCallback(() => {

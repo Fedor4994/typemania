@@ -6,9 +6,15 @@ interface ResultProps {
   time: number;
   accurancyPercentage: number;
   speed: number;
+  testType: string;
 }
 
-const Results = ({ time, accurancyPercentage, speed }: ResultProps) => {
+const Results = ({
+  time,
+  accurancyPercentage,
+  speed,
+  testType,
+}: ResultProps) => {
   return (
     <motion.ul className={s.resultsList}>
       <motion.li
@@ -55,6 +61,21 @@ const Results = ({ time, accurancyPercentage, speed }: ResultProps) => {
         className={s.errors}
       >
         Accurancy: {formatPercentage(accurancyPercentage)}
+      </motion.li>
+      <motion.li
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.5,
+          delay: 1.3,
+        }}
+        className={s.percentage}
+      >
+        Test type: {testType}
       </motion.li>
     </motion.ul>
   );

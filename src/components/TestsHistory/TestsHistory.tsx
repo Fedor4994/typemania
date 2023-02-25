@@ -10,6 +10,7 @@ const TestsHistory = ({ tests }: { tests: Test[] }) => {
           <p>{test.accuracy}</p>
           <p>{test.time}</p>
           <p>{test.createdAt}</p>
+          <p>{test.testType}</p>
         </li>
       ))}
     </ul>

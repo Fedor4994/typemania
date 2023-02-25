@@ -11,18 +11,22 @@ import {
 import { useAppDispatch } from "../redux/store";
 import { addTest } from "../redux/tests/tests-operations";
 import { useNavigate } from "react-router-dom";
+import { setLastTest } from "../redux/tests/testsSlice";
+import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
+import { useSelector } from "react-redux";
 
 export type State = "start" | "run" | "finish";
 
 export const useTimerTyping = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const [typed, setTyped] = useState("");
   const [state, setState] = useState<State>("start");
   const [cursor, setCursor] = useState(0);
-  const [errors, setErrors] = useState(0);
 
+  const errorsRef = useRef(0);
   const totalTypedRef = useRef(0);
   const { words, updateWords } = useWords();
 
@@ -39,24 +43,42 @@ export const useTimerTyping = () => {
     if (!timeLeft) {
       resetCountdown();
       const wordsReached = words.substring(0, Math.min(cursor, words.length));
-      setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached));
+      errorsRef.current += countErrors(typed, wordsReached);
 
       if (totalTypedRef.current !== 0) {
-        dispatch(
-          addTest({
-            wpm: calculateWordsPerMinute(
-              totalTypedRef.current - errors,
-              countdownSeconds
-            ),
-            accuracy: calculateAccurancyPercentage(
-              errors,
-              totalTypedRef.current
-            ),
-            time: countdownSeconds,
-          })
-        ).then(() => {
-          navigate("/results");
-        });
+        if (isLoggedIn) {
+          dispatch(
+            addTest({
+              wpm: calculateWordsPerMinute(
+                totalTypedRef.current - errorsRef.current,
+                countdownSeconds
+              ),
+              accuracy: calculateAccurancyPercentage(
+                errorsRef.current,
+                totalTypedRef.current
+              ),
+              time: countdownSeconds,
+              testType: `Timer, ${countdownSeconds} seconds`,
+            })
+          );
+        } else {
+          dispatch(
+            setLastTest({
+              wpm: calculateWordsPerMinute(
+                totalTypedRef.current - errorsRef.current,
+                countdownSeconds
+              ),
+              accuracy: calculateAccurancyPercentage(
+                errorsRef.current,
+                totalTypedRef.current
+              ),
+              time: countdownSeconds,
+              testType: `Timer, ${countdownSeconds} seconds`,
+            })
+          );
+        }
+
+        navigate("/results");
       }
 
       setState("finish");
@@ -65,7 +87,7 @@ export const useTimerTyping = () => {
     countdownSeconds,
     cursor,
     dispatch,
-    errors,
+    isLoggedIn,
     navigate,
     resetCountdown,
     timeLeft,
@@ -81,16 +103,16 @@ export const useTimerTyping = () => {
       setTyped("");
       updateWords();
       setCursor(0);
-      setErrors((prevErrors) => prevErrors + countErrors(typed, words));
+      errorsRef.current += countErrors(typed, words);
     }
   }, [typed, updateWords, words]);
 
   const onRestart = useCallback(() => {
     totalTypedRef.current = 0;
+    errorsRef.current = 0;
 
     setTyped("");
     resetCountdown();
-    setErrors(0);
     setCursor(0);
     setState("start");
   }, [resetCountdown]);

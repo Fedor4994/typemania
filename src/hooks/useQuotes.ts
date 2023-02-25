@@ -45,5 +45,5 @@ export const useQuotes = () => {
     setCurrentQuote(generatQuotes(quoteLength));
   }, [quoteLength]);
 
-  return { currentQuote, updateQuotes, setQuoteLength };
+  return { currentQuote, updateQuotes, setQuoteLength, quoteLength };
 };
