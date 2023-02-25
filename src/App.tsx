@@ -20,6 +20,7 @@ import { selectIsFetchingUser } from "./redux/auth/auth-selectors";
 import FetchingUserLoader from "./components/FetchingUserLoader/FetchingUserLoader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ResultsPage from "./views/ResultsPage/ResultsPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,8 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/results" element={<ResultsPage />} />
+
           <Route
             path="/login"
             element={

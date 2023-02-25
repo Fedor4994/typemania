@@ -1,12 +1,7 @@
-import {
-  calculateAccurancyPercentage,
-  calculateWordsPerMinute,
-} from "../../utils/helpers";
 import { useTimerTyping } from "../../hooks/useTimerTyping";
 import CountdownTimer from "../../components/CountdownTimer/CountdownTimer";
 import GeneratedWords from "../../components/GeneratedWords/GeneratedWords";
 import RestartButton from "../../components/RestartButton/RestartButton";
-import Results from "../../components/Results/Results";
 import UserTyping from "../../components/UserTyping/UserTyping";
 import s from "./CountdownPage.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
@@ -14,9 +9,6 @@ import NextButton from "../../components/NextButton/NextButton";
 
 const CountdownPage = () => {
   const {
-    errors,
-    totalTyped,
-    state,
     timeLeft,
     countdownSeconds,
     words,
@@ -50,13 +42,6 @@ const CountdownPage = () => {
           }}
         />
       </div>
-
-      <Results
-        accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
-        errors={errors}
-        speed={calculateWordsPerMinute(totalTyped - errors, countdownSeconds)}
-        state={state}
-      />
     </div>
   );
 };

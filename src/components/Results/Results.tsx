@@ -1,25 +1,14 @@
 import { motion } from "framer-motion";
-import { State } from "../../hooks/useTimerTyping";
 import { formatPercentage } from "../../utils/helpers";
 import s from "./Results.module.scss";
 
 interface ResultProps {
-  errors: number;
+  time: number;
   accurancyPercentage: number;
   speed: number;
-  state: State;
 }
 
-const Results = ({
-  errors,
-  accurancyPercentage,
-  speed,
-  state,
-}: ResultProps) => {
-  if (state !== "finish") {
-    return null;
-  }
-
+const Results = ({ time, accurancyPercentage, speed }: ResultProps) => {
   return (
     <motion.ul className={s.resultsList}>
       <motion.li
@@ -48,9 +37,9 @@ const Results = ({
           duration: 0.5,
           delay: 0.5,
         }}
-        className={s.errors}
+        className={s.percentage}
       >
-        Errors: {errors}
+        Time spend: {time} seconds
       </motion.li>
       <motion.li
         initial={{
@@ -63,7 +52,7 @@ const Results = ({
           duration: 0.5,
           delay: 1,
         }}
-        className={s.percentage}
+        className={s.errors}
       >
         Accurancy: {formatPercentage(accurancyPercentage)}
       </motion.li>

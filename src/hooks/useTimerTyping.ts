@@ -2,13 +2,23 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import useWords from "./useWords";
 import useCountdownTimer from "./useCountdownTimer";
-import { countErrors, isKeyboardAllowed } from "../utils/helpers";
+import {
+  calculateAccurancyPercentage,
+  calculateWordsPerMinute,
+  countErrors,
+  isKeyboardAllowed,
+} from "../utils/helpers";
+import { useAppDispatch } from "../redux/store";
+import { addTest } from "../redux/tests/tests-operations";
+import { useNavigate } from "react-router-dom";
 
 export type State = "start" | "run" | "finish";
 
 export const useTimerTyping = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const [typed, setTyped] = useState("");
-  const [totalTyped, setTotalTyped] = useState(0);
   const [state, setState] = useState<State>("start");
   const [cursor, setCursor] = useState(0);
   const [errors, setErrors] = useState(0);
@@ -28,12 +38,42 @@ export const useTimerTyping = () => {
     // The end of timer
     if (!timeLeft) {
       resetCountdown();
-      setTotalTyped(totalTypedRef.current);
       const wordsReached = words.substring(0, Math.min(cursor, words.length));
       setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached));
+
+      if (totalTypedRef.current !== 0) {
+        dispatch(
+          addTest({
+            wpm: calculateWordsPerMinute(
+              totalTypedRef.current - errors,
+              countdownSeconds
+            ),
+            accuracy: calculateAccurancyPercentage(
+              errors,
+              totalTypedRef.current
+            ),
+            time: countdownSeconds,
+          })
+        ).then(() => {
+          navigate("/results");
+        });
+      }
+
       setState("finish");
     }
-  }, [cursor, resetCountdown, timeLeft, typed, updateWords, words]);
+  }, [
+    countdownSeconds,
+    cursor,
+    dispatch,
+    errors,
+    navigate,
+    resetCountdown,
+    timeLeft,
+    totalTypedRef,
+    typed,
+    updateWords,
+    words,
+  ]);
 
   useEffect(() => {
     // Finish group of words
@@ -50,7 +90,6 @@ export const useTimerTyping = () => {
 
     setTyped("");
     resetCountdown();
-    setTotalTyped(0);
     setErrors(0);
     setCursor(0);
     setState("start");
@@ -101,9 +140,6 @@ export const useTimerTyping = () => {
   }, [keydownHandler]);
 
   return {
-    errors,
-    totalTyped,
-    state,
     timeLeft,
     countdownSeconds,
     words,

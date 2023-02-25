@@ -3,9 +3,20 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useQuotes } from "./useQuotes";
 import useStopwatch from "./useStopwatch";
 import { State } from "./useTimerTyping";
-import { countErrors, isKeyboardAllowed } from "../utils/helpers";
+import {
+  calculateAccurancyPercentage,
+  calculateWordsPerMinute,
+  countErrors,
+  isKeyboardAllowed,
+} from "../utils/helpers";
+import { useAppDispatch } from "../redux/store";
+import { addTest } from "../redux/tests/tests-operations";
+import { useNavigate } from "react-router-dom";
 
 export const useQuotesTyping = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const [typed, setTyped] = useState("");
   const [totalTyped, setTotalTyped] = useState(0);
   const [errors, setErrors] = useState(0);
@@ -40,9 +51,31 @@ export const useQuotesTyping = () => {
       setTotalTyped(totalTypedRef.current);
       setErrors(countErrors(typed, currentQuote.text));
       resetStopwatch();
+
+      if (totalTyped !== 0) {
+        dispatch(
+          addTest({
+            wpm: calculateWordsPerMinute(totalTyped - errors, secondsPassed),
+            accuracy: calculateAccurancyPercentage(errors, totalTyped),
+            time: secondsPassed,
+          })
+        ).then(() => {
+          navigate("/results");
+        });
+      }
+
       setState("finish");
     }
-  }, [currentQuote, resetStopwatch, typed]);
+  }, [
+    currentQuote,
+    dispatch,
+    errors,
+    navigate,
+    resetStopwatch,
+    secondsPassed,
+    totalTyped,
+    typed,
+  ]);
 
   const onRestart = useCallback(() => {
     totalTypedRef.current = 0;
@@ -103,9 +136,5 @@ export const useQuotesTyping = () => {
     onRestart,
     currentQuote,
     typed,
-    errors,
-    totalTyped,
-    secondsPassed,
-    state,
   };
 };
