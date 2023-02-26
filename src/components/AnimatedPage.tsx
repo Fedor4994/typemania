@@ -6,7 +6,7 @@ const animations = {
   exit: { opacity: 0 },
 };
 
-const AnimatedPage = ({ children }) => {
+const AnimatedPage = ({ children }: { children: JSX.Element }) => {
   return (
     <motion.div
       variants={animations}

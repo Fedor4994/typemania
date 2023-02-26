@@ -29,20 +29,22 @@ const CountdownPage = () => {
       />
       <CountdownTimer timeLeft={timeLeft} />
       <AnimatedPage>
-        <div className={s.typingArea}>
-          <GeneratedWords words={words} />
-          <UserTyping words={words} userInput={typed} />
-        </div>
+        <>
+          <div className={s.typingArea}>
+            <GeneratedWords words={words} />
+            <UserTyping words={words} userInput={typed} />
+          </div>
 
-        <div className={s.buttonsWrapper}>
-          <RestartButton onRestart={onRestart} />
-          <NextButton
-            handleNextTest={() => {
-              onRestart();
-              updateWords();
-            }}
-          />
-        </div>
+          <div className={s.buttonsWrapper}>
+            <RestartButton onRestart={onRestart} />
+            <NextButton
+              handleNextTest={() => {
+                onRestart();
+                updateWords();
+              }}
+            />
+          </div>
+        </>
       </AnimatedPage>
     </div>
   );

@@ -29,21 +29,23 @@ const QuotePage = () => {
       />
 
       <AnimatedPage>
-        <div className={s.typingArea}>
-          <GeneratedWords words={currentQuote.text} />
-          <UserTyping words={currentQuote.text} userInput={typed} />
-          <Source text={currentQuote.source} />
-        </div>
+        <>
+          <div className={s.typingArea}>
+            <GeneratedWords words={currentQuote.text} />
+            <UserTyping words={currentQuote.text} userInput={typed} />
+            <Source text={currentQuote.source} />
+          </div>
 
-        <div className={s.buttonsWrapper}>
-          <RestartButton onRestart={onRestart} />
-          <NextButton
-            handleNextTest={() => {
-              onRestart();
-              updateQuotes();
-            }}
-          />
-        </div>
+          <div className={s.buttonsWrapper}>
+            <RestartButton onRestart={onRestart} />
+            <NextButton
+              handleNextTest={() => {
+                onRestart();
+                updateQuotes();
+              }}
+            />
+          </div>
+        </>
       </AnimatedPage>
     </div>
   );
