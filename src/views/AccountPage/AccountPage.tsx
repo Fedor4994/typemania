@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import TestsHistory from "../../components/TestsHistory/TestsHistory";
 import { useAppDispatch } from "../../redux/store";
@@ -20,7 +21,21 @@ const AccountPage = () => {
 
   return (
     <div className={s.accountPage}>
-      {isLoading ? <p>Loading...</p> : <TestsHistory tests={tests} />}
+      {isLoading ? (
+        <div className={s.accountLoader}>
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="var(--main-color)"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            visible={true}
+          />
+        </div>
+      ) : (
+        <TestsHistory tests={tests} />
+      )}
     </div>
   );
 };

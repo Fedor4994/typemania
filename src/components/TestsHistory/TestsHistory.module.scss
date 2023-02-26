@@ -1,5 +1,72 @@
-.test {
-  display: flex;
-  gap: 10px;
-  color: aliceblue;
+:global {
+  body[data-theme="joker"] {
+    --table-color: #100817;
+  }
+
+  body[data-theme="aurora"] {
+    --table-color: #00263d;
+  }
+
+  body[data-theme="cheesecake"] {
+    --table-color: #c0b9ac;
+  }
+
+  body[data-theme="orange"] {
+    --table-color: #0a1616;
+  }
+
+  body[data-theme="ukraine"] {
+    --table-color: #004582;
+  }
+
+  body[data-theme="matrix"] {
+    --table-color: #011201;
+  }
+}
+
+.transactionHistory {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+thead th {
+  color: var(--header-icon-color);
+}
+
+tbody td {
+  text-align: center;
+}
+
+th,
+td {
+  padding: 10px;
+}
+
+tr:first-child td:first-child {
+  border-top-left-radius: 10px;
+}
+tr:first-child td:last-child {
+  border-top-right-radius: 10px;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+tbody:nth-child(even) {
+  background-color: var(--table-color);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+tbody:nth-child(odd) {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--main-color);
 }
