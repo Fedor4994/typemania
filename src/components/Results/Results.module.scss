@@ -10,7 +10,7 @@
     --backgroud-color: var(--aurora-background);
     --main-color: var(--aurora-secondary-text);
     --circle-color-1: #01273b;
-    --circle-color-2: #01131d;
+    --circle-color-2: #011927;
   }
 
   body[data-theme="cheesecake"] {
@@ -177,13 +177,11 @@
     justify-content: center;
     flex-direction: column;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 50%;
+    top: 20%;
+    left: 20%;
     height: 120px;
     width: 120px;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
     z-index: 10;
     background-color: var(--circle-color-1);
 

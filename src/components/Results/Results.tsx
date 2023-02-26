@@ -67,7 +67,16 @@ const Results = ({
           </span>
         </motion.div>
 
-        <div className={s.circle}>
+        <motion.div
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }}
+          exit={{ rotate: 0 }}
+          transition={{
+            duration: 3,
+            ease: "easeInOut",
+          }}
+          className={s.circle}
+        >
           <div className={s.line1}></div>
           <div className={s.line2}></div>
           <div className={s.line3}></div>
@@ -75,11 +84,20 @@ const Results = ({
           <div className={s.line5}></div>
           <div className={s.line6}></div>
           <div className={s.insertCircle}></div>
-          <div className={s.insertCircle2}>
+          <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: -360 }}
+            exit={{ rotate: 0 }}
+            transition={{
+              duration: 3,
+              ease: "easeInOut",
+            }}
+            className={s.insertCircle2}
+          >
             <span className={s.timerSeconds}>{time}</span>
             <span className={s.timerSeconds}>seconds</span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         <motion.div
           style={{
