@@ -8,6 +8,8 @@ import { FaCheck, FaSignInAlt } from "react-icons/fa";
 import s from "./LoginForm.module.scss";
 import { useAppDispatch } from "../../redux/store";
 import { login } from "../../redux/auth/auth-operations";
+import { useSelector } from "react-redux";
+import { selectIsLoading } from "../../redux/auth/auth-selectors";
 
 const LoginForm = () => {
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
@@ -15,6 +17,7 @@ const LoginForm = () => {
 
   const dispatch = useAppDispatch();
   const notify = () => toast.error("Incorrect email or password");
+  const isLoading = useSelector(selectIsLoading);
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -182,7 +185,9 @@ const LoginForm = () => {
 
       <button
         className={s.loginButton}
-        disabled={values.email === "" || Object.values(errors).length !== 0}
+        disabled={
+          values.email === "" || Object.values(errors).length !== 0 || isLoading
+        }
       >
         <FaSignInAlt size={18} /> Sign-in
       </button>

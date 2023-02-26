@@ -8,6 +8,8 @@ import { FaCheck, FaUserPlus } from "react-icons/fa";
 import s from "./RegisterForm.module.scss";
 import { useAppDispatch } from "../../redux/store";
 import { register } from "../../redux/auth/auth-operations";
+import { useSelector } from "react-redux";
+import { selectIsLoading } from "../../redux/auth/auth-selectors";
 
 const RegisterForm = () => {
   const [nameErrorMessage, setNameErrorMessage] = useState("");
@@ -16,6 +18,7 @@ const RegisterForm = () => {
 
   const dispatch = useAppDispatch();
   const notify = () => toast.error("A user with the same email already exists");
+  const isLoading = useSelector(selectIsLoading);
 
   const NAME_REGEX = /^[A-Za-z0-9 А-Яа-я]+$/;
 
@@ -256,7 +259,9 @@ const RegisterForm = () => {
 
       <button
         className={s.registerButton}
-        disabled={values.email === "" || Object.values(errors).length !== 0}
+        disabled={
+          values.email === "" || Object.values(errors).length !== 0 || isLoading
+        }
       >
         <FaUserPlus size={18} /> Sign-up
       </button>
