@@ -11,7 +11,7 @@ export type Quote = {
 export type QuoteLength = "short" | "medium" | "long" | "all";
 const arrayOfQuotes: Array<Quote> = quotesFile.quotes;
 
-const generatQuotes = (length: QuoteLength) => {
+const generateQuotes = (length: QuoteLength) => {
   let randomQuote =
     arrayOfQuotes[Math.floor(Math.random() * arrayOfQuotes.length)];
   let arr: Array<Quote> = [];
@@ -36,13 +36,13 @@ const generatQuotes = (length: QuoteLength) => {
 export const useQuotes = () => {
   const [quoteLength, setQuoteLength] = useState<QuoteLength>("short");
   const [currentQuote, setCurrentQuote] = useState<Quote>(
-    generatQuotes(quoteLength)
+    generateQuotes(quoteLength)
   );
 
-  const updateQuotes = () => setCurrentQuote(generatQuotes(quoteLength));
+  const updateQuotes = () => setCurrentQuote(generateQuotes(quoteLength));
 
   useEffect(() => {
-    setCurrentQuote(generatQuotes(quoteLength));
+    setCurrentQuote(generateQuotes(quoteLength));
   }, [quoteLength]);
 
   return { currentQuote, updateQuotes, setQuoteLength, quoteLength };

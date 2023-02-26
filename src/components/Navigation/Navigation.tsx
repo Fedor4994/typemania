@@ -52,7 +52,10 @@ const Navigation = ({
       {currentPage === "time" && (
         <ul className={s.navigationList}>
           <li
-            onClick={() => handleChange(15)}
+            onClick={() => {
+              localStorage.setItem("timeOption", "15");
+              handleChange(15);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 15 ? s.activeOption : ""
             }`}
@@ -60,7 +63,10 @@ const Navigation = ({
             15
           </li>
           <li
-            onClick={() => handleChange(30)}
+            onClick={() => {
+              localStorage.setItem("timeOption", "30");
+              handleChange(30);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 30 ? s.activeOption : ""
             }`}
@@ -68,7 +74,10 @@ const Navigation = ({
             30
           </li>
           <li
-            onClick={() => handleChange(60)}
+            onClick={() => {
+              localStorage.setItem("timeOption", "60");
+              handleChange(60);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 60 ? s.activeOption : ""
             }`}
@@ -76,7 +85,10 @@ const Navigation = ({
             60
           </li>
           <li
-            onClick={() => handleChange(120)}
+            onClick={() => {
+              localStorage.setItem("timeOption", "120");
+              handleChange(120);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 120 ? s.activeOption : ""
             }`}
@@ -89,7 +101,10 @@ const Navigation = ({
       {currentPage === "words" && (
         <ul className={s.navigationList}>
           <li
-            onClick={() => handleChange(10)}
+            onClick={() => {
+              localStorage.setItem("wordsOption", "10");
+              handleChange(10);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 10 ? s.activeOption : ""
             }`}
@@ -97,7 +112,10 @@ const Navigation = ({
             10
           </li>
           <li
-            onClick={() => handleChange(25)}
+            onClick={() => {
+              localStorage.setItem("wordsOption", "25");
+              handleChange(25);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 25 ? s.activeOption : ""
             }`}
@@ -105,7 +123,10 @@ const Navigation = ({
             25
           </li>
           <li
-            onClick={() => handleChange(50)}
+            onClick={() => {
+              localStorage.setItem("wordsOption", "50");
+              handleChange(50);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 50 ? s.activeOption : ""
             }`}
@@ -113,7 +134,10 @@ const Navigation = ({
             50
           </li>
           <li
-            onClick={() => handleChange(100)}
+            onClick={() => {
+              localStorage.setItem("wordsOption", "100");
+              handleChange(100);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 100 ? s.activeOption : ""
             }`}
@@ -126,7 +150,10 @@ const Navigation = ({
       {currentPage === "quote" && (
         <ul className={s.navigationList}>
           <li
-            onClick={() => handleChange(1)}
+            onClick={() => {
+              localStorage.setItem("quoteOption", "1");
+              handleChange(1);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 1 ? s.activeOption : ""
             }`}
@@ -134,7 +161,10 @@ const Navigation = ({
             All
           </li>
           <li
-            onClick={() => handleChange(2)}
+            onClick={() => {
+              localStorage.setItem("quoteOption", "2");
+              handleChange(2);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 2 ? s.activeOption : ""
             }`}
@@ -142,7 +172,10 @@ const Navigation = ({
             Short
           </li>
           <li
-            onClick={() => handleChange(3)}
+            onClick={() => {
+              localStorage.setItem("quoteOption", "3");
+              handleChange(3);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 3 ? s.activeOption : ""
             }`}
@@ -150,7 +183,10 @@ const Navigation = ({
             Medium
           </li>
           <li
-            onClick={() => handleChange(4)}
+            onClick={() => {
+              localStorage.setItem("quoteOption", "4");
+              handleChange(4);
+            }}
             className={`${s.navigationIcon} ${
               currentValue === 4 ? s.activeOption : ""
             }`}

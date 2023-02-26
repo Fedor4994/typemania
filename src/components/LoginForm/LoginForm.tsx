@@ -38,7 +38,6 @@ const LoginForm = () => {
       dispatch(login(values)).then((data) => {
         if (data.meta.requestStatus === "rejected") {
           notify();
-          console.log(123);
           resetForm({
             values: {
               email: values.email,

@@ -28,7 +28,7 @@ export const useTimerTyping = () => {
 
   const errorsRef = useRef(0);
   const totalTypedRef = useRef(0);
-  const { words, updateWords } = useWords();
+  const { words, updateWords } = useWords(40);
 
   const {
     timeLeft,

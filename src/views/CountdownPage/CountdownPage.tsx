@@ -6,6 +6,7 @@ import UserTyping from "../../components/UserTyping/UserTyping";
 import s from "./CountdownPage.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import NextButton from "../../components/NextButton/NextButton";
+import AnimatedPage from "../../components/AnimatedPage";
 
 const CountdownPage = () => {
   const {
@@ -27,21 +28,22 @@ const CountdownPage = () => {
         onRestart={onRestart}
       />
       <CountdownTimer timeLeft={timeLeft} />
+      <AnimatedPage>
+        <div className={s.typingArea}>
+          <GeneratedWords words={words} />
+          <UserTyping words={words} userInput={typed} />
+        </div>
 
-      <div className={s.typingArea}>
-        <GeneratedWords words={words} />
-        <UserTyping words={words} userInput={typed} />
-      </div>
-
-      <div className={s.buttonsWrapper}>
-        <RestartButton onRestart={onRestart} />
-        <NextButton
-          handleNextTest={() => {
-            onRestart();
-            updateWords();
-          }}
-        />
-      </div>
+        <div className={s.buttonsWrapper}>
+          <RestartButton onRestart={onRestart} />
+          <NextButton
+            handleNextTest={() => {
+              onRestart();
+              updateWords();
+            }}
+          />
+        </div>
+      </AnimatedPage>
     </div>
   );
 };

@@ -6,9 +6,10 @@
 
 .typingArea {
   position: relative;
-  display: flex;
   width: 100%;
   word-break: break-all;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }

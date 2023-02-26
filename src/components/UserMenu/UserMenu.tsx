@@ -1,6 +1,6 @@
 import { FaUserAlt, FaSignOutAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logOut } from "../../redux/auth/auth-operations";
 import { selectUser } from "../../redux/auth/auth-selectors";
 import { useAppDispatch } from "../../redux/store";
@@ -8,6 +8,7 @@ import s from "./UserMenu.module.scss";
 
 const UserMenu = () => {
   const { name } = useSelector(selectUser);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   return (
@@ -20,6 +21,7 @@ const UserMenu = () => {
         className={s.logoutIcon}
         onClick={() => {
           dispatch(logOut());
+          navigate("/login");
         }}
       >
         <FaSignOutAlt size={20} />

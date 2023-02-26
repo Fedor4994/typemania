@@ -12,8 +12,15 @@ const generateWords = (count: number) => {
   return generatedWords.join(" ");
 };
 
-const useWords = () => {
-  const [wordsCount, setWordsCount] = useState(50);
+const useWords = (optionalCount?: number) => {
+  let initialWords: number | null = null;
+  if (localStorage.getItem("wordsOption")) {
+    initialWords = Number(localStorage.getItem("wordsOption"));
+  }
+
+  const [wordsCount, setWordsCount] = useState(
+    optionalCount || initialWords || 50
+  );
   const [words, setWords] = useState<string>(generateWords(wordsCount));
 
   const updateWords = () => setWords(generateWords(wordsCount));

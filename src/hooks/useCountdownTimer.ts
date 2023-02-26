@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 
 const useCountdownTimer = () => {
-  const [countdownSeconds, setCountdownSeconds] = useState(30);
+  let initialSeconds: number | null = null;
+  if (localStorage.getItem("timeOption")) {
+    initialSeconds = Number(localStorage.getItem("timeOption"));
+  }
+
+  const [countdownSeconds, setCountdownSeconds] = useState(
+    initialSeconds || 30
+  );
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
   const [timeLeft, setTimeLeft] = useState<number>(countdownSeconds);
 

@@ -1,3 +1,4 @@
+import AnimatedPage from "../../components/AnimatedPage";
 import GeneratedWords from "../../components/GeneratedWords/GeneratedWords";
 import Navigation from "../../components/Navigation/Navigation";
 import NextButton from "../../components/NextButton/NextButton";
@@ -26,27 +27,24 @@ const QuotePage = () => {
         onChange={setQuotesCount}
         onRestart={onRestart}
       />
-      <div className={s.typingArea}>
-        <GeneratedWords words={currentQuote.text} />
-        <UserTyping words={currentQuote.text} userInput={typed} />
-      </div>
-      <Source text={currentQuote.source} />
 
-      <div className={s.buttonsWrapper}>
-        <RestartButton onRestart={onRestart} />
-        <NextButton
-          handleNextTest={() => {
-            onRestart();
-            updateQuotes();
-          }}
-        />
-      </div>
-      {/* <Results
-        accurancyPercentage={calculateAccurancyPercentage(errors, totalTyped)}
-        errors={errors}
-        speed={calculateWordsPerMinute(totalTyped - errors, secondsPassed)}
-        state={state}
-      /> */}
+      <AnimatedPage>
+        <div className={s.typingArea}>
+          <GeneratedWords words={currentQuote.text} />
+          <UserTyping words={currentQuote.text} userInput={typed} />
+          <Source text={currentQuote.source} />
+        </div>
+
+        <div className={s.buttonsWrapper}>
+          <RestartButton onRestart={onRestart} />
+          <NextButton
+            handleNextTest={() => {
+              onRestart();
+              updateQuotes();
+            }}
+          />
+        </div>
+      </AnimatedPage>
     </div>
   );
 };

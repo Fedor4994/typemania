@@ -26,6 +26,7 @@ export const useStopwatchTyping = () => {
   const [state, setState] = useState<State>("start");
 
   const totalTypedRef = useRef(0);
+
   const { words, updateWords, wordsCount, setWordsCount } = useWords();
   const { secondsPassed, startStopwatch, resetStopwatch } = useStopwatch();
 

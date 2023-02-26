@@ -31,7 +31,12 @@ export const useQuotesTyping = () => {
     useQuotes();
   const { secondsPassed, startStopwatch, resetStopwatch } = useStopwatch();
 
-  const [quotesCount, setQuotesCount] = useState(1);
+  let initialQuotesCount: number | null = null;
+  if (localStorage.getItem("quoteOption")) {
+    initialQuotesCount = Number(localStorage.getItem("quoteOption"));
+  }
+
+  const [quotesCount, setQuotesCount] = useState(initialQuotesCount || 1);
 
   useEffect(() => {
     switch (quotesCount) {
