@@ -23,12 +23,17 @@ const testsSlice = createSlice({
     setLastTest(state, { payload }) {
       state.lastTest = payload;
     },
+    clearTests(state) {
+      state.items = [];
+    },
   },
   extraReducers: (builder) =>
     builder
 
       .addCase(fetchTests.fulfilled, (state, { payload }) => {
-        state.items = payload || [];
+        if (payload) {
+          state.items = [...state.items, ...payload];
+        }
       })
       .addCase(addTest.fulfilled, (state, { payload }) => {
         if (payload) {
@@ -52,4 +57,4 @@ const testsSlice = createSlice({
 });
 
 export default testsSlice.reducer;
-export const { setLastTest } = testsSlice.actions;
+export const { setLastTest, clearTests } = testsSlice.actions;

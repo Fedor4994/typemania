@@ -4,16 +4,33 @@ import { Test, TestInfo } from "../../types/test";
 import { TestsSlice } from "./testsSlice";
 
 export const fetchTests = createAsyncThunk(
-  "tests/fetchAll",
-  async (_, { rejectWithValue }) => {
+  "tests/fetchTests",
+  async (
+    { page = 1, sort = -1 }: { page?: number; sort?: number },
+    { rejectWithValue }
+  ) => {
     try {
-      const { data } = await axios.get<Test[]>("/tests");
+      const { data } = await axios.get<Test[]>(
+        `/tests?page=${page}&sort=${sort}`
+      );
       return data;
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
       }
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState() as {
+        tests: TestsSlice;
+      };
+
+      const { isLoading } = state.tests;
+      if (isLoading) {
+        return false;
+      }
+    },
   }
 );
 
