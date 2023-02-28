@@ -1,8 +1,17 @@
+import { BsFillCaretRightFill } from "react-icons/bs";
 import { Test } from "../../types/test";
 import { formatPercentage } from "../../utils/helpers";
 import s from "./TestsHistory.module.scss";
 
-const TestsHistory = ({ tests }: { tests: Test[] }) => {
+const TestsHistory = ({
+  tests,
+  onSortChange,
+  sortValue,
+}: {
+  tests: Test[];
+  onSortChange: (value: number) => void;
+  sortValue: number;
+}) => {
   return (
     <table className={s.transactionHistory}>
       <thead>
@@ -11,7 +20,19 @@ const TestsHistory = ({ tests }: { tests: Test[] }) => {
           <th>WPM</th>
           <th>Accuracy</th>
           <th>Time spended</th>
-          <th>Date</th>
+          <th>
+            <label className={s.sortCheckbox}>
+              Date
+              <input
+                checked={sortValue === 1}
+                onChange={() => onSortChange(sortValue === 1 ? -1 : 1)}
+                type="checkbox"
+              />
+              <span className={s.sortCheckmark}>
+                <BsFillCaretRightFill size={18} />
+              </span>
+            </label>
+          </th>
         </tr>
       </thead>
 

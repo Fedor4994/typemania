@@ -70,3 +70,29 @@ tbody:nth-child(odd) {
   font-weight: 600;
   color: var(--main-color);
 }
+
+.sortCheckbox {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.sortCheckbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.sortCheckmark {
+  position: absolute;
+
+  top: -1px;
+  right: -25px;
+  transform: rotate(90deg);
+}
+
+.sortCheckbox input:checked ~ .sortCheckmark {
+  transform: rotate(270deg);
+  top: 0px;
+  right: -30px;
+}

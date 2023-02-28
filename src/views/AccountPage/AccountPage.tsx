@@ -22,11 +22,12 @@ const AccountPage = () => {
   const testsDetails = useSelector(selectTestsDetails);
   const isLoading = useSelector(selectIsLoading);
   const [page, setPage] = useState(1);
+  const [sortValue, setSortValue] = useState(-1);
 
   useEffect(() => {
-    dispatch(fetchTests({ page }));
+    dispatch(fetchTests({ page, sort: sortValue }));
     dispatch(getTestsDetails());
-  }, [dispatch, page]);
+  }, [dispatch, page, sortValue]);
 
   useEffect(() => {
     return () => {
@@ -34,11 +35,23 @@ const AccountPage = () => {
     };
   }, [dispatch]);
 
+  const handleSortChange = (value: number) => {
+    dispatch(clearTests());
+    setPage(1);
+    setSortValue(value);
+  };
+
   return (
     <div className={s.accountPage}>
       <UserInfo details={testsDetails} />
 
-      {tests.length !== 0 && <TestsHistory tests={tests} />}
+      {tests.length !== 0 && (
+        <TestsHistory
+          onSortChange={handleSortChange}
+          tests={tests}
+          sortValue={sortValue}
+        />
+      )}
 
       {isLoading && (
         <div className={s.accountLoader}>
