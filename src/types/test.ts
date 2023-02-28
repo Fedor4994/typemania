@@ -10,3 +10,25 @@ export type Test = {
 };
 
 export type TestInfo = Pick<Test, "wpm" | "accuracy" | "time" | "testType">;
+
+export type TestsDetails = {
+  averageAccuracy: number;
+  averageWpm: number;
+  testCompleted: number;
+  timeSpended: {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+
+  timerFifteenTopWpm: number | null;
+  timerSixtyTopWpm: number | null;
+  timerThirtyTopWpm: number | null;
+  timerTwoMinuteTopWpm: number | null;
+  topWpm: number | null;
+  wordsFiftyTopWpm: number | null;
+  wordsHungredTopWpm: number | null;
+  wordsTenTopWpm: number | null;
+  wordsTwenyFiveTopWpm: number | null;
+};

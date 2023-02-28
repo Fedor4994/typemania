@@ -4,3 +4,21 @@
   align-items: center;
   justify-content: center;
 }
+
+.loadMoreButton {
+  cursor: pointer;
+  width: 100%;
+  height: 40px;
+  background-color: var(--table-color);
+  color: var(--main-color);
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  transition: 300ms all ease;
+}
+
+.loadMoreButton:hover {
+  background-color: var(--correct-color);
+  color: var(--nav-bar-color);
+}

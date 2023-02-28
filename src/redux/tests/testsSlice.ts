@@ -1,9 +1,10 @@
 import { createSlice, isAnyOf, SerializedError } from "@reduxjs/toolkit";
-import { Test } from "../../types/test";
-import { addTest, fetchTests } from "./tests-operations";
+import { Test, TestsDetails } from "../../types/test";
+import { addTest, fetchTests, getTestsDetails } from "./tests-operations";
 
 export type TestsSlice = {
   items: Test[];
+  testsDetails: TestsDetails | null;
   lastTest: Test | null;
   isLoading: boolean;
   error: SerializedError | null;
@@ -11,6 +12,7 @@ export type TestsSlice = {
 
 const initialState: TestsSlice = {
   items: [],
+  testsDetails: null,
   lastTest: null,
   isLoading: false,
   error: null,
@@ -33,6 +35,11 @@ const testsSlice = createSlice({
       .addCase(fetchTests.fulfilled, (state, { payload }) => {
         if (payload) {
           state.items = [...state.items, ...payload];
+        }
+      })
+      .addCase(getTestsDetails.fulfilled, (state, { payload }) => {
+        if (payload) {
+          state.testsDetails = payload;
         }
       })
       .addCase(addTest.fulfilled, (state, { payload }) => {
