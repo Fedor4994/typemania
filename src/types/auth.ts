@@ -3,6 +3,7 @@ export type User = {
   name: string;
   email: string;
   password: string;
+  createdAt: string;
 };
 
-export type UserInfo = Pick<User, "name" | "email">;
+export type UserInfo = Pick<User, "name" | "email" | "createdAt">;

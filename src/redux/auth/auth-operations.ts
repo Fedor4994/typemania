@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { User } from "../../types/auth";
+import { User, UserInfo } from "../../types/auth";
 import { AuthSlice } from "./authSlice";
 
 axios.defaults.baseURL = "https://typemania-api.onrender.com/api";
@@ -16,13 +16,12 @@ const token = {
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (userData: Omit<User, "_id">, { rejectWithValue }) => {
+  async (userData: Omit<User, "_id" | "createdAt">, { rejectWithValue }) => {
     try {
       const { data } = await axios.post<{
         token: string | null;
-        user: User;
+        user: UserInfo;
       }>("/users/register", userData);
-
       token.set(data.token);
 
       return data;
@@ -40,11 +39,10 @@ export const login = createAsyncThunk(
     try {
       const { data } = await axios.post<{
         token: string | null;
-        user: User;
+        user: UserInfo;
       }>("/users/login", userData);
 
       token.set(data.token);
-
       return data;
     } catch (error) {
       if (error instanceof Error) {
@@ -83,7 +81,7 @@ export const getCurrentUser = createAsyncThunk(
     try {
       const { data } = await axios.get<{
         token: string | null;
-        user: User;
+        user: UserInfo;
       }>("/users/current");
 
       return data;

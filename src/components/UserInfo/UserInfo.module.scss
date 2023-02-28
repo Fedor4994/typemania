@@ -1,3 +1,97 @@
 .userInfo {
-  color: aliceblue;
+  color: var(--correct-color);
+}
+
+.mainWrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-top: 20px;
+
+  padding: 30px;
+  background-color: var(--table-color);
+}
+
+.userStats {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.divide {
+  height: 130px;
+  width: 8px;
+  border-radius: 10px;
+  background-color: var(--backgroud-color);
+}
+
+.avatar {
+  height: 100px;
+  width: 100px;
+}
+
+.userWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.username {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.joined {
+  font-size: 14px;
+  color: var(--header-icon-color);
+}
+
+.statsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.statsValue {
+  font-size: 16px;
+  color: var(--header-icon-color);
+}
+
+.highestsResults {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timerHighestsResults {
+  display: flex;
+  justify-content: space-around;
+  width: 49%;
+  height: 150px;
+  border-radius: 10px;
+  align-items: center;
+  margin-bottom: 50px;
+  padding: 30px;
+  background-color: var(--table-color);
+  margin-bottom: 50px;
+}
+
+.wordsHighestsResults {
+  display: flex;
+  justify-content: space-around;
+  width: 49%;
+  height: 150px;
+  border-radius: 10px;
+  align-items: center;
+  margin-bottom: 50px;
+  padding: 30px;
+  background-color: var(--table-color);
+  margin-bottom: 50px;
 }

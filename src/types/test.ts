@@ -15,12 +15,7 @@ export type TestsDetails = {
   averageAccuracy: number;
   averageWpm: number;
   testCompleted: number;
-  timeSpended: {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  };
+  timeSpended: string;
 
   timerFifteenTopWpm: number | null;
   timerSixtyTopWpm: number | null;
