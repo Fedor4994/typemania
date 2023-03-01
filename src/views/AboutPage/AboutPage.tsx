@@ -14,7 +14,7 @@ const AboutPage = () => {
   const [info, setInfo] = useState<AppDetails>({
     totalTests: 0,
     totalUsers: 0,
-    totalTime: "00:00:00",
+    totalTime: "loading...",
   });
 
   useEffect(() => {
