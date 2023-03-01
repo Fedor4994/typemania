@@ -55,8 +55,6 @@ const authSlice = createSlice({
           state.user.createdAt = payload?.user.createdAt || "";
           state.user._id = payload?.user._id || "";
 
-          console.log(payload?.user._id);
-
           state.token = payload?.token || null;
           state.isLoggedIn = true;
           state.isLoading = false;

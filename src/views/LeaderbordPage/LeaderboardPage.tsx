@@ -2,6 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
+import { useAppDispatch } from "../../redux/store";
+import { getTestsDetails } from "../../redux/tests/tests-operations";
+import { selectTestsDetails } from "../../redux/tests/tests-selectors";
 import { User } from "../../types/auth";
 import s from "./LeaderboardPage.module.scss";
 
@@ -15,6 +18,8 @@ const LeaderboardPage = () => {
   const [place, setPlace] = useState(0);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userDetails = useSelector(selectTestsDetails);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     async function fetchData() {
@@ -36,21 +41,30 @@ const LeaderboardPage = () => {
 
     if (isLoggedIn) {
       fetchCurrentPlace();
+      dispatch(getTestsDetails());
     }
-  }, [isLoggedIn]);
+  }, [dispatch, isLoggedIn]);
 
   return (
     <div className={s.leaderbordPage}>
       <ul>
-        {leaderboard.map((position) => (
-          <li key={position.user._id}>
-            <span>{position.user.name}</span>
-            <span>{position.bestsRecord ? position.bestsRecord : " 0"}</span>
-          </li>
-        ))}
+        {leaderboard.map(
+          (position) =>
+            position.bestsRecord && (
+              <li key={position.user._id}>
+                <span>{position.user.name}</span>
+                <span>{position.bestsRecord}</span>
+              </li>
+            )
+        )}
       </ul>
 
-      {isLoggedIn && <p>YOUR POSITION: {place}</p>}
+      {isLoggedIn &&
+        (userDetails?.testCompleted ? (
+          <p>YOUR POSITION: {place}</p>
+        ) : (
+          <p>Complete your first test to to be placed on the leaderboard</p>
+        ))}
     </div>
   );
 };
