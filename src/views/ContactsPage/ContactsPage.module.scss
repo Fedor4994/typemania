@@ -1,0 +1,16 @@
+.contactsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.contactsTitle {
+  font-size: 22px;
+  text-align: center;
+  color: var(--correct-color);
+  margin-bottom: 40px;
+  margin-top: 20px;
+}

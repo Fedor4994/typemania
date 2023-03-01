@@ -1,0 +1,25 @@
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  background-color: var(--table-color);
+  width: 49%;
+  height: 200px;
+  border: none;
+  border-radius: 10px;
+  color: var(--correct-color);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px;
+  transition: background 0.125s, color 0.125s;
+}
+
+.contact:hover {
+  background-color: var(--correct-color);
+  color: var(--table-color);
+}
+
+.contactText {
+  font-size: 50px;
+}
