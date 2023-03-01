@@ -11,7 +11,7 @@ export type AuthSlice = {
 };
 
 const initialState: AuthSlice = {
-  user: { name: "", email: "", createdAt: "" },
+  user: { name: "", email: "", createdAt: "", _id: "" },
   token: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
@@ -25,7 +25,7 @@ const authSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(logOut.fulfilled, (state) => {
-        state.user = { name: "", email: "", createdAt: "" };
+        state.user = { name: "", email: "", createdAt: "", _id: "" };
         state.token = null;
         state.isLoggedIn = false;
       })
@@ -36,6 +36,7 @@ const authSlice = createSlice({
         state.user.email = payload?.user.email || "";
         state.user.name = payload?.user.name || "";
         state.user.createdAt = payload?.user.createdAt || "";
+        state.user._id = payload?.user._id || "";
 
         state.isLoggedIn = true;
         state.isFetchingCurrentUser = false;
@@ -52,6 +53,10 @@ const authSlice = createSlice({
           state.user.email = payload?.user.email || "";
           state.user.name = payload?.user.name || "";
           state.user.createdAt = payload?.user.createdAt || "";
+          state.user._id = payload?.user._id || "";
+
+          console.log(payload?.user._id);
+
           state.token = payload?.token || null;
           state.isLoggedIn = true;
           state.isLoading = false;

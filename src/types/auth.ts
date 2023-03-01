@@ -6,4 +6,4 @@ export type User = {
   createdAt: string;
 };
 
-export type UserInfo = Pick<User, "name" | "email" | "createdAt">;
+export type UserInfo = Omit<User, "password">;

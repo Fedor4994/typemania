@@ -5,7 +5,6 @@ import Layout from "./views/Layout/Layout";
 import CountdownPage from "./views/CountdownPage/CountdownPage";
 import WordsPage from "./views/WordsPage/WordsPage";
 import QuotePage from "./views/QuotePage/QuotePage";
-import LeaderbordPage from "./views/LeaderbordPage/LeaderbordPage";
 import AboutPage from "./views/AboutPage/AboutPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
 import LoginPage from "./views/LoginPage/LoginPage";
@@ -21,6 +20,7 @@ import FetchingUserLoader from "./components/FetchingUserLoader/FetchingUserLoad
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ResultsPage from "./views/ResultsPage/ResultsPage";
+import LeaderboardPage from "./views/LeaderbordPage/LeaderboardPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ function App() {
           <Route index element={<CountdownPage />} />
           <Route path="/words" element={<WordsPage />} />
           <Route path="/quote" element={<QuotePage />} />
-          <Route path="/leaderbord" element={<LeaderbordPage />} />
+          <Route path="/leaderbord" element={<LeaderboardPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
