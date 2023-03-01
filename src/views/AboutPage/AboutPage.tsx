@@ -83,7 +83,7 @@ const AboutPage = () => {
         from famous people or from various popular films, computer games, books,
         and so on.
       </p>
-      <p className={s.subTitle}>About terms.</p>
+      <p className={s.subTitle}>About terms</p>
       <p className={s.infoText}>
         WPM (words per minute) - total amount of characters in the correctly
         typed words (including spaces), divided by 5 and normalised to 60
