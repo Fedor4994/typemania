@@ -10,8 +10,8 @@
   }
 
   body[data-theme="cheesecake"] {
-    --header-icon-color: var(--cheesecake-correct-text);
-    --header-icon-hover: var(--cheesecake-main-text);
+    --header-icon-color: var(--cheesecake-main-text);
+    --header-icon-hover: var(--cheesecake-correct-text);
   }
 
   body[data-theme="orange"] {
