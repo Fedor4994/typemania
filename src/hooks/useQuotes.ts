@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import quotesFile from "../data/quotes.json";
+import englishQuotesFile from "../data/englishQuotes.json";
+import russianQuotesFile from "../data/russianQuotes.json";
+import ukrainianQuotesFile from "../data/ukrainianQuotes.json";
+import javascriptQutesFile from "../data/javascriptQuotes.json";
 
 export type Quote = {
   id: number;
@@ -9,9 +12,30 @@ export type Quote = {
 };
 
 export type QuoteLength = "short" | "medium" | "long" | "all";
-const arrayOfQuotes: Array<Quote> = quotesFile.quotes;
 
 const generateQuotes = (length: QuoteLength) => {
+  let arrayOfQuotes: Array<Quote> = [];
+  const language = localStorage.getItem("language");
+
+  switch (language) {
+    case "english":
+      arrayOfQuotes = englishQuotesFile.quotes;
+      break;
+    case "russian":
+      arrayOfQuotes = russianQuotesFile.quotes;
+      break;
+    case "ukrainian":
+      arrayOfQuotes = ukrainianQuotesFile.quotes;
+      break;
+    case "javascript":
+      arrayOfQuotes = javascriptQutesFile.quotes;
+      break;
+
+    default:
+      arrayOfQuotes = englishQuotesFile.quotes;
+      break;
+  }
+
   let randomQuote =
     arrayOfQuotes[Math.floor(Math.random() * arrayOfQuotes.length)];
   let arr: Array<Quote> = [];

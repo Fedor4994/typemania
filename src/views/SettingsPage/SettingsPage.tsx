@@ -9,7 +9,6 @@ const languages = [
   "ukrainian",
   "russian",
   "javascript",
-  "git",
   "twitch emotes",
 ];
 

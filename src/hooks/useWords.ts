@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import englishWordsFile from "../data/englishWords.json";
 import russianWordsFile from "../data/russianWords.json";
 import ukrainianWordsFile from "../data/ukrainianWords.json";
-import gitWordsFile from "../data/gitWords.json";
 import javascriptFile from "../data/javascriptWords.json";
 import twitchFile from "../data/twitchWords.json";
 
@@ -20,9 +19,7 @@ const generateWords = (count: number) => {
     case "ukrainian":
       arrayOfWords = ukrainianWordsFile.words;
       break;
-    case "git":
-      arrayOfWords = gitWordsFile.words;
-      break;
+
     case "javascript":
       arrayOfWords = javascriptFile.words;
       break;
