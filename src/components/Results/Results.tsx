@@ -63,9 +63,6 @@ const Results = ({
     }
   }, [dispatch, isLoggedIn]);
 
-  console.log(testsDetails?.topWpm);
-  console.log(speedPercentage);
-
   return (
     <motion.ul className={s.resultsList}>
       <motion.li className={s.circlesWrapper}>

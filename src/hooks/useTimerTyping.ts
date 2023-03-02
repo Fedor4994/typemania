@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-
+import { useSelector } from "react-redux";
 import useWords from "./useWords";
 import useCountdownTimer from "./useCountdownTimer";
 import {
@@ -13,7 +13,7 @@ import { addTest } from "../redux/tests/tests-operations";
 import { useNavigate } from "react-router-dom";
 import { setLastTest } from "../redux/tests/testsSlice";
 import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
-import { useSelector } from "react-redux";
+import keypress from "../data/sound.wav";
 
 export type State = "start" | "run" | "finish";
 
@@ -119,6 +119,8 @@ export const useTimerTyping = () => {
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
+      const audio = new Audio(keypress);
+
       if (key === "Escape") {
         onRestart();
         return;
@@ -140,11 +142,19 @@ export const useTimerTyping = () => {
       }
       switch (key) {
         case "Backspace":
+          if (localStorage.getItem("isSound") === "true") {
+            audio.play();
+          }
+
           setTyped((typed) => typed.slice(0, -1));
           totalTypedRef.current -= 1;
           setCursor((prevCursor) => prevCursor - 1);
           break;
         default:
+          if (localStorage.getItem("isSound") === "true") {
+            audio.play();
+          }
+
           setTyped((typed) => typed.concat(key));
           totalTypedRef.current += 1;
           setCursor((prevCursor) => prevCursor + 1);

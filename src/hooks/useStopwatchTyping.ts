@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
 import { setLastTest } from "../redux/tests/testsSlice";
+import keypress from "../data/sound.wav";
 
 export const useStopwatchTyping = () => {
   const dispatch = useAppDispatch();
@@ -89,6 +90,8 @@ export const useStopwatchTyping = () => {
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
+      const audio = new Audio(keypress);
+
       if (key === "Escape") {
         onRestart();
         return;
@@ -110,10 +113,18 @@ export const useStopwatchTyping = () => {
       }
       switch (key) {
         case "Backspace":
+          if (localStorage.getItem("isSound") === "true") {
+            audio.play();
+          }
+
           setTyped((typed) => typed.slice(0, -1));
           totalTypedRef.current -= 1;
           break;
         default:
+          if (localStorage.getItem("isSound") === "true") {
+            audio.play();
+          }
+
           setTyped((typed) => typed.concat(key));
           totalTypedRef.current += 1;
           break;
