@@ -1,9 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaArrowAltCircleRight } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaCrown } from "react-icons/fa";
 import { formatPercentage } from "../../utils/helpers";
 import s from "./Results.module.scss";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
+import { selectTestsDetails } from "../../redux/tests/tests-selectors";
+import { useAppDispatch } from "../../redux/store";
+import { getTestsDetails } from "../../redux/tests/tests-operations";
 
 interface ResultProps {
   time: number;
@@ -18,6 +23,10 @@ const Results = ({
   speed,
   testType,
 }: ResultProps) => {
+  const testsDetails = useSelector(selectTestsDetails);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const dispatch = useAppDispatch();
+
   const [speedPercentage, setSpeedPercentage] = useState(0);
   const [accurancyPercentage, setAccurancyPercentage] = useState(0);
 
@@ -47,6 +56,15 @@ const Results = ({
       clearInterval(intervalIdAccurancy.current);
     }
   }, [accurancy, accurancyPercentage]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getTestsDetails());
+    }
+  }, [dispatch, isLoggedIn]);
+
+  console.log(testsDetails?.topWpm);
+  console.log(speedPercentage);
 
   return (
     <motion.ul className={s.resultsList}>
@@ -110,7 +128,25 @@ const Results = ({
         >
           <span className={s.valueTitle}>Speed:</span>
 
-          <span className={s.value}>{speedPercentage} WPM</span>
+          <span className={s.value}>
+            {speedPercentage} WPM
+            {speedPercentage === testsDetails?.topWpm && (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 1,
+                }}
+                className={s.newRecordCrown}
+              >
+                <FaCrown />
+              </motion.div>
+            )}
+          </span>
         </motion.div>
       </motion.li>
 

@@ -17,8 +17,8 @@ const LeaderboardTable = ({
         <tr>
           <th className={s.place}>Place</th>
           <th>Name</th>
-          <th>TOP WPM</th>
-          <th>Joined at</th>
+          <th>Top WPM</th>
+          <th>Joined</th>
         </tr>
       </thead>
 
