@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import LeaderboardTable from "../../components/LeaderboardTable/LeaderboardTable";
 import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
 import { useAppDispatch } from "../../redux/store";
@@ -48,21 +49,36 @@ const LeaderboardPage = () => {
 
   return (
     <div className={s.leaderbordPage}>
-      <LeaderboardTable leaderboard={leaderboard} />
+      {leaderboard.length === 0 ? null : (
+        <>
+          <h1 className={s.leaderboardTitle}>All time English leaderboard</h1>
+          <LeaderboardTable leaderboard={leaderboard} />
 
-      {isLoggedIn &&
-        (userDetails?.testCompleted ? (
-          <p className={s.yourPosition}>
-            YOUR POSITION:{" "}
-            {place > 10
-              ? `${place}. Keep practicing to get to the top!`
-              : `${place}. Congratulations, you're in the top!`}
-          </p>
-        ) : (
-          <p className={s.yourPosition}>
-            Complete your first test to be placed on the leaderboard
-          </p>
-        ))}
+          {isLoggedIn ? (
+            userDetails?.testCompleted ? (
+              <p className={s.yourPosition}>
+                Your place:{" "}
+                {place > 10
+                  ? `${place}. Keep practicing to get to the top!`
+                  : `${place}. Congratulations, you're in the top!`}
+              </p>
+            ) : (
+              <p className={s.yourPosition}>
+                Complete your first test to be placed on the leaderboard
+              </p>
+            )
+          ) : (
+            <p className={s.yourPosition}>
+              {
+                <Link className={s.signupLink} to="/login">
+                  Sing up
+                </Link>
+              }
+              and start typing to be placed on the leaderboard
+            </p>
+          )}
+        </>
+      )}
     </div>
   );
 };

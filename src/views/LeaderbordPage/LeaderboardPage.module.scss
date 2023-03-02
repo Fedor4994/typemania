@@ -10,3 +10,15 @@
   align-items: center;
   justify-content: center;
 }
+
+.leaderboardTitle {
+  text-align: center;
+  color: var(--main-color);
+  margin-bottom: 15px;
+}
+
+.signupLink {
+  color: var(--main-color);
+  margin-right: 5px;
+  text-decoration: underline;
+}
