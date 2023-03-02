@@ -4,7 +4,14 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import s from "./SettingsPage.module.scss";
 
-const languages = ["english", "ukrainian", "russian"];
+const languages = [
+  "english",
+  "ukrainian",
+  "russian",
+  "javascript",
+  "git",
+  "twitch emotes",
+];
 
 const SettingsPage = () => {
   const [isSound, setIsSound] = useState(

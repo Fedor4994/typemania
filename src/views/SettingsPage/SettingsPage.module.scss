@@ -59,6 +59,8 @@
   background-color: var(--table-color);
   width: 400px;
   border: none;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 
   div {
     color: var(--main-color);
@@ -70,5 +72,5 @@
 }
 
 .arrow {
-  margin-top: 5px;
+  margin-top: 4px;
 }
