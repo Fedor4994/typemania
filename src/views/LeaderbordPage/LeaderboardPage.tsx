@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LeaderboardTable from "../../components/LeaderboardTable/LeaderboardTable";
@@ -49,7 +50,19 @@ const LeaderboardPage = () => {
 
   return (
     <div className={s.leaderbordPage}>
-      {leaderboard.length === 0 ? null : (
+      {leaderboard.length === 0 ? (
+        <div className={s.leaderboardLoader}>
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="var(--main-color)"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            visible={true}
+          />
+        </div>
+      ) : (
         <>
           <h1 className={s.leaderboardTitle}>All time English leaderboard</h1>
           <LeaderboardTable leaderboard={leaderboard} />

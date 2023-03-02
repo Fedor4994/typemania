@@ -96,3 +96,7 @@ a {
 #root {
   height: 100%;
 }
+.Dropdown-option.is-selected {
+  background-color: var(--main-color) !important;
+  color: var(--table-color) !important;
+}

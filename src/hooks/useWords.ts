@@ -1,12 +1,31 @@
 import { useState, useEffect } from "react";
-import wordsFile from "../data/words.json";
+import englishWordsFile from "../data/englishWords.json";
+import russianWordsFile from "../data/russianWords.json";
+import ukrainianWordsFile from "../data/ukrainianWords.json";
 
 const generateWords = (count: number) => {
-  const arrayOfWords: Array<String> = wordsFile.words;
+  let arrayOfWords: Array<String> = [];
+  const language = localStorage.getItem("language");
+
+  switch (language) {
+    case "english":
+      arrayOfWords = englishWordsFile.words;
+      break;
+    case "russian":
+      arrayOfWords = russianWordsFile.words;
+      break;
+    case "ukrainian":
+      arrayOfWords = ukrainianWordsFile.words;
+      break;
+    default:
+      arrayOfWords = englishWordsFile.words;
+      break;
+  }
+
   let generatedWords: Array<String> = [];
   for (let i = 0; i <= count; i++) {
     generatedWords.push(
-      wordsFile.words[Math.floor(Math.random() * arrayOfWords.length)]
+      arrayOfWords[Math.floor(Math.random() * arrayOfWords.length)]
     );
   }
   return generatedWords.join(" ");
