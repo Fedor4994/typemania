@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import LeaderboardTable from "../../components/LeaderboardTable/LeaderboardTable";
 import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
 import { useAppDispatch } from "../../redux/store";
 import { getTestsDetails } from "../../redux/tests/tests-operations";
@@ -47,23 +48,20 @@ const LeaderboardPage = () => {
 
   return (
     <div className={s.leaderbordPage}>
-      <ul>
-        {leaderboard.map(
-          (position) =>
-            position.bestsRecord && (
-              <li key={position.user._id}>
-                <span>{position.user.name}</span>
-                <span>{position.bestsRecord}</span>
-              </li>
-            )
-        )}
-      </ul>
+      <LeaderboardTable leaderboard={leaderboard} />
 
       {isLoggedIn &&
         (userDetails?.testCompleted ? (
-          <p>YOUR POSITION: {place}</p>
+          <p className={s.yourPosition}>
+            YOUR POSITION:{" "}
+            {place > 10
+              ? `${place}. Keep practicing to get to the top!`
+              : `${place}. Congratulations, you're in the top!`}
+          </p>
         ) : (
-          <p>Complete your first test to to be placed on the leaderboard</p>
+          <p className={s.yourPosition}>
+            Complete your first test to be placed on the leaderboard
+          </p>
         ))}
     </div>
   );
