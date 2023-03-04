@@ -12,7 +12,13 @@ export type Theme =
   | "matrix";
 
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState<Theme>("joker");
+  const localStorageTheme = localStorage.getItem("theme-color") as Theme;
+
+  const [theme, setTheme] = useState<Theme>(localStorageTheme || "joker");
+
+  useEffect(() => {
+    setTheme((localStorage.getItem("theme-color") as Theme) || "joker");
+  }, [localStorageTheme]);
 
   useEffect(() => {
     const currentThemeColor = localStorage.getItem("theme-color");
