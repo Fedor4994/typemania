@@ -28,6 +28,11 @@ function App() {
 
   useEffect(() => {
     dispatch(getCurrentUser());
+
+    document.body.setAttribute(
+      "data-font",
+      localStorage.getItem("font-family") || "Ubuntu Mono"
+    );
   }, [dispatch]);
 
   return isFetchingUser ? (

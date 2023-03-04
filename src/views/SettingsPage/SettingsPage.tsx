@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FaVolumeUp, FaLanguage, FaPalette } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaVolumeUp, FaLanguage, FaPalette, FaFont } from "react-icons/fa";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import s from "./SettingsPage.module.scss";
@@ -22,6 +22,14 @@ export const themes = [
   "matrix",
 ];
 
+export const fonts = [
+  "Ubuntu Mono",
+  "Coming Soon",
+  "JetBrains Mono",
+  "Caveat",
+  "Advent Pro",
+];
+
 const SettingsPage = () => {
   const [isSound, setIsSound] = useState(
     localStorage.getItem("isSound") || "false"
@@ -33,6 +41,14 @@ const SettingsPage = () => {
   const [theme, setTheme] = useState<Theme>(
     (localStorage.getItem("theme-color") as Theme) || "joker"
   );
+
+  const [font, setFont] = useState(
+    localStorage.getItem("font-family") || "Ubuntu Mono"
+  );
+
+  useEffect(() => {
+    document.body.setAttribute("data-font", font);
+  }, [font]);
 
   return (
     <div className={s.settingPage}>
@@ -70,6 +86,30 @@ const SettingsPage = () => {
             ON
           </button>
         </div>
+      </div>
+
+      <div className={s.settingsWrapper}>
+        <div className={s.settingsTitleWraper}>
+          <div className={s.settingsTitle}>
+            <FaFont />
+            <p>font-family</p>
+          </div>
+          <p className={s.settingsSubTitle}>
+            Set the font-style of the application's text.
+          </p>
+        </div>
+        <Dropdown
+          controlClassName={s.dropdownInput}
+          menuClassName={s.dropdown}
+          arrowClassName={s.arrow}
+          options={fonts}
+          onChange={(option) => {
+            setFont(option.value as Theme);
+            localStorage.setItem("font-family", option.value);
+          }}
+          value={font}
+          placeholder="Select a font"
+        />
       </div>
 
       <div className={s.settingsWrapper}>

@@ -29,7 +29,12 @@ const WordsPage = () => {
               marginBottom: 10,
             }}
           >
-            <LanguageSelect updateWords={updateWords} />
+            <LanguageSelect
+              updateWords={() => {
+                onRestart();
+                updateWords();
+              }}
+            />
           </div>
 
           <div className={s.typingArea}>

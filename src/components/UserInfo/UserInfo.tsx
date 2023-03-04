@@ -59,25 +59,25 @@ const UserInfo = ({ details }: { details: TestsDetails | null }) => {
           <div className={s.statsWrapper}>
             <span className={s.statsValue}>15 seconds</span>
             {details?.timerFifteenTopWpm
-              ? details?.timerFifteenTopWpm + " WPM"
+              ? details?.timerFifteenTopWpm + " wpm"
               : "-"}
           </div>
           <div className={s.statsWrapper}>
             <span className={s.statsValue}>30 seconds</span>
             {details?.timerThirtyTopWpm
-              ? details?.timerThirtyTopWpm + " WPM"
+              ? details?.timerThirtyTopWpm + " wpm"
               : "-"}
           </div>
           <div className={s.statsWrapper}>
             <span className={s.statsValue}>60 seconds</span>
             {details?.timerSixtyTopWpm
-              ? details?.timerSixtyTopWpm + " WPM"
+              ? details?.timerSixtyTopWpm + " wpm"
               : "-"}
           </div>
           <div className={s.statsWrapper}>
             <span className={s.statsValue}>120 seconds</span>
             {details?.timerTwoMinuteTopWpm
-              ? details?.timerTwoMinuteTopWpm + " WPM"
+              ? details?.timerTwoMinuteTopWpm + " wpm"
               : "-"}
           </div>
         </div>
@@ -85,24 +85,24 @@ const UserInfo = ({ details }: { details: TestsDetails | null }) => {
         <div className={s.wordsHighestsResults}>
           <div className={s.statsWrapper}>
             <span className={s.statsValue}>10 words</span>
-            {details?.wordsTenTopWpm ? details?.wordsTenTopWpm + " WPM" : "-"}
+            {details?.wordsTenTopWpm ? details?.wordsTenTopWpm + " wpm" : "-"}
           </div>
           <div className={s.statsWrapper}>
             <span className={s.statsValue}>25 words</span>
             {details?.wordsTwenyFiveTopWpm
-              ? details?.wordsTwenyFiveTopWpm + " WPM"
+              ? details?.wordsTwenyFiveTopWpm + " wpm"
               : "-"}
           </div>
           <div className={s.statsWrapper}>
             <span className={s.statsValue}>50 words</span>
             {details?.wordsFiftyTopWpm
-              ? details?.wordsFiftyTopWpm + " WPM"
+              ? details?.wordsFiftyTopWpm + " wpm"
               : "-"}
           </div>
           <div className={s.statsWrapper}>
             <span className={s.statsValue}>100 words</span>
             {details?.wordsHungredTopWpm
-              ? details?.wordsHungredTopWpm + " WPM"
+              ? details?.wordsHungredTopWpm + " wpm"
               : "-"}
           </div>
         </div>

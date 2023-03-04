@@ -50,6 +50,26 @@ body {
   flex-direction: column;
 }
 
+body[data-font="Ubuntu Mono"] {
+  font-family: "Ubuntu Mono", monospace;
+}
+
+body[data-font="Coming Soon"] {
+  font-family: "Coming Soon", cursive;
+}
+
+body[data-font="JetBrains Mono"] {
+  font-family: "JetBrains Mono", monospace;
+}
+
+body[data-font="Caveat"] {
+  font-family: "Caveat", cursive;
+}
+
+body[data-font="Advent Pro"] {
+  font-family: "Advent Pro", sans-serif;
+}
+
 body[data-theme="joker"] {
   background-color: var(--joker-background);
 }

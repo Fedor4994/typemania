@@ -30,7 +30,12 @@ const CountdownPage = () => {
       />
       <div className={s.timerWrapper}>
         <CountdownTimer timeLeft={timeLeft} />
-        <LanguageSelect updateWords={updateWords} />
+        <LanguageSelect
+          updateWords={() => {
+            onRestart();
+            updateWords();
+          }}
+        />
       </div>
       <AnimatedPage>
         <>

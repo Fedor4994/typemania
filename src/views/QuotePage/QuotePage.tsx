@@ -36,7 +36,12 @@ const QuotePage = () => {
               marginBottom: 10,
             }}
           >
-            <LanguageSelect updateWords={updateQuotes} />
+            <LanguageSelect
+              updateWords={() => {
+                onRestart();
+                updateQuotes();
+              }}
+            />
           </div>
           <div className={s.typingArea}>
             <GeneratedWords words={currentQuote.text} />

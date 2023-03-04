@@ -31,11 +31,8 @@ const LanguageSelect = ({ updateWords }: { updateWords: () => void }) => {
 
   return (
     <>
-      <div
-        onClick={() => setIsModalOpen(true)}
-        className={s.languageSelectWrapper}
-      >
-        <div className={s.languageSelect}>
+      <div className={s.languageSelectWrapper}>
+        <div onClick={() => setIsModalOpen(true)} className={s.languageSelect}>
           <GiEarthAmerica /> {language}
         </div>
       </div>
