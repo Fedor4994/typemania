@@ -7,6 +7,7 @@ import s from "./CountdownPage.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import NextButton from "../../components/NextButton/NextButton";
 import AnimatedPage from "../../components/AnimatedPage";
+import LanguageSelect from "../../components/LanguageSelect/LanguageSelect";
 
 const CountdownPage = () => {
   const {
@@ -27,7 +28,10 @@ const CountdownPage = () => {
         onChange={setCountdownSeconds}
         onRestart={onRestart}
       />
-      <CountdownTimer timeLeft={timeLeft} />
+      <div className={s.timerWrapper}>
+        <CountdownTimer timeLeft={timeLeft} />
+        <LanguageSelect updateWords={updateWords} />
+      </div>
       <AnimatedPage>
         <>
           <div className={s.typingArea}>

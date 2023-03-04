@@ -1,5 +1,6 @@
 import AnimatedPage from "../../components/AnimatedPage";
 import GeneratedWords from "../../components/GeneratedWords/GeneratedWords";
+import LanguageSelect from "../../components/LanguageSelect/LanguageSelect";
 import Navigation from "../../components/Navigation/Navigation";
 import NextButton from "../../components/NextButton/NextButton";
 import RestartButton from "../../components/RestartButton/RestartButton";
@@ -23,6 +24,14 @@ const WordsPage = () => {
 
       <AnimatedPage>
         <>
+          <div
+            style={{
+              marginBottom: 10,
+            }}
+          >
+            <LanguageSelect updateWords={updateWords} />
+          </div>
+
           <div className={s.typingArea}>
             <GeneratedWords words={words} />
             <UserTyping words={words} userInput={typed} />

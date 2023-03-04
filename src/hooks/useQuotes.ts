@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import englishQuotesFile from "../data/englishQuotes.json";
 import russianQuotesFile from "../data/russianQuotes.json";
 import ukrainianQuotesFile from "../data/ukrainianQuotes.json";
-import javascriptQutesFile from "../data/javascriptQuotes.json";
 
 export type Quote = {
   id: number;
@@ -26,9 +25,6 @@ const generateQuotes = (length: QuoteLength) => {
       break;
     case "ukrainian":
       arrayOfQuotes = ukrainianQuotesFile.quotes;
-      break;
-    case "javascript":
-      arrayOfQuotes = javascriptQutesFile.quotes;
       break;
 
     default:

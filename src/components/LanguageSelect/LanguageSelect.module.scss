@@ -1,0 +1,58 @@
+.languageSelectWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1200;
+}
+
+.languageModal {
+  width: 20%;
+  display: flex;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: var(--table-color);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.languageOption {
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--main-color);
+  width: 100%;
+  padding: 10px;
+  &:hover {
+    color: var(--table-color);
+    background-color: var(--correct-color);
+  }
+}
+
+.activeOption {
+  color: var(--table-color);
+  background-color: var(--correct-color);
+}
+
+.languageSelect {
+  cursor: pointer;
+  color: var(--timer-color);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  &:hover {
+    color: var(--correct-color);
+  }
+}

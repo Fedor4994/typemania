@@ -4,7 +4,7 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import s from "./SettingsPage.module.scss";
 
-const languages = [
+export const languages = [
   "english",
   "ukrainian",
   "russian",
