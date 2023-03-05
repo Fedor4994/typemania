@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { BsFillCaretRightFill } from "react-icons/bs";
+import { FaSkull, FaSmile, FaGlobeAmericas } from "react-icons/fa";
+import { motion } from "framer-motion";
 import { Test } from "../../types/test";
 import { formatPercentage } from "../../utils/helpers";
 import s from "./TestsHistory.module.scss";
@@ -12,14 +15,18 @@ const TestsHistory = ({
   onSortChange: (value: number) => void;
   sortValue: number;
 }) => {
+  const [nameErrorMessage, setNameErrorMessage] = useState("");
+
   return (
     <table className={s.transactionHistory}>
       <thead>
         <tr>
           <th>Test Type</th>
-          <th>WPM</th>
-          <th>Accuracy</th>
+          <th className={s.wpmColumn}>WPM</th>
+          <th className={s.wpmColumn}>Accuracy</th>
           <th>Time spended</th>
+          <th className={s.infoColumn}>Info</th>
+
           <th>
             <label className={s.sortCheckbox}>
               Date
@@ -43,6 +50,73 @@ const TestsHistory = ({
             <td>{test.wpm}</td>
             <td>{formatPercentage(test.accuracy)}</td>
             <td>{test.time} seconds</td>
+            <td>
+              <div className={s.infoWrapper}>
+                <motion.div
+                  onHoverStart={() => setNameErrorMessage(test._id)}
+                  onHoverEnd={() => setNameErrorMessage("")}
+                  className={s.checkIcon}
+                >
+                  <FaGlobeAmericas />
+                  {nameErrorMessage === test._id && (
+                    <motion.p
+                      initial={{
+                        opacity: 0,
+                        y: "-50%",
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        y: "-50%",
+                      }}
+                      transition={{
+                        duration: 0.4,
+                      }}
+                      className={s.tooltip}
+                    >
+                      {test.language}
+                    </motion.p>
+                  )}
+                </motion.div>
+
+                <motion.div
+                  onHoverStart={() =>
+                    setNameErrorMessage(`Hardcore ${test._id}`)
+                  }
+                  onHoverEnd={() => setNameErrorMessage("")}
+                  className={s.checkIcon}
+                >
+                  {test.isHardcore ? <FaSkull /> : <FaSmile />}
+
+                  {nameErrorMessage === `Hardcore ${test._id}` && (
+                    <motion.p
+                      initial={{
+                        opacity: 0,
+                        y: "-50%",
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        y: "-50%",
+                      }}
+                      transition={{
+                        duration: 0.4,
+                      }}
+                      className={s.hardcoreTooltip}
+                    >
+                      {test.isHardcore ? "hardcore" : "normal"}
+                    </motion.p>
+                  )}
+                </motion.div>
+              </div>
+            </td>
+
             <td>{new Date(test.createdAt).toLocaleString().slice(0, 17)}</td>
           </tr>
         </tbody>

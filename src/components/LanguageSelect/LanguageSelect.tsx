@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { GiEarthAmerica } from "react-icons/gi";
+import { FaGlobeAmericas } from "react-icons/fa";
 import { languages } from "../../views/SettingsPage/SettingsPage";
 import s from "./LanguageSelect.module.scss";
 
@@ -33,7 +33,7 @@ const LanguageSelect = ({ updateWords }: { updateWords: () => void }) => {
     <>
       <div className={s.languageSelectWrapper}>
         <div onClick={() => setIsModalOpen(true)} className={s.languageSelect}>
-          <GiEarthAmerica /> {language}
+          <FaGlobeAmericas /> {language}
         </div>
       </div>
       <AnimatePresence>

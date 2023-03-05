@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import useWords from "./useWords";
 import useCountdownTimer from "./useCountdownTimer";
 import {
@@ -21,6 +22,10 @@ export const useTimerTyping = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const notify = () =>
+    toast.info("Harcore mode is active", {
+      toastId: "customId",
+    });
 
   const [typed, setTyped] = useState("");
   const [state, setState] = useState<State>("start");
@@ -59,6 +64,9 @@ export const useTimerTyping = () => {
               ),
               time: countdownSeconds,
               testType: `Timer, ${countdownSeconds} seconds`,
+              language: localStorage.getItem("language") || "english",
+              isHardcore:
+                localStorage.getItem("isHardcore") === "true" ? true : false,
             })
           );
         } else {
@@ -116,6 +124,16 @@ export const useTimerTyping = () => {
     setCursor(0);
     setState("start");
   }, [resetCountdown]);
+
+  useEffect(() => {
+    const wordsReached = words.substring(0, Math.min(cursor, words.length));
+    const isHardcore = localStorage.getItem("isHardcore");
+
+    if (countErrors(typed, wordsReached) > 0 && isHardcore === "true") {
+      onRestart();
+      notify();
+    }
+  }, [cursor, onRestart, typed, words]);
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {

@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
 import { setLastTest } from "../redux/tests/testsSlice";
 import keypress from "../data/sound.wav";
+import { toast } from "react-toastify";
 
 export const useStopwatchTyping = () => {
   const dispatch = useAppDispatch();
@@ -24,9 +25,14 @@ export const useStopwatchTyping = () => {
   const [typed, setTyped] = useState("");
   const [totalTyped, setTotalTyped] = useState(0);
   const [errors, setErrors] = useState(0);
+  const [cursor, setCursor] = useState(0);
   const [state, setState] = useState<State>("start");
 
   const totalTypedRef = useRef(0);
+  const notify = () =>
+    toast.info("Harcore mode is active", {
+      toastId: "customId",
+    });
 
   const { words, updateWords, wordsCount, setWordsCount } = useWords();
   const { secondsPassed, startStopwatch, resetStopwatch } = useStopwatch();
@@ -36,6 +42,7 @@ export const useStopwatchTyping = () => {
     if (typed.length === words.length) {
       setTotalTyped(totalTypedRef.current);
       setErrors(countErrors(typed, words));
+      setCursor(0);
       resetStopwatch();
 
       if (totalTyped !== 0) {
@@ -46,6 +53,9 @@ export const useStopwatchTyping = () => {
               accuracy: calculateAccurancyPercentage(errors, totalTyped),
               time: secondsPassed,
               testType: `Words, ${wordsCount}`,
+              language: localStorage.getItem("language") || "english",
+              isHardcore:
+                localStorage.getItem("isHardcore") === "true" ? true : false,
             })
           );
         } else {
@@ -84,9 +94,20 @@ export const useStopwatchTyping = () => {
     setTyped("");
     setTotalTyped(0);
     setErrors(0);
+    setCursor(0);
     resetStopwatch();
     setState("start");
   }, [resetStopwatch]);
+
+  useEffect(() => {
+    const wordsReached = words.substring(0, Math.min(cursor, words.length));
+    const isHardcore = localStorage.getItem("isHardcore");
+
+    if (countErrors(typed, wordsReached) > 0 && isHardcore === "true") {
+      onRestart();
+      notify();
+    }
+  }, [cursor, onRestart, typed, words]);
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
@@ -118,6 +139,7 @@ export const useStopwatchTyping = () => {
           }
 
           setTyped((typed) => typed.slice(0, -1));
+          setCursor((prevCursor) => prevCursor - 1);
           totalTypedRef.current -= 1;
           break;
         default:
@@ -126,6 +148,7 @@ export const useStopwatchTyping = () => {
           }
 
           setTyped((typed) => typed.concat(key));
+          setCursor((prevCursor) => prevCursor + 1);
           totalTypedRef.current += 1;
           break;
       }

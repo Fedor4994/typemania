@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
 import { setLastTest } from "../redux/tests/testsSlice";
 import keypress from "../data/sound.wav";
+import { toast } from "react-toastify";
 
 export const useQuotesTyping = () => {
   const dispatch = useAppDispatch();
@@ -25,9 +26,15 @@ export const useQuotesTyping = () => {
   const [typed, setTyped] = useState("");
   const [totalTyped, setTotalTyped] = useState(0);
   const [errors, setErrors] = useState(0);
+  const [cursor, setCursor] = useState(0);
   const [state, setState] = useState<State>("start");
 
   const totalTypedRef = useRef(0);
+  const notify = () =>
+    toast.info("Harcore mode is active", {
+      toastId: "customId",
+    });
+
   const { currentQuote, setQuoteLength, updateQuotes, quoteLength } =
     useQuotes();
   const { secondsPassed, startStopwatch, resetStopwatch } = useStopwatch();
@@ -62,6 +69,7 @@ export const useQuotesTyping = () => {
       setTotalTyped(totalTypedRef.current);
       setErrors(countErrors(typed, currentQuote.text));
       resetStopwatch();
+      setCursor(0);
 
       if (totalTyped !== 0) {
         if (isLoggedIn) {
@@ -71,6 +79,9 @@ export const useQuotesTyping = () => {
               accuracy: calculateAccurancyPercentage(errors, totalTyped),
               time: secondsPassed,
               testType: `Quote, ${quoteLength}`,
+              language: localStorage.getItem("language") || "english",
+              isHardcore:
+                localStorage.getItem("isHardcore") === "true" ? true : false,
             })
           );
         } else {
@@ -108,9 +119,23 @@ export const useQuotesTyping = () => {
     setTyped("");
     setTotalTyped(0);
     setErrors(0);
+    setCursor(0);
     resetStopwatch();
     setState("start");
   }, [resetStopwatch]);
+
+  useEffect(() => {
+    const wordsReached = currentQuote.text.substring(
+      0,
+      Math.min(cursor, currentQuote.text.length)
+    );
+    const isHardcore = localStorage.getItem("isHardcore");
+
+    if (countErrors(typed, wordsReached) > 0 && isHardcore === "true") {
+      onRestart();
+      notify();
+    }
+  }, [currentQuote.text, cursor, onRestart, typed]);
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
@@ -142,6 +167,7 @@ export const useQuotesTyping = () => {
           }
 
           setTyped((typed) => typed.slice(0, -1));
+          setCursor((prevCursor) => prevCursor - 1);
           totalTypedRef.current -= 1;
           break;
         default:
@@ -150,6 +176,7 @@ export const useQuotesTyping = () => {
           }
 
           setTyped((typed) => typed.concat(key));
+          setCursor((prevCursor) => prevCursor + 1);
           totalTypedRef.current += 1;
           break;
       }

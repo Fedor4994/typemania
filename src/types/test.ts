@@ -4,12 +4,17 @@ export type Test = {
   accuracy: number;
   time: number;
   testType: string;
+  language: string;
+  isHardcore: boolean;
   createdAt: string;
   updatedAt: string;
   userId: string;
 };
 
-export type TestInfo = Pick<Test, "wpm" | "accuracy" | "time" | "testType">;
+export type TestInfo = Pick<
+  Test,
+  "wpm" | "accuracy" | "time" | "testType" | "language" | "isHardcore"
+>;
 
 export type TestsDetails = {
   averageAccuracy: number;

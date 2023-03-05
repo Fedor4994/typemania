@@ -96,3 +96,49 @@ tbody:nth-child(odd) {
   top: 0px;
   right: -30px;
 }
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  left: -30px;
+  background-color: #171717;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
+
+.hardcoreTooltip {
+  position: absolute;
+  top: -40px;
+  left: -30px;
+  background-color: #171717;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
+
+.checkIcon {
+  cursor: pointer;
+
+  width: 20px;
+
+  height: 20px;
+  position: relative;
+}
+
+.infoWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.infoColumn {
+  width: 100px;
+}
+
+.wpmColumn {
+  width: 150px;
+}
