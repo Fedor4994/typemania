@@ -79,7 +79,7 @@ const SettingsPage = () => {
             }`}
             onClick={() => {
               setIsSound("false");
-              localStorage.setItem("caret-style", "false");
+              localStorage.setItem("isSound", "false");
             }}
           >
             OFF
@@ -90,7 +90,7 @@ const SettingsPage = () => {
             }`}
             onClick={() => {
               setIsSound("true");
-              localStorage.setItem("caret-style", "true");
+              localStorage.setItem("isSound", "true");
             }}
           >
             ON
