@@ -5,6 +5,7 @@ import {
   FaPalette,
   FaFont,
   FaICursor,
+  FaSkull,
 } from "react-icons/fa";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
@@ -40,6 +41,7 @@ const SettingsPage = () => {
   const [isSound, setIsSound] = useState(
     localStorage.getItem("isSound") || "false"
   );
+
   const [language, setLanguage] = useState(
     localStorage.getItem("language") || "english"
   );
@@ -54,6 +56,10 @@ const SettingsPage = () => {
 
   const [caretStyle, setCaretStyle] = useState(
     localStorage.getItem("caret-style") || "thin"
+  );
+
+  const [isHardcore, setIsHardcore] = useState(
+    localStorage.getItem("isHardcore") || "false"
   );
 
   useEffect(() => {
@@ -238,6 +244,43 @@ const SettingsPage = () => {
           value={theme}
           placeholder="Select an theme"
         />
+      </div>
+
+      <div className={s.settingsWrapper}>
+        <div className={s.settingsTitleWraper}>
+          <div className={s.settingsTitle}>
+            <FaSkull />
+            <p>hardcore mode</p>
+          </div>
+          <p className={s.settingsSubTitle}>
+            You fails if you press a single incorrect key <br /> (meaning you
+            have to achieve 100% accuracy).
+          </p>
+        </div>
+        <div className={s.settingsButtons}>
+          <button
+            className={`${s.settingsButton} ${
+              isHardcore === "false" ? s.activeButton : ""
+            }`}
+            onClick={() => {
+              setIsHardcore("false");
+              localStorage.setItem("isHardcore", "false");
+            }}
+          >
+            OFF
+          </button>
+          <button
+            className={`${s.settingsButton} ${
+              isHardcore === "true" ? s.activeButton : ""
+            }`}
+            onClick={() => {
+              setIsHardcore("true");
+              localStorage.setItem("isHardcore", "true");
+            }}
+          >
+            ON
+          </button>
+        </div>
       </div>
     </div>
   );
