@@ -3,7 +3,19 @@
   border: none;
   border-radius: 10px;
   padding: 8px 15px;
-  width: 190px;
+  width: 193px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--correct-color);
+  background-color: var(--table-color);
+}
+
+.settingsSmallButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 15px;
+  width: 69px;
   font-size: 16px;
   font-weight: 600;
   color: var(--correct-color);
@@ -39,7 +51,7 @@
 .settingsButtons {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
 }
 
 .dropdownInput {

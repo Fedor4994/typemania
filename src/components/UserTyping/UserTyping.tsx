@@ -29,7 +29,7 @@ const UserTyping = ({
           <span className={s.spaceChar} key={`${char}_${index}`}>
             <TbSpace
               className={char === " " ? s.spaceIcon : s.errorSpaceIcon}
-              size={18}
+              size={16}
             />
           </span>
         ) : (

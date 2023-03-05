@@ -8,7 +8,7 @@ const GeneratedWords = ({ words }: { words: string }) => {
         if (char === " ") {
           return (
             <span className={s.space} key={`${char}_${index}`}>
-              <TbSpace className={s.spaceIcon} size={18} />
+              <TbSpace className={s.spaceIcon} size={16} />
             </span>
           );
         } else {

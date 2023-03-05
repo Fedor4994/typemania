@@ -24,10 +24,47 @@
   }
 }
 
-.caret {
+.caretWrapper {
+  position: relative;
   display: inline-block;
-  background-color: var(--caret-color);
-  width: 2px;
+  background-color: transparent;
+  width: 14px;
   height: 23px;
   margin-top: 7px;
+}
+
+.thinCaret {
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  background-color: var(--caret-color);
+  width: 2px;
+  height: 28px;
+}
+
+.filledCaret {
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  background-color: var(--correct-color);
+  width: 16px;
+  height: 28px;
+}
+
+.outlinedCaret {
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 16px;
+  padding-left: 4px;
+  height: 30px;
+  border: 1px solid var(--correct-color);
+}
+
+.underlineCaret {
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 16px;
+  border-bottom: 2px solid var(--caret-color);
 }

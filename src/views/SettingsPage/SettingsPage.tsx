@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { FaVolumeUp, FaLanguage, FaPalette, FaFont } from "react-icons/fa";
+import {
+  FaVolumeUp,
+  FaLanguage,
+  FaPalette,
+  FaFont,
+  FaICursor,
+} from "react-icons/fa";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import s from "./SettingsPage.module.scss";
@@ -46,6 +52,10 @@ const SettingsPage = () => {
     localStorage.getItem("font-family") || "Ubuntu Mono"
   );
 
+  const [caretStyle, setCaretStyle] = useState(
+    localStorage.getItem("caret-style") || "thin"
+  );
+
   useEffect(() => {
     document.body.setAttribute("data-font", font);
   }, [font]);
@@ -69,7 +79,7 @@ const SettingsPage = () => {
             }`}
             onClick={() => {
               setIsSound("false");
-              localStorage.setItem("isSound", "false");
+              localStorage.setItem("caret-style", "false");
             }}
           >
             OFF
@@ -80,7 +90,7 @@ const SettingsPage = () => {
             }`}
             onClick={() => {
               setIsSound("true");
-              localStorage.setItem("isSound", "true");
+              localStorage.setItem("caret-style", "true");
             }}
           >
             ON
@@ -110,6 +120,75 @@ const SettingsPage = () => {
           value={font}
           placeholder="Select a font"
         />
+      </div>
+
+      <div className={s.settingsWrapper}>
+        <div className={s.settingsTitleWraper}>
+          <div className={s.settingsTitle}>
+            <FaICursor />
+            <p>caret style</p>
+          </div>
+          <p className={s.settingsSubTitle}>
+            Change the style of the caret during the test.
+          </p>
+        </div>
+        <div className={s.settingsButtons}>
+          <button
+            className={`${s.settingsSmallButton} ${
+              caretStyle === "off" ? s.activeButton : ""
+            }`}
+            onClick={() => {
+              setCaretStyle("off");
+              localStorage.setItem("caret-style", "off");
+            }}
+          >
+            off
+          </button>
+          <button
+            className={`${s.settingsSmallButton} ${
+              caretStyle === "thin" ? s.activeButton : ""
+            }`}
+            onClick={() => {
+              setCaretStyle("thin");
+              localStorage.setItem("caret-style", "thin");
+            }}
+          >
+            |
+          </button>
+          <button
+            className={`${s.settingsSmallButton} ${
+              caretStyle === "filled" ? s.activeButton : ""
+            }`}
+            onClick={() => {
+              setCaretStyle("filled");
+              localStorage.setItem("caret-style", "filled");
+            }}
+          >
+            ▮
+          </button>
+          <button
+            className={`${s.settingsSmallButton} ${
+              caretStyle === "outlined" ? s.activeButton : ""
+            }`}
+            onClick={() => {
+              setCaretStyle("outlined");
+              localStorage.setItem("caret-style", "outlined");
+            }}
+          >
+            ▯
+          </button>
+          <button
+            className={`${s.settingsSmallButton} ${
+              caretStyle === "underline" ? s.activeButton : ""
+            }`}
+            onClick={() => {
+              setCaretStyle("underline");
+              localStorage.setItem("caret-style", "underline");
+            }}
+          >
+            _
+          </button>
+        </div>
       </div>
 
       <div className={s.settingsWrapper}>
