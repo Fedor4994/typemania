@@ -1,15 +1,17 @@
-import { FaLink, FaUserCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaLink, FaPencilAlt, FaUserCircle } from "react-icons/fa";
 import { TestsDetails } from "../../types/test";
 import s from "./UserDescription.module.scss";
 import { formatPercentage } from "../../utils/helpers";
 import { UserInfo } from "../../types/auth";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import { getLeaderboardPlace } from "../../redux/auth/auth-operations";
 import { useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { selectLeaderboardPlace } from "../../redux/auth/auth-selectors";
 import { toast } from "react-toastify";
+import { AnimatePresence } from "framer-motion";
+import UserEditModal from "../UserEditModal/UserEditModal";
 
 const UserDescription = ({
   details,
@@ -27,6 +29,8 @@ const UserDescription = ({
   const { pathname } = useLocation();
   const isProfile = pathname.slice(0, 8) === "/profile";
   const place = useSelector(selectLeaderboardPlace);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getLeaderboardPlace(currentUser._id));
@@ -76,8 +80,17 @@ const UserDescription = ({
             {formatPercentage(details?.averageAccuracy || 0)}
           </div>
 
+          {!isProfile && (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className={s.editButton}
+            >
+              <FaPencilAlt size={20} />
+            </button>
+          )}
+
           <button
-            className={s.linkButton}
+            className={`${s.linkButton} ${isProfile ? s.maxHigh : ""}`}
             onClick={() => {
               navigator.clipboard.writeText(
                 `https://typemania.vercel.app/profile/${currentUser._id}`
@@ -89,6 +102,12 @@ const UserDescription = ({
           </button>
         </div>
       </div>
+
+      {isModalOpen && (
+        <AnimatePresence>
+          <UserEditModal setIsModalOpen={setIsModalOpen} />
+        </AnimatePresence>
+      )}
 
       <div className={s.highestsResults}>
         <div className={s.timerHighestsResults}>
