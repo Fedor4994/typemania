@@ -3,6 +3,7 @@
 }
 
 .mainWrapper {
+  position: relative;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -106,4 +107,23 @@
   padding: 30px;
   font-size: 30px;
   background-color: var(--table-color);
+}
+
+.linkButton {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--header-icon-color);
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: 200ms all ease;
+
+  &:hover {
+    background-color: var(--correct-color);
+    color: var(--table-color);
+  }
 }

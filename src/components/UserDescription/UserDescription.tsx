@@ -1,4 +1,4 @@
-import { FaUserCircle } from "react-icons/fa";
+import { FaLink, FaUserCircle } from "react-icons/fa";
 import { TestsDetails } from "../../types/test";
 import s from "./UserDescription.module.scss";
 import { formatPercentage } from "../../utils/helpers";
@@ -9,6 +9,7 @@ import { getLeaderboardPlace } from "../../redux/auth/auth-operations";
 import { useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { selectLeaderboardPlace } from "../../redux/auth/auth-selectors";
+import { toast } from "react-toastify";
 
 const UserDescription = ({
   details,
@@ -18,6 +19,11 @@ const UserDescription = ({
   currentUser: UserInfo;
 }) => {
   const dispatch = useAppDispatch();
+  const notify = () =>
+    toast.success("Public URL copied to clipboard", {
+      toastId: "linkId",
+    });
+
   const { pathname } = useLocation();
   const isProfile = pathname.slice(0, 8) === "/profile";
   const place = useSelector(selectLeaderboardPlace);
@@ -69,6 +75,18 @@ const UserDescription = ({
             <span className={s.statsValue}>Average accuracy: </span>
             {formatPercentage(details?.averageAccuracy || 0)}
           </div>
+
+          <button
+            className={s.linkButton}
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `https://typemania.vercel.app/profile/${currentUser._id}`
+              );
+              notify();
+            }}
+          >
+            <FaLink size={20} />
+          </button>
         </div>
       </div>
 
