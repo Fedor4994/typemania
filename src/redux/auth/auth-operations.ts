@@ -65,6 +65,23 @@ export const logOut = createAsyncThunk(
   }
 );
 
+export const getLeaderboardPlace = createAsyncThunk(
+  "auth/getPlace",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get<{
+        place: number;
+      }>(`/users/leaderboard/place/${userId}`);
+
+      return data;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export const getCurrentUser = createAsyncThunk(
   "auth/refresh",
   async (_, { getState, rejectWithValue }) => {

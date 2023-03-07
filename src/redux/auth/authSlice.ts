@@ -1,10 +1,17 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { UserInfo } from "../../types/auth";
-import { getCurrentUser, login, logOut, register } from "./auth-operations";
+import {
+  getCurrentUser,
+  getLeaderboardPlace,
+  login,
+  logOut,
+  register,
+} from "./auth-operations";
 
 export type AuthSlice = {
   user: UserInfo;
   token: string | null;
+  leaderboardPlace: number;
   isLoggedIn: boolean;
   isFetchingCurrentUser: boolean;
   isLoading: boolean;
@@ -12,6 +19,7 @@ export type AuthSlice = {
 
 const initialState: AuthSlice = {
   user: { name: "", email: "", createdAt: "", _id: "" },
+  leaderboardPlace: 0,
   token: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
@@ -43,6 +51,9 @@ const authSlice = createSlice({
       })
       .addCase(getCurrentUser.rejected, (state) => {
         state.isFetchingCurrentUser = false;
+      })
+      .addCase(getLeaderboardPlace.fulfilled, (state, { payload }) => {
+        state.leaderboardPlace = payload?.place || 0;
       })
       .addMatcher(isAnyOf(register.pending, login.pending), (state) => {
         state.isLoading = true;

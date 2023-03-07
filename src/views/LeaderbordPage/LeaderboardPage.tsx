@@ -4,7 +4,12 @@ import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LeaderboardTable from "../../components/LeaderboardTable/LeaderboardTable";
-import { selectIsLoggedIn, selectUser } from "../../redux/auth/auth-selectors";
+import { getLeaderboardPlace } from "../../redux/auth/auth-operations";
+import {
+  selectIsLoggedIn,
+  selectLeaderboardPlace,
+  selectUser,
+} from "../../redux/auth/auth-selectors";
 import { useAppDispatch } from "../../redux/store";
 import { getTestsDetails } from "../../redux/tests/tests-operations";
 import { selectTestsDetails } from "../../redux/tests/tests-selectors";
@@ -18,11 +23,12 @@ export type LeaderboardPosition = {
 
 const LeaderboardPage = () => {
   const [leaderboard, setLeaderBoard] = useState<LeaderboardPosition[]>([]);
-  const [place, setPlace] = useState(0);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userDetails = useSelector(selectTestsDetails);
   const currentUser = useSelector(selectUser);
+  const place = useSelector(selectLeaderboardPlace);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -36,15 +42,8 @@ const LeaderboardPage = () => {
   }, []);
 
   useEffect(() => {
-    async function fetchCurrentPlace() {
-      const { data } = await axios.get<{ place: number }>(
-        "/users/leaderboard/place"
-      );
-      setPlace(data.place);
-    }
-
     if (isLoggedIn) {
-      fetchCurrentPlace();
+      dispatch(getLeaderboardPlace(currentUser._id));
       dispatch(getTestsDetails(currentUser._id));
     }
   }, [currentUser._id, dispatch, isLoggedIn]);

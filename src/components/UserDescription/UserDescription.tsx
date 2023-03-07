@@ -4,6 +4,11 @@ import s from "./UserDescription.module.scss";
 import { formatPercentage } from "../../utils/helpers";
 import { UserInfo } from "../../types/auth";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { getLeaderboardPlace } from "../../redux/auth/auth-operations";
+import { useAppDispatch } from "../../redux/store";
+import { useSelector } from "react-redux";
+import { selectLeaderboardPlace } from "../../redux/auth/auth-selectors";
 
 const UserDescription = ({
   details,
@@ -12,8 +17,14 @@ const UserDescription = ({
   details: TestsDetails | null;
   currentUser: UserInfo;
 }) => {
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const isProfile = pathname.slice(0, 8) === "/profile";
+  const place = useSelector(selectLeaderboardPlace);
+
+  useEffect(() => {
+    dispatch(getLeaderboardPlace(currentUser._id));
+  }, [currentUser._id, dispatch]);
 
   return (
     <div className={s.userInfo}>
@@ -60,12 +71,6 @@ const UserDescription = ({
           </div>
         </div>
       </div>
-
-      {isProfile && (
-        <div className={s.sideProfile}>
-          All-Time English Leaderboards place: {currentUser.email}
-        </div>
-      )}
 
       <div className={s.highestsResults}>
         <div className={s.timerHighestsResults}>
@@ -120,6 +125,12 @@ const UserDescription = ({
           </div>
         </div>
       </div>
+
+      {isProfile && (
+        <div className={s.sideProfile}>
+          All-Time English Leaderboards place: {place}
+        </div>
+      )}
     </div>
   );
 };
