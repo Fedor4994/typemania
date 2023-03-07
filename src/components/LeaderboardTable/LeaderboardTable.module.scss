@@ -12,9 +12,17 @@
   text-align: center;
 }
 
+.profileLink {
+  color: var(--correct-color);
+}
+
 .userBody {
   background-color: var(--correct-color);
   color: var(--nav-bar-color);
+
+  .profileLink {
+    color: var(--nav-bar-color);
+  }
 }
 .crownPlace {
   display: flex;

@@ -4,7 +4,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LeaderboardTable from "../../components/LeaderboardTable/LeaderboardTable";
-import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/auth-selectors";
 import { useAppDispatch } from "../../redux/store";
 import { getTestsDetails } from "../../redux/tests/tests-operations";
 import { selectTestsDetails } from "../../redux/tests/tests-selectors";
@@ -22,6 +22,7 @@ const LeaderboardPage = () => {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userDetails = useSelector(selectTestsDetails);
+  const currentUser = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -44,9 +45,9 @@ const LeaderboardPage = () => {
 
     if (isLoggedIn) {
       fetchCurrentPlace();
-      dispatch(getTestsDetails());
+      dispatch(getTestsDetails(currentUser._id));
     }
-  }, [dispatch, isLoggedIn]);
+  }, [currentUser._id, dispatch, isLoggedIn]);
 
   return (
     <div className={s.leaderbordPage}>

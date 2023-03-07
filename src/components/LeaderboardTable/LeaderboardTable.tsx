@@ -3,6 +3,7 @@ import { LeaderboardPosition } from "../../views/LeaderbordPage/LeaderboardPage"
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/auth-selectors";
 import { FaCrown } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const LeaderboardTable = ({
   leaderboard,
@@ -34,7 +35,14 @@ const LeaderboardTable = ({
                   {index === 0 ? <FaCrown className={s.crown} /> : index + 1}{" "}
                 </td>
 
-                <td>{position.user.name}</td>
+                <td>
+                  <Link
+                    className={s.profileLink}
+                    to={`/profile/${position.user._id}`}
+                  >
+                    {position.user.name}
+                  </Link>
+                </td>
                 <td>{position.bestsRecord}</td>
                 <td>
                   {new Date(position.user.createdAt).toUTCString().slice(5, 16)}

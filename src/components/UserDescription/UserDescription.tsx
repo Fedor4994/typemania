@@ -1,12 +1,19 @@
-import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
-import { selectUser } from "../../redux/auth/auth-selectors";
 import { TestsDetails } from "../../types/test";
-import s from "./UserInfo.module.scss";
+import s from "./UserDescription.module.scss";
 import { formatPercentage } from "../../utils/helpers";
+import { UserInfo } from "../../types/auth";
+import { useLocation } from "react-router-dom";
 
-const UserInfo = ({ details }: { details: TestsDetails | null }) => {
-  const currentUser = useSelector(selectUser);
+const UserDescription = ({
+  details,
+  currentUser,
+}: {
+  details: TestsDetails | null;
+  currentUser: UserInfo;
+}) => {
+  const { pathname } = useLocation();
+  const isProfile = pathname.slice(0, 8) === "/profile";
 
   return (
     <div className={s.userInfo}>
@@ -53,6 +60,12 @@ const UserInfo = ({ details }: { details: TestsDetails | null }) => {
           </div>
         </div>
       </div>
+
+      {isProfile && (
+        <div className={s.sideProfile}>
+          All-Time English Leaderboards place: {currentUser.email}
+        </div>
+      )}
 
       <div className={s.highestsResults}>
         <div className={s.timerHighestsResults}>
@@ -111,4 +124,4 @@ const UserInfo = ({ details }: { details: TestsDetails | null }) => {
   );
 };
 
-export default UserInfo;
+export default UserDescription;

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import TestsHistory from "../../components/TestsHistory/TestsHistory";
-import UserInfo from "../../components/UserInfo/UserInfo";
+import UserDescription from "../../components/UserDescription/UserDescription";
+import { selectUser } from "../../redux/auth/auth-selectors";
 import { useAppDispatch } from "../../redux/store";
 import {
   fetchTests,
@@ -21,13 +22,14 @@ const AccountPage = () => {
   const tests = useSelector(selectTests);
   const testsDetails = useSelector(selectTestsDetails);
   const isLoading = useSelector(selectIsLoading);
+  const currentUser = useSelector(selectUser);
   const [page, setPage] = useState(1);
   const [sortValue, setSortValue] = useState(-1);
 
   useEffect(() => {
     dispatch(fetchTests({ page, sort: sortValue }));
-    dispatch(getTestsDetails());
-  }, [dispatch, page, sortValue]);
+    dispatch(getTestsDetails(currentUser._id));
+  }, [currentUser._id, dispatch, page, sortValue]);
 
   useEffect(() => {
     return () => {
@@ -43,7 +45,7 @@ const AccountPage = () => {
 
   return (
     <div className={s.accountPage}>
-      <UserInfo details={testsDetails} />
+      <UserDescription details={testsDetails} currentUser={currentUser} />
 
       {tests.length !== 0 && (
         <TestsHistory

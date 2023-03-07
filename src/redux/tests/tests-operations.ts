@@ -62,9 +62,11 @@ export const addTest = createAsyncThunk(
 
 export const getTestsDetails = createAsyncThunk(
   "tests/testsDetails",
-  async (_, { rejectWithValue }) => {
+  async (userId: string, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get<TestsDetails>(`/tests/details`);
+      const { data } = await axios.get<TestsDetails>(
+        `/tests/details/${userId}`
+      );
       return data;
     } catch (error) {
       if (error instanceof Error) {

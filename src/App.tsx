@@ -21,6 +21,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ResultsPage from "./views/ResultsPage/ResultsPage";
 import LeaderboardPage from "./views/LeaderbordPage/LeaderboardPage";
+import ProfilePage from "./views/ProfilePage/ProfilePage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -49,6 +50,7 @@ function App() {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/results" element={<ResultsPage />} />
+          <Route path="/profile/:userId" element={<ProfilePage />} />
 
           <Route
             path="/login"

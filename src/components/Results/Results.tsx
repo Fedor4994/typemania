@@ -5,7 +5,7 @@ import { FaArrowAltCircleRight, FaCrown } from "react-icons/fa";
 import { formatPercentage } from "../../utils/helpers";
 import s from "./Results.module.scss";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/auth-selectors";
 import { selectTestsDetails } from "../../redux/tests/tests-selectors";
 import { useAppDispatch } from "../../redux/store";
 import { getTestsDetails } from "../../redux/tests/tests-operations";
@@ -25,6 +25,7 @@ const Results = ({
 }: ResultProps) => {
   const testsDetails = useSelector(selectTestsDetails);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const currentUser = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
   const [speedPercentage, setSpeedPercentage] = useState(0);
@@ -59,9 +60,9 @@ const Results = ({
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(getTestsDetails());
+      dispatch(getTestsDetails(currentUser._id));
     }
-  }, [dispatch, isLoggedIn]);
+  }, [currentUser._id, dispatch, isLoggedIn]);
 
   return (
     <motion.ul className={s.resultsList}>
