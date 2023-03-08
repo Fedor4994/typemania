@@ -3,7 +3,7 @@ import axios from "axios";
 import { User, UserInfo } from "../../types/auth";
 import { AuthSlice } from "./authSlice";
 
-axios.defaults.baseURL = "https://typemania-api.onrender.com/api";
+axios.defaults.baseURL = "https://typemania.fly.dev/api";
 
 const token = {
   set(token: string | null) {
@@ -119,5 +119,19 @@ export const getCurrentUser = createAsyncThunk(
         return false;
       }
     },
+  }
+);
+
+export const updateUserName = createAsyncThunk(
+  "auth/updateUsername",
+  async (name: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.patch<User>("/users/name", { name });
+      return data;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+    }
   }
 );

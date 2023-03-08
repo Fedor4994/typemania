@@ -6,6 +6,7 @@ import {
   login,
   logOut,
   register,
+  updateUserName,
 } from "./auth-operations";
 
 export type AuthSlice = {
@@ -54,6 +55,9 @@ const authSlice = createSlice({
       })
       .addCase(getLeaderboardPlace.fulfilled, (state, { payload }) => {
         state.leaderboardPlace = payload?.place || 0;
+      })
+      .addCase(updateUserName.fulfilled, (state, { payload }) => {
+        state.user.name = payload?.name || state.user.name;
       })
       .addMatcher(isAnyOf(register.pending, login.pending), (state) => {
         state.isLoading = true;

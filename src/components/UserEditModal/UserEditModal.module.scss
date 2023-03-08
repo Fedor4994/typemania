@@ -1,3 +1,15 @@
+@mixin editInput {
+  border: none;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--clue-color);
+  background-color: var(--nav-bar-color);
+  margin-bottom: 30px;
+}
 .backdrop {
   position: fixed;
   top: 0;
@@ -12,11 +24,105 @@
   width: 35%;
   display: flex;
   border-radius: 10px;
-  padding: 50px;
+  padding: 30px;
   flex-direction: column;
   position: absolute;
   background-color: var(--table-color);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  right: -35px;
+  background-color: #171717;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
+
+.editForm {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.formTitle {
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--correct-color);
+  margin-bottom: 20px;
+}
+
+.formSubTitle {
+  margin-right: auto;
+  font-size: 18px;
+  color: var(--words-color);
+}
+
+.validInput {
+  @include editInput();
+  outline: 1px solid var(--words-color);
+}
+
+.invalidInput {
+  @include editInput();
+
+  outline: 1px solid var(--error-color);
+}
+
+.emptyInput {
+  @include editInput();
+
+  outline: none;
+}
+
+.editLabel {
+  width: 100%;
+  position: relative;
+}
+
+.crossIcon {
+  cursor: pointer;
+  color: var(--error-color);
+  position: absolute;
+  right: 10px;
+  top: 9px;
+}
+
+.checkIcon {
+  cursor: pointer;
+  color: var(--correct-color);
+  position: absolute;
+  right: 10px;
+  top: 9px;
+}
+
+.saveButton {
+  cursor: pointer;
+  background-color: var(--nav-bar-color);
+  color: var(--correct-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  transition: 200ms all ease;
+
+  &:hover {
+    background-color: var(--correct-color);
+    color: var(--nav-bar-color);
+  }
 }
