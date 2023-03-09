@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import { updateUserName } from "../../redux/auth/auth-operations";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/auth-selectors";
+import { toast } from "react-toastify";
 
 const NAME_REGEX = /^[A-Za-z0-9 А-Яа-я]+$/;
 
@@ -19,6 +20,9 @@ const UserEditModal = ({
 }) => {
   const [nameErrorMessage, setNameErrorMessage] = useState("");
   const currentUser = useSelector(selectUser);
+  const notifyError = () =>
+    toast.error("A user with the same name already exists");
+  const notifySuccess = () => toast.success("User updated!");
 
   const dispatch = useAppDispatch();
 
@@ -37,8 +41,19 @@ const UserEditModal = ({
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      dispatch(updateUserName(values.name));
-      setIsModalOpen(false);
+      dispatch(updateUserName(values.name)).then((data) => {
+        if (data.meta.requestStatus === "rejected") {
+          notifyError();
+          resetForm({
+            values: {
+              name: "",
+            },
+          });
+        } else {
+          setIsModalOpen(false);
+          notifySuccess();
+        }
+      });
     },
   });
 
@@ -151,7 +166,11 @@ const UserEditModal = ({
             )}
           </label>
 
-          <button className={s.saveButton} type="submit">
+          <button
+            disabled={values.name === "" || Object.values(errors).length !== 0}
+            className={s.saveButton}
+            type="submit"
+          >
             save
           </button>
         </form>

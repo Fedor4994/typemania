@@ -121,7 +121,12 @@
   border: none;
   transition: 200ms all ease;
 
-  &:hover {
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
     background-color: var(--correct-color);
     color: var(--nav-bar-color);
   }
