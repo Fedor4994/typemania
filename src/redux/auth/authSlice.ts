@@ -6,6 +6,7 @@ import {
   login,
   logOut,
   register,
+  updateUserAvatar,
   updateUserName,
 } from "./auth-operations";
 
@@ -19,7 +20,7 @@ export type AuthSlice = {
 };
 
 const initialState: AuthSlice = {
-  user: { name: "", email: "", createdAt: "", _id: "" },
+  user: { name: "", email: "", createdAt: "", _id: "", avatarURL: "" },
   leaderboardPlace: 0,
   token: null,
   isLoggedIn: false,
@@ -34,7 +35,13 @@ const authSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(logOut.fulfilled, (state) => {
-        state.user = { name: "", email: "", createdAt: "", _id: "" };
+        state.user = {
+          name: "",
+          email: "",
+          createdAt: "",
+          _id: "",
+          avatarURL: "",
+        };
         state.token = null;
         state.isLoggedIn = false;
       })
@@ -45,6 +52,7 @@ const authSlice = createSlice({
         state.user.email = payload?.user.email || "";
         state.user.name = payload?.user.name || "";
         state.user.createdAt = payload?.user.createdAt || "";
+        state.user.avatarURL = payload?.user.avatarURL || "";
         state.user._id = payload?.user._id || "";
 
         state.isLoggedIn = true;
@@ -59,6 +67,10 @@ const authSlice = createSlice({
       .addCase(updateUserName.fulfilled, (state, { payload }) => {
         state.user.name = payload?.name || state.user.name;
       })
+      .addCase(updateUserAvatar.fulfilled, (state, { payload }) => {
+        state.user.avatarURL = payload?.avatarURL || "";
+        state.isLoading = false;
+      })
       .addMatcher(isAnyOf(register.pending, login.pending), (state) => {
         state.isLoading = true;
       })
@@ -68,6 +80,7 @@ const authSlice = createSlice({
           state.user.email = payload?.user.email || "";
           state.user.name = payload?.user.name || "";
           state.user.createdAt = payload?.user.createdAt || "";
+          state.user.avatarURL = payload?.user.avatarURL || "";
           state.user._id = payload?.user._id || "";
 
           state.token = payload?.token || null;

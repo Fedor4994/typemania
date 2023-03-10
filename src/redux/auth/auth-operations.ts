@@ -135,3 +135,25 @@ export const updateUserName = createAsyncThunk(
     }
   }
 );
+
+export const updateUserAvatar = createAsyncThunk(
+  "auth/updateUserAvatar",
+  async ({ avatar }: { avatar: FormData }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.patch<{ avatarURL: string }>(
+        "/users/avatars",
+        avatar,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

@@ -6,7 +6,10 @@ import { ImCross } from "react-icons/im";
 import { useAppDispatch } from "../../redux/store";
 import s from "./UserEditModal.module.scss";
 import { useFormik } from "formik";
-import { updateUserName } from "../../redux/auth/auth-operations";
+import {
+  updateUserAvatar,
+  updateUserName,
+} from "../../redux/auth/auth-operations";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/auth-selectors";
 import { toast } from "react-toastify";
@@ -19,10 +22,16 @@ const UserEditModal = ({
   setIsModalOpen: (isOpen: boolean) => void;
 }) => {
   const [nameErrorMessage, setNameErrorMessage] = useState("");
+  const [isFileAdded, setIsFileAdded] = useState(false);
   const currentUser = useSelector(selectUser);
-  const notifyError = () =>
-    toast.error("A user with the same name already exists");
-  const notifySuccess = () => toast.success("User updated!");
+  const notifyError = (error: string) =>
+    toast.error(error, {
+      toastId: "editId",
+    });
+  const notifySuccess = () =>
+    toast.success("User updated!", {
+      toastId: "editId",
+    });
 
   const dispatch = useAppDispatch();
 
@@ -35,18 +44,38 @@ const UserEditModal = ({
       .required("Username is a required field"),
   });
 
-  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+  const {
+    values,
+    errors,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue,
+  } = useFormik({
     initialValues: {
       name: currentUser.name,
+      file: null,
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
+      if (values.file) {
+        const formData = new FormData();
+        formData.append("avatar", values.file);
+
+        dispatch(updateUserAvatar({ avatar: formData })).then((data) => {
+          if (data.meta.requestStatus === "rejected") {
+            notifyError("Avatar must be an image");
+          }
+        });
+      }
+
       dispatch(updateUserName(values.name)).then((data) => {
         if (data.meta.requestStatus === "rejected") {
-          notifyError();
+          notifyError("User with the same name already exist");
           resetForm({
             values: {
               name: "",
+              file: null,
             },
           });
         } else {
@@ -165,6 +194,38 @@ const UserEditModal = ({
               </motion.p>
             )}
           </label>
+
+          <div className={s.card}>
+            <p className={s.formSubTitle}>Upload new avatar</p>
+            <div className={s.drop_box}>
+              {isFileAdded ? (
+                <h3>
+                  File ready to upload <FaCheck />
+                </h3>
+              ) : (
+                <>
+                  <header>
+                    <h3>Select File here</h3>
+                  </header>
+                  <p>Files Supported: JPG, JPEG, PNG</p>
+                  <label className={s.btn}>
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      hidden
+                      accept=".jpg,.jpeg,.png"
+                      onChange={(event: any) => {
+                        setFieldValue("file", event.currentTarget.files[0]);
+                        setIsFileAdded(true);
+                      }}
+                    />
+                    Choose File
+                  </label>
+                </>
+              )}
+            </div>
+          </div>
 
           <button
             disabled={values.name === "" || Object.values(errors).length !== 0}

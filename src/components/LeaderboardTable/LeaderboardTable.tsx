@@ -17,7 +17,7 @@ const LeaderboardTable = ({
       <thead>
         <tr>
           <th className={s.place}>Place</th>
-          <th>Name</th>
+          <th className={s.nameCol}>Name</th>
           <th>Top WPM</th>
           <th>Joined</th>
         </tr>
@@ -40,7 +40,22 @@ const LeaderboardTable = ({
                     className={s.profileLink}
                     to={`/profile/${position.user._id}`}
                   >
-                    {position.user.name}
+                    <div className={s.nameWrapper}>
+                      <div className={s.avatar}>
+                        <img
+                          className={s.avatarImage}
+                          src={
+                            position.user.avatarURL &&
+                            position.user.avatarURL?.length > 100
+                              ? position.user.avatarURL
+                              : `https://typemania.fly.dev/${position.user.avatarURL}`
+                          }
+                          alt="avatar"
+                        />
+                      </div>
+
+                      {position.user.name}
+                    </div>
                   </Link>
                 </td>
                 <td>{position.bestsRecord}</td>

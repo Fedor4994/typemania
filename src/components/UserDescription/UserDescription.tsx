@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaLink, FaPencilAlt, FaUserCircle } from "react-icons/fa";
+import { FaLink, FaPencilAlt } from "react-icons/fa";
 import { TestsDetails } from "../../types/test";
 import s from "./UserDescription.module.scss";
 import { formatPercentage } from "../../utils/helpers";
@@ -41,7 +41,15 @@ const UserDescription = ({
       <div className={s.mainWrapper}>
         <div className={s.userWrapper}>
           <div className={s.avatar}>
-            <FaUserCircle size="100%" />
+            <img
+              className={s.avatarImage}
+              src={
+                currentUser.avatarURL && currentUser.avatarURL?.length > 100
+                  ? currentUser.avatarURL
+                  : `https://typemania.fly.dev/${currentUser.avatarURL}`
+              }
+              alt="avatar"
+            />
           </div>
           <div>
             <p className={s.username}>{currentUser.name}</p>

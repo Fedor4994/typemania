@@ -30,3 +30,28 @@
   justify-content: center;
   gap: 5px;
 }
+
+.nameCol {
+  margin-left: 50px;
+  width: 300px;
+}
+
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 70px;
+  gap: 10px;
+}
+
+.avatar {
+  height: 30px;
+  width: 30px;
+  pointer-events: none;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}

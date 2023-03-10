@@ -131,3 +131,74 @@
     color: var(--nav-bar-color);
   }
 }
+
+.card {
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--words-color);
+}
+
+.drop_box {
+  margin: 10px 0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px dotted var(--words-color);
+  border-radius: 5px;
+}
+
+.drop_box h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2e2e2e;
+}
+
+.drop_box p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--correct-color);
+}
+
+.btn {
+  cursor: pointer;
+  background-color: var(--nav-bar-color);
+  color: var(--correct-color);
+  border: 1px solid var(--correct-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: 200ms all ease;
+
+  &:hover {
+    background-color: var(--correct-color);
+    border: none;
+    color: var(--nav-bar-color);
+  }
+}
+.form input {
+  margin: 10px 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+}
