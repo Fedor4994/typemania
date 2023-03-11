@@ -8,6 +8,7 @@ export type Test = {
   testType: string;
   language: string;
   isHardcore: boolean;
+  text: string;
   record: TypingEvent[];
   createdAt: string;
   updatedAt: string;
@@ -22,6 +23,7 @@ export type TestInfo = Pick<
   | "testType"
   | "language"
   | "isHardcore"
+  | "text"
   | "record"
 >;
 

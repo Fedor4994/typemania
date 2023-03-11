@@ -70,6 +70,7 @@ const ResultsPage = () => {
       )}
       {isModalOpen && (
         <RecordTypingModal
+          words={lastTest?.text || ""}
           typingEvents={lastTest?.record || []}
           setIsModalOpen={setIsModalOpen}
         />

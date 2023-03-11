@@ -84,6 +84,7 @@ export const useQuotesTyping = () => {
               language: localStorage.getItem("language") || "english",
               isHardcore:
                 localStorage.getItem("isHardcore") === "true" ? true : false,
+              text: currentQuote.text,
               record: typingEvents,
             })
           );
@@ -94,6 +95,7 @@ export const useQuotesTyping = () => {
               accuracy: calculateAccurancyPercentage(errors, totalTyped),
               time: secondsPassed,
               testType: `Quote, ${quoteLength}`,
+              text: currentQuote.text,
               record: typingEvents,
             })
           );

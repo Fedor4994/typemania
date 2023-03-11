@@ -35,6 +35,7 @@ export const useTimerTyping = () => {
 
   const errorsRef = useRef(0);
   const totalTypedRef = useRef(0);
+  const totalWords = useRef("");
   const { words, updateWords } = useWords(40);
 
   const {
@@ -69,6 +70,7 @@ export const useTimerTyping = () => {
               language: localStorage.getItem("language") || "english",
               isHardcore:
                 localStorage.getItem("isHardcore") === "true" ? true : false,
+              text: totalWords.current,
               record: typingEvents,
             })
           );
@@ -85,6 +87,7 @@ export const useTimerTyping = () => {
               ),
               time: countdownSeconds,
               testType: `Timer, ${countdownSeconds} seconds`,
+              text: totalWords.current,
               record: typingEvents,
             })
           );
@@ -123,6 +126,7 @@ export const useTimerTyping = () => {
   const onRestart = useCallback(() => {
     totalTypedRef.current = 0;
     errorsRef.current = 0;
+    totalWords.current = "";
 
     setTyped("");
     resetCountdown();
@@ -184,13 +188,21 @@ export const useTimerTyping = () => {
             audio.play();
           }
 
+          if (totalWords.current === "") {
+            totalWords.current = words;
+          }
+
+          if (!totalWords.current.includes(words)) {
+            totalWords.current += words;
+          }
+
           setTyped((typed) => typed.concat(key));
           totalTypedRef.current += 1;
           setCursor((prevCursor) => prevCursor + 1);
           break;
       }
     },
-    [onRestart, startCountdown, state, updateWords]
+    [onRestart, startCountdown, state, updateWords, words]
   );
 
   useEffect(() => {

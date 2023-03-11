@@ -9,14 +9,50 @@
 }
 
 .recordModal {
-  width: 35%;
   display: flex;
   border-radius: 10px;
-  padding: 30px;
+  padding: 50px 70px;
   flex-direction: column;
   position: absolute;
   background-color: var(--table-color);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.typingArea {
+  position: relative;
+  display: flex;
+  width: 99%;
+  word-break: break-all;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+.controllButton {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: var(--words-color);
+  transition: 200ms all ease;
+  border-radius: 7px;
+  padding: 10px 25px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
+    background-color: var(--button-hover);
+  }
+}
+
+.buttonsWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }

@@ -65,8 +65,10 @@ const TestsHistory = ({
                 >
                   <FaPlayCircle size={18} />
                 </button>
+
                 {isModalOpen && test._id === recordedTest && (
                   <RecordTypingModal
+                    words={test.text}
                     typingEvents={test.record}
                     setIsModalOpen={setIsModalOpen}
                   />

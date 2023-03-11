@@ -62,6 +62,7 @@ export const useStopwatchTyping = () => {
               language: localStorage.getItem("language") || "english",
               isHardcore:
                 localStorage.getItem("isHardcore") === "true" ? true : false,
+              text: words,
               record: typingEvents,
             })
           );
@@ -72,6 +73,7 @@ export const useStopwatchTyping = () => {
               accuracy: calculateAccurancyPercentage(errors, totalTyped),
               time: secondsPassed,
               testType: `Words, ${wordsCount}`,
+              text: words,
               record: typingEvents,
             })
           );
