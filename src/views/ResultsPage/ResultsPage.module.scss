@@ -17,3 +17,26 @@
   align-items: center;
   justify-content: center;
 }
+
+.replayWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.replayButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  color: var(--main-color);
+
+  margin-top: 20px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}

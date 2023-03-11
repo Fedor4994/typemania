@@ -1,3 +1,5 @@
+import { TypingEvent } from "../hooks/useStopwatchTyping";
+
 export type Test = {
   _id: string;
   wpm: number;
@@ -6,6 +8,7 @@ export type Test = {
   testType: string;
   language: string;
   isHardcore: boolean;
+  record: TypingEvent[];
   createdAt: string;
   updatedAt: string;
   userId: string;
@@ -13,7 +16,13 @@ export type Test = {
 
 export type TestInfo = Pick<
   Test,
-  "wpm" | "accuracy" | "time" | "testType" | "language" | "isHardcore"
+  | "wpm"
+  | "accuracy"
+  | "time"
+  | "testType"
+  | "language"
+  | "isHardcore"
+  | "record"
 >;
 
 export type TestsDetails = {

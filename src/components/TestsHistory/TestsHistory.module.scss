@@ -41,6 +41,7 @@ tbody td {
 
 th,
 td {
+  position: relative;
   padding: 10px;
 }
 
@@ -141,4 +142,14 @@ tbody:nth-child(odd) {
 
 .wpmColumn {
   width: 150px;
+}
+
+.replayButton {
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  background-color: transparent;
+  border: none;
+  color: var(--main-color);
 }

@@ -17,6 +17,7 @@ import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
 import { setLastTest } from "../redux/tests/testsSlice";
 import keypress from "../data/sound.wav";
 import { toast } from "react-toastify";
+import { TypingEvent } from "./useStopwatchTyping";
 
 export const useQuotesTyping = () => {
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ export const useQuotesTyping = () => {
   const [errors, setErrors] = useState(0);
   const [cursor, setCursor] = useState(0);
   const [state, setState] = useState<State>("start");
+  const [typingEvents, setTypingEvents] = useState<TypingEvent[]>([]);
 
   const totalTypedRef = useRef(0);
   const notify = () =>
@@ -82,6 +84,7 @@ export const useQuotesTyping = () => {
               language: localStorage.getItem("language") || "english",
               isHardcore:
                 localStorage.getItem("isHardcore") === "true" ? true : false,
+              record: typingEvents,
             })
           );
         } else {
@@ -91,6 +94,7 @@ export const useQuotesTyping = () => {
               accuracy: calculateAccurancyPercentage(errors, totalTyped),
               time: secondsPassed,
               testType: `Quote, ${quoteLength}`,
+              record: typingEvents,
             })
           );
         }
@@ -111,6 +115,7 @@ export const useQuotesTyping = () => {
     secondsPassed,
     totalTyped,
     typed,
+    typingEvents,
   ]);
 
   const onRestart = useCallback(() => {
@@ -120,6 +125,7 @@ export const useQuotesTyping = () => {
     setTotalTyped(0);
     setErrors(0);
     setCursor(0);
+    setTypingEvents([]);
     resetStopwatch();
     setState("start");
   }, [resetStopwatch]);
@@ -140,6 +146,11 @@ export const useQuotesTyping = () => {
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       const audio = new Audio(keypress);
+
+      const timestamp = Date.now();
+      const char = key;
+      const typingEvent: TypingEvent = { timestamp, char };
+      setTypingEvents((prevEvents) => [...prevEvents, typingEvent]);
 
       if (key === "Escape") {
         onRestart();

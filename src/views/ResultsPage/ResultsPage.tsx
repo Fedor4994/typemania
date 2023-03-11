@@ -1,6 +1,9 @@
+import { useState } from "react";
+import { FaPlayCircle } from "react-icons/fa";
 import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
+import { RecordTypingModal } from "../../components/RecordTyping/RecordTypingModal";
 import Results from "../../components/Results/Results";
 import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
 import {
@@ -11,6 +14,8 @@ import {
 import s from "./ResultsPage.module.scss";
 
 const ResultsPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const lastTest = useSelector(selectLastTest);
   const isLoading = useSelector(selectIsLoading);
   const resultsError = useSelector(selectError);
@@ -48,11 +53,25 @@ const ResultsPage = () => {
           />
         </div>
       ) : (
-        <Results
-          accurancyPercentage={lastTest?.accuracy || 0}
-          speed={lastTest?.wpm || 0}
-          time={lastTest?.time || 0}
-          testType={lastTest?.testType || ""}
+        <div className={s.replayWrapper}>
+          <Results
+            accurancyPercentage={lastTest?.accuracy || 0}
+            speed={lastTest?.wpm || 0}
+            time={lastTest?.time || 0}
+            testType={lastTest?.testType || ""}
+          />
+          <button
+            className={s.replayButton}
+            onClick={() => setIsModalOpen(true)}
+          >
+            Watch replay <FaPlayCircle size={18} />
+          </button>
+        </div>
+      )}
+      {isModalOpen && (
+        <RecordTypingModal
+          typingEvents={lastTest?.record || []}
+          setIsModalOpen={setIsModalOpen}
         />
       )}
     </div>

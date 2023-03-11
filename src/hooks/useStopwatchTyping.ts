@@ -17,6 +17,11 @@ import { setLastTest } from "../redux/tests/testsSlice";
 import keypress from "../data/sound.wav";
 import { toast } from "react-toastify";
 
+export interface TypingEvent {
+  timestamp: number;
+  char: string;
+}
+
 export const useStopwatchTyping = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -27,6 +32,7 @@ export const useStopwatchTyping = () => {
   const [errors, setErrors] = useState(0);
   const [cursor, setCursor] = useState(0);
   const [state, setState] = useState<State>("start");
+  const [typingEvents, setTypingEvents] = useState<TypingEvent[]>([]);
 
   const totalTypedRef = useRef(0);
   const notify = () =>
@@ -56,6 +62,7 @@ export const useStopwatchTyping = () => {
               language: localStorage.getItem("language") || "english",
               isHardcore:
                 localStorage.getItem("isHardcore") === "true" ? true : false,
+              record: typingEvents,
             })
           );
         } else {
@@ -65,6 +72,7 @@ export const useStopwatchTyping = () => {
               accuracy: calculateAccurancyPercentage(errors, totalTyped),
               time: secondsPassed,
               testType: `Words, ${wordsCount}`,
+              record: typingEvents,
             })
           );
         }
@@ -83,6 +91,7 @@ export const useStopwatchTyping = () => {
     secondsPassed,
     totalTyped,
     typed,
+    typingEvents,
     updateWords,
     words,
     wordsCount,
@@ -95,6 +104,7 @@ export const useStopwatchTyping = () => {
     setTotalTyped(0);
     setErrors(0);
     setCursor(0);
+    setTypingEvents([]);
     resetStopwatch();
     setState("start");
   }, [resetStopwatch]);
@@ -112,6 +122,11 @@ export const useStopwatchTyping = () => {
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       const audio = new Audio(keypress);
+
+      const timestamp = Date.now();
+      const char = key;
+      const typingEvent: TypingEvent = { timestamp, char };
+      setTypingEvents((prevEvents) => [...prevEvents, typingEvent]);
 
       if (key === "Escape") {
         onRestart();

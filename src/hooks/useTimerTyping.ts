@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { setLastTest } from "../redux/tests/testsSlice";
 import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
 import keypress from "../data/sound.wav";
+import { TypingEvent } from "./useStopwatchTyping";
 
 export type State = "start" | "run" | "finish";
 
@@ -30,6 +31,7 @@ export const useTimerTyping = () => {
   const [typed, setTyped] = useState("");
   const [state, setState] = useState<State>("start");
   const [cursor, setCursor] = useState(0);
+  const [typingEvents, setTypingEvents] = useState<TypingEvent[]>([]);
 
   const errorsRef = useRef(0);
   const totalTypedRef = useRef(0);
@@ -67,6 +69,7 @@ export const useTimerTyping = () => {
               language: localStorage.getItem("language") || "english",
               isHardcore:
                 localStorage.getItem("isHardcore") === "true" ? true : false,
+              record: typingEvents,
             })
           );
         } else {
@@ -82,6 +85,7 @@ export const useTimerTyping = () => {
               ),
               time: countdownSeconds,
               testType: `Timer, ${countdownSeconds} seconds`,
+              record: typingEvents,
             })
           );
         }
@@ -101,6 +105,7 @@ export const useTimerTyping = () => {
     timeLeft,
     totalTypedRef,
     typed,
+    typingEvents,
     updateWords,
     words,
   ]);
@@ -122,6 +127,7 @@ export const useTimerTyping = () => {
     setTyped("");
     resetCountdown();
     setCursor(0);
+    setTypingEvents([]);
     setState("start");
   }, [resetCountdown]);
 
@@ -138,6 +144,11 @@ export const useTimerTyping = () => {
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       const audio = new Audio(keypress);
+
+      const timestamp = Date.now();
+      const char = key;
+      const typingEvent: TypingEvent = { timestamp, char };
+      setTypingEvents((prevEvents) => [...prevEvents, typingEvent]);
 
       if (key === "Escape") {
         onRestart();
