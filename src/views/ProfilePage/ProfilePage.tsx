@@ -9,11 +9,16 @@ import { useSelector } from "react-redux";
 import { selectTestsDetails } from "../../redux/tests/tests-selectors";
 import UserDescription from "../../components/UserDescription/UserDescription";
 import { ThreeDots } from "react-loader-spinner";
+import AchievementsList from "../../components/AchievementsList/AchievementsList";
+import { getUserAchievements } from "../../redux/auth/auth-operations";
+import { selectAchievements } from "../../redux/auth/auth-selectors";
 
 const ProfilePage = () => {
   const { userId } = useParams();
   const dispatch = useAppDispatch();
   const userDetails = useSelector(selectTestsDetails);
+  const achievements = useSelector(selectAchievements);
+
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
@@ -29,14 +34,21 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (user?._id) {
-      dispatch(getTestsDetails(user?._id));
+      dispatch(getTestsDetails(user._id));
+      dispatch(getUserAchievements(user._id));
     }
   }, [dispatch, user?._id]);
 
   return (
     <div className={s.profilePage}>
       {user ? (
-        <UserDescription details={userDetails} currentUser={user as UserInfo} />
+        <>
+          <UserDescription
+            details={userDetails}
+            currentUser={user as UserInfo}
+          />
+          <AchievementsList achievements={achievements} />;
+        </>
       ) : (
         <div className={s.profileLoader}>
           <ThreeDots

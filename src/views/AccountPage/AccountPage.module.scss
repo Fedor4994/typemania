@@ -22,3 +22,33 @@
   background-color: var(--correct-color);
   color: var(--nav-bar-color);
 }
+
+.navigationButtonsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.navigationButton {
+  width: 40%;
+  cursor: pointer;
+  height: 40px;
+  background-color: var(--table-color);
+  color: var(--main-color);
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  transition: 200ms all ease;
+
+  &:hover {
+    background-color: var(--correct-color);
+    color: var(--nav-bar-color);
+  }
+}
+
+.activeButton {
+  border: 1px solid var(--main-color);
+}

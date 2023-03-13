@@ -1,6 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { User, UserInfo } from "../../types/auth";
+import {
+  Achievements,
+  initialAchievements,
+  User,
+  UserInfo,
+} from "../../types/auth";
 import { AuthSlice } from "./authSlice";
 
 axios.defaults.baseURL = "https://typemania.fly.dev/api";
@@ -149,6 +154,42 @@ export const updateUserAvatar = createAsyncThunk(
           },
         }
       );
+      return data;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const getUserAchievements = createAsyncThunk(
+  "auth/getAchievements",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get<Achievements>(
+        `/users/achievemets/${userId}`
+      );
+
+      return data;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const setCompletedAchievement = createAsyncThunk(
+  "auth/updateAchievementsCompleted",
+  async (
+    achievementName: keyof typeof initialAchievements,
+    { rejectWithValue }
+  ) => {
+    try {
+      const { data } = await axios.put<Achievements>("/users/achievemets", {
+        achievementName,
+      });
       return data;
     } catch (error) {
       if (error instanceof Error) {

@@ -7,3 +7,4 @@ export const selectLeaderboardPlace = (state: RootState) =>
 export const selectIsLoading = (state: RootState) => state.auth.isLoading;
 export const selectIsFetchingUser = (state: RootState) =>
   state.auth.isFetchingCurrentUser;
+export const selectAchievements = (state: RootState) => state.auth.achievements;

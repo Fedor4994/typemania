@@ -1,0 +1,61 @@
+.completed {
+  opacity: 1;
+}
+
+.notCompleted {
+  opacity: 0.5;
+}
+
+.achievementsTitle {
+  color: var(--correct-color);
+  font-size: 28px;
+}
+
+.achievementsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.speedList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  margin-bottom: 40px;
+}
+
+.achievementWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 22%;
+  height: 60px;
+  background-color: var(--table-color);
+  color: var(--correct-color);
+  border-top-left-radius: 28%;
+  border-bottom-left-radius: 28%;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+
+  font-size: 22px;
+}
+
+.achievementMatchesWrapper {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 22%;
+  height: 60px;
+  background-color: var(--table-color);
+  color: var(--correct-color);
+  border-top-left-radius: 28%;
+  border-bottom-left-radius: 28%;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+
+  font-size: 18px;
+}
+
+.achievementImage {
+  height: 140%;
+}

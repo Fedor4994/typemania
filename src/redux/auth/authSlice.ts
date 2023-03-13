@@ -1,11 +1,13 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { UserInfo } from "../../types/auth";
+import { Achievements, initialAchievements, UserInfo } from "../../types/auth";
 import {
   getCurrentUser,
   getLeaderboardPlace,
+  getUserAchievements,
   login,
   logOut,
   register,
+  setCompletedAchievement,
   updateUserAvatar,
   updateUserName,
 } from "./auth-operations";
@@ -14,6 +16,7 @@ export type AuthSlice = {
   user: UserInfo;
   token: string | null;
   leaderboardPlace: number;
+  achievements: Achievements;
   isLoggedIn: boolean;
   isFetchingCurrentUser: boolean;
   isLoading: boolean;
@@ -22,6 +25,7 @@ export type AuthSlice = {
 const initialState: AuthSlice = {
   user: { name: "", email: "", createdAt: "", _id: "", avatarURL: "" },
   leaderboardPlace: 0,
+  achievements: initialAchievements,
   token: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
@@ -70,6 +74,12 @@ const authSlice = createSlice({
       .addCase(updateUserAvatar.fulfilled, (state, { payload }) => {
         state.user.avatarURL = payload?.avatarURL || "";
         state.isLoading = false;
+      })
+      .addCase(getUserAchievements.fulfilled, (state, { payload }) => {
+        state.achievements = payload || initialAchievements;
+      })
+      .addCase(setCompletedAchievement.fulfilled, (state, { payload }) => {
+        state.achievements = payload || initialAchievements;
       })
       .addMatcher(isAnyOf(register.pending, login.pending), (state) => {
         state.isLoading = true;
