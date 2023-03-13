@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { FaPlayCircle } from "react-icons/fa";
 import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
@@ -60,12 +61,22 @@ const ResultsPage = () => {
             time={lastTest?.time || 0}
             testType={lastTest?.testType || ""}
           />
-          <button
+          <motion.button
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              duration: 0.5,
+              delay: 1.8,
+            }}
             className={s.replayButton}
             onClick={() => setIsModalOpen(true)}
           >
             Watch replay <FaPlayCircle size={18} />
-          </button>
+          </motion.button>
         </div>
       )}
       {isModalOpen && (
