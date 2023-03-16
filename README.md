@@ -21,5 +21,5 @@ Test yourself in various modes, track your progress and improve your speed.
 
 # Bug report or Feature request
 
-If you encounter a bug or have a feature request, [send us an email](mailto:fedorsosnin04@gmail.com), [create an issue](https://github.com/Fedor4994/typemania/issues) or [create a discussion thread](https://github.com/Fedor4994/typemania/discussions).
+If you encounter a bug or have a feature request, [send me an email](mailto:fedorsosnin04@gmail.com) or [create an issue](https://github.com/Fedor4994/typemania/issues).
 
