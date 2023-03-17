@@ -1,0 +1,51 @@
+.notFoundPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 150px;
+  gap: 100px;
+}
+
+.errorImage {
+  width: 350px;
+  border-radius: 10px;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 100%;
+  gap: 15px;
+  color: var(--correct-color);
+  font-weight: 600px;
+  font-size: 20px;
+}
+
+.statusCode {
+  font-size: 100px;
+  font-weight: 600;
+  line-height: 80%;
+  color: var(--main-color);
+}
+
+.gohomeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 8px 15px;
+  transition: 200ms all ease;
+  color: var(--correct-color);
+  background-color: var(--table-color);
+
+  &:hover {
+    color: var(--table-color);
+    background-color: var(--correct-color);
+  }
+}

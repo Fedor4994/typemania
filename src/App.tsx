@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ResultsPage from "./views/ResultsPage/ResultsPage";
 import LeaderboardPage from "./views/LeaderbordPage/LeaderboardPage";
 import ProfilePage from "./views/ProfilePage/ProfilePage";
+import NotFoundPage from "./views/NotFoundPage/NotFoundPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -64,6 +65,8 @@ function App() {
               <PrivateRoute component={<AccountPage />} redirectTo="/login" />
             }
           />
+
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
       <ToastContainer
