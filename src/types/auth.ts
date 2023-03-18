@@ -3,6 +3,7 @@ export type User = {
   name: string;
   email: string;
   avatarURL?: string;
+  verify?: boolean;
   password: string;
   createdAt: string;
 };

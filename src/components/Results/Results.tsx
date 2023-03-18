@@ -63,10 +63,10 @@ const Results = ({
   }, [accurancy, accurancyPercentage]);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && currentUser.verify) {
       dispatch(getTestsDetails(currentUser._id));
     }
-  }, [currentUser._id, dispatch, isLoggedIn]);
+  }, [currentUser._id, currentUser.verify, dispatch, isLoggedIn]);
 
   return (
     <div

@@ -13,7 +13,7 @@ import { useAppDispatch } from "../redux/store";
 import { addTest } from "../redux/tests/tests-operations";
 import { useNavigate } from "react-router-dom";
 import { setLastTest } from "../redux/tests/testsSlice";
-import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
+import { selectIsLoggedIn, selectUser } from "../redux/auth/auth-selectors";
 import keypress from "../data/sound.wav";
 import { TypingEvent } from "./useStopwatchTyping";
 
@@ -23,6 +23,8 @@ export const useTimerTyping = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const currentUser = useSelector(selectUser);
+
   const notify = () =>
     toast.info("Harcore mode is active", {
       toastId: "customId",
@@ -54,7 +56,7 @@ export const useTimerTyping = () => {
       errorsRef.current += countErrors(typed, wordsReached);
 
       if (totalTypedRef.current !== 0) {
-        if (isLoggedIn) {
+        if (isLoggedIn && currentUser.verify) {
           dispatch(
             addTest({
               wpm: calculateWordsPerMinute(
@@ -100,6 +102,7 @@ export const useTimerTyping = () => {
     }
   }, [
     countdownSeconds,
+    currentUser.verify,
     cursor,
     dispatch,
     isLoggedIn,

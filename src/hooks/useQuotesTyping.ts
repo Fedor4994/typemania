@@ -13,7 +13,7 @@ import { useAppDispatch } from "../redux/store";
 import { addTest } from "../redux/tests/tests-operations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../redux/auth/auth-selectors";
+import { selectIsLoggedIn, selectUser } from "../redux/auth/auth-selectors";
 import { setLastTest } from "../redux/tests/testsSlice";
 import keypress from "../data/sound.wav";
 import { toast } from "react-toastify";
@@ -23,6 +23,7 @@ export const useQuotesTyping = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const currentUser = useSelector(selectUser);
 
   const [typed, setTyped] = useState("");
   const [totalTyped, setTotalTyped] = useState(0);
@@ -74,7 +75,7 @@ export const useQuotesTyping = () => {
       setCursor(0);
 
       if (totalTyped !== 0) {
-        if (isLoggedIn) {
+        if (isLoggedIn && currentUser.verify) {
           dispatch(
             addTest({
               wpm: calculateWordsPerMinute(totalTyped - errors, secondsPassed),
@@ -108,6 +109,7 @@ export const useQuotesTyping = () => {
     }
   }, [
     currentQuote,
+    currentUser.verify,
     dispatch,
     errors,
     isLoggedIn,

@@ -42,11 +42,11 @@ const LeaderboardPage = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && currentUser.verify) {
       dispatch(getLeaderboardPlace(currentUser._id));
       dispatch(getTestsDetails(currentUser._id));
     }
-  }, [currentUser._id, dispatch, isLoggedIn]);
+  }, [currentUser._id, currentUser.verify, dispatch, isLoggedIn]);
 
   return (
     <div className={s.leaderbordPage}>
@@ -68,16 +68,22 @@ const LeaderboardPage = () => {
           <LeaderboardTable leaderboard={leaderboard} />
 
           {isLoggedIn ? (
-            userDetails?.testCompleted ? (
-              <p className={s.yourPosition}>
-                Your place:{" "}
-                {place > 10
-                  ? `${place}. Keep practicing to get to the top!`
-                  : `${place}. Congratulations, you're in the top!`}
-              </p>
+            currentUser.verify ? (
+              userDetails?.testCompleted ? (
+                <p className={s.yourPosition}>
+                  Your place:{" "}
+                  {place > 10
+                    ? `${place}. Keep practicing to get to the top!`
+                    : `${place}. Congratulations, you're in the top!`}
+                </p>
+              ) : (
+                <p className={s.yourPosition}>
+                  Complete your first test to be placed on the leaderboard
+                </p>
+              )
             ) : (
               <p className={s.yourPosition}>
-                Complete your first test to be placed on the leaderboard
+                Verify your accout to be placed on the leaderboard
               </p>
             )
           ) : (

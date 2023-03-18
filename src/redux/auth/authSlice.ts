@@ -23,7 +23,14 @@ export type AuthSlice = {
 };
 
 const initialState: AuthSlice = {
-  user: { name: "", email: "", createdAt: "", _id: "", avatarURL: "" },
+  user: {
+    name: "",
+    email: "",
+    createdAt: "",
+    _id: "",
+    avatarURL: "",
+    verify: false,
+  },
   leaderboardPlace: 0,
   achievements: initialAchievements,
   token: null,
@@ -58,6 +65,7 @@ const authSlice = createSlice({
         state.user.createdAt = payload?.user.createdAt || "";
         state.user.avatarURL = payload?.user.avatarURL || "";
         state.user._id = payload?.user._id || "";
+        state.user.verify = payload?.user.verify;
 
         state.isLoggedIn = true;
         state.isFetchingCurrentUser = false;
@@ -92,6 +100,7 @@ const authSlice = createSlice({
           state.user.createdAt = payload?.user.createdAt || "";
           state.user.avatarURL = payload?.user.avatarURL || "";
           state.user._id = payload?.user._id || "";
+          state.user.verify = payload?.user.verify;
 
           state.token = payload?.token || null;
           state.isLoggedIn = true;

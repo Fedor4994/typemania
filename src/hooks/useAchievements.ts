@@ -7,6 +7,7 @@ import {
 import {
   selectAchievements,
   selectIsLoggedIn,
+  selectUser,
 } from "../redux/auth/auth-selectors";
 import { useAppDispatch } from "../redux/store";
 import { TestsDetails } from "../types/test";
@@ -17,12 +18,13 @@ export const useAchievements = (
 ) => {
   const dispatch = useAppDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const currentUser = useSelector(selectUser)
   const [earnedAchievements, setEarnedAchievements] = useState<String[]>([]);
   const achievements = useSelector(selectAchievements);
 
   useEffect(() => {
     dispatch(getUserAchievements(userId)).then(() => {
-      if (isLoggedIn) {
+      if (isLoggedIn && currentUser.verify) {
         if (
           testsDetails?.topWpm &&
           testsDetails?.topWpm >= 10 &&
@@ -507,50 +509,7 @@ export const useAchievements = (
         }
       }
     });
-  }, [
-    achievements.matches1,
-    achievements.matches10,
-    achievements.matches100,
-    achievements.matches1000,
-    achievements.matches10000,
-    achievements.matches25,
-    achievements.matches250,
-    achievements.matches2500,
-    achievements.matches5,
-    achievements.matches50,
-    achievements.matches500,
-    achievements.matches5000,
-    achievements.speed10,
-    achievements.speed110,
-    achievements.speed130,
-    achievements.speed150,
-    achievements.speed175,
-    achievements.speed200,
-    achievements.speed225,
-    achievements.speed250,
-    achievements.speed30,
-    achievements.speed50,
-    achievements.speed70,
-    achievements.speed90,
-    achievements.time10m,
-    achievements.time12h,
-    achievements.time14d,
-    achievements.time1d,
-    achievements.time1h,
-    achievements.time1m,
-    achievements.time1month,
-    achievements.time30m,
-    achievements.time3month,
-    achievements.time6h,
-    achievements.time6month,
-    achievements.time7d,
-    dispatch,
-    isLoggedIn,
-    testsDetails?.testCompleted,
-    testsDetails?.timeSpended,
-    testsDetails?.topWpm,
-    userId,
-  ]);
+  }, [achievements.matches1, achievements.matches10, achievements.matches100, achievements.matches1000, achievements.matches10000, achievements.matches25, achievements.matches250, achievements.matches2500, achievements.matches5, achievements.matches50, achievements.matches500, achievements.matches5000, achievements.speed10, achievements.speed110, achievements.speed130, achievements.speed150, achievements.speed175, achievements.speed200, achievements.speed225, achievements.speed250, achievements.speed30, achievements.speed50, achievements.speed70, achievements.speed90, achievements.time10m, achievements.time12h, achievements.time14d, achievements.time1d, achievements.time1h, achievements.time1m, achievements.time1month, achievements.time30m, achievements.time3month, achievements.time6h, achievements.time6month, achievements.time7d, currentUser.verify, dispatch, isLoggedIn, testsDetails?.testCompleted, testsDetails?.timeSpended, testsDetails?.topWpm, userId]);
 
   return earnedAchievements;
 };

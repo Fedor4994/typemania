@@ -25,7 +25,8 @@ const LeaderboardTable = ({
 
       {leaderboard.map(
         (position, index) =>
-          position.bestsRecord && (
+          position.bestsRecord &&
+          position.user.verify && (
             <tbody key={position.user._id}>
               <tr
                 className={`${s.tr} 

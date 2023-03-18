@@ -1,6 +1,9 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { TbMailFast } from "react-icons/tb";
 import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import AchievementsList from "../../components/AchievementsList/AchievementsList";
 import TestsHistory from "../../components/TestsHistory/TestsHistory";
 import UserDescription from "../../components/UserDescription/UserDescription";
@@ -33,6 +36,7 @@ const AccountPage = () => {
   const [isTestHistory, setIsTestHistory] = useState(true);
   const [page, setPage] = useState(1);
   const [sortValue, setSortValue] = useState(-1);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     dispatch(fetchTests({ page, sort: sortValue }));
@@ -52,64 +56,94 @@ const AccountPage = () => {
     setSortValue(value);
   };
 
+  const resendEmail = async (email: string) => {
+    try {
+      await axios.post("/users/verify", { email });
+      toast.success("Verification email sent successfully!");
+    } catch (error) {
+      toast.error("Email sent fails. Try again later.");
+      console.log(error);
+    }
+  };
+
   return (
     <div className={s.accountPage}>
-      <UserDescription details={testsDetails} currentUser={currentUser} />
-
-      <div className={s.navigationButtonsWrapper}>
-        <button
-          className={`${s.navigationButton} ${
-            isTestHistory ? s.activeButton : ""
-          }`}
-          onClick={() => setIsTestHistory(true)}
-        >
-          Tests history
-        </button>
-        <button
-          className={`${s.navigationButton} ${
-            isTestHistory ? "" : s.activeButton
-          }`}
-          onClick={() => setIsTestHistory(false)}
-        >
-          Achievements
-        </button>
-      </div>
-
-      {isTestHistory ? (
+      {currentUser.verify ? (
         <>
-          {tests.length !== 0 && (
-            <TestsHistory
-              onSortChange={handleSortChange}
-              tests={tests}
-              sortValue={sortValue}
-            />
-          )}
+          <UserDescription details={testsDetails} currentUser={currentUser} />
 
-          {isLoading && (
-            <div className={s.accountLoader}>
-              <ThreeDots
-                height="80"
-                width="80"
-                radius="9"
-                color="var(--main-color)"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                visible={true}
-              />
-            </div>
-          )}
-
-          {tests.length !== testsDetails?.testCompleted && !isLoading && (
+          <div className={s.navigationButtonsWrapper}>
             <button
-              className={s.loadMoreButton}
-              onClick={() => setPage((prevPage) => prevPage + 1)}
+              className={`${s.navigationButton} ${
+                isTestHistory ? s.activeButton : ""
+              }`}
+              onClick={() => setIsTestHistory(true)}
             >
-              load more
+              Tests history
             </button>
+            <button
+              className={`${s.navigationButton} ${
+                isTestHistory ? "" : s.activeButton
+              }`}
+              onClick={() => setIsTestHistory(false)}
+            >
+              Achievements
+            </button>
+          </div>
+
+          {isTestHistory ? (
+            <>
+              {tests.length !== 0 && (
+                <TestsHistory
+                  onSortChange={handleSortChange}
+                  tests={tests}
+                  sortValue={sortValue}
+                />
+              )}
+
+              {isLoading && (
+                <div className={s.accountLoader}>
+                  <ThreeDots
+                    height="80"
+                    width="80"
+                    radius="9"
+                    color="var(--main-color)"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    visible={true}
+                  />
+                </div>
+              )}
+
+              {tests.length !== testsDetails?.testCompleted && !isLoading && (
+                <button
+                  className={s.loadMoreButton}
+                  onClick={() => setPage((prevPage) => prevPage + 1)}
+                >
+                  load more
+                </button>
+              )}
+            </>
+          ) : (
+            <AchievementsList achievements={achievements} />
           )}
         </>
       ) : (
-        <AchievementsList achievements={achievements} />
+        <div className={s.verifyWrapper}>
+          Your account is not verified. <br /> To use the account statistics,
+          you need to verify it. <br /> If you already verified, reload the
+          window.
+          <button
+            disabled={isButtonDisabled}
+            className={s.verifyButton}
+            onClick={() => {
+              resendEmail(currentUser.email);
+              setIsButtonDisabled(true);
+            }}
+          >
+            <TbMailFast size={28} /> Send the verification email again.
+          </button>
+        </div>
       )}
     </div>
   );

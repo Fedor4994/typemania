@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   Achievements,
   initialAchievements,
@@ -27,6 +28,7 @@ export const register = createAsyncThunk(
         token: string | null;
         user: UserInfo;
       }>("/users/register", userData);
+      toast.success("Verification email sent");
       token.set(data.token);
 
       return data;
