@@ -30,6 +30,8 @@ const initialState: AuthSlice = {
     _id: "",
     avatarURL: "",
     verify: false,
+    currentWordIndex: 0,
+    isPartyLeader: false,
   },
   leaderboardPlace: 0,
   achievements: initialAchievements,
@@ -52,6 +54,9 @@ const authSlice = createSlice({
           createdAt: "",
           _id: "",
           avatarURL: "",
+          isPartyLeader: false,
+
+          currentWordIndex: 0,
         };
         state.token = null;
         state.isLoggedIn = false;
@@ -66,6 +71,8 @@ const authSlice = createSlice({
         state.user.avatarURL = payload?.user.avatarURL || "";
         state.user._id = payload?.user._id || "";
         state.user.verify = payload?.user.verify;
+        state.user.isPartyLeader = payload?.user.isPartyLeader;
+        state.user.currentWordIndex = payload?.user.currentWordIndex;
 
         state.isLoggedIn = true;
         state.isFetchingCurrentUser = false;
@@ -101,6 +108,8 @@ const authSlice = createSlice({
           state.user.avatarURL = payload?.user.avatarURL || "";
           state.user._id = payload?.user._id || "";
           state.user.verify = payload?.user.verify;
+          state.user.isPartyLeader = payload?.user.isPartyLeader;
+          state.user.currentWordIndex = payload?.user.currentWordIndex;
 
           state.token = payload?.token || null;
           state.isLoggedIn = true;

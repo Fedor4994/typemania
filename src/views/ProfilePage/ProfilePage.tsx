@@ -47,7 +47,7 @@ const ProfilePage = () => {
             details={userDetails}
             currentUser={user as UserInfo}
           />
-          <AchievementsList achievements={achievements} />;
+          <AchievementsList achievements={achievements} />
         </>
       ) : (
         <div className={s.profileLoader}>

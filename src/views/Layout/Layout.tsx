@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { FaInfo, FaCrown, FaKeyboard, FaRegUser, FaCode } from "react-icons/fa";
+import { FaInfo, FaCrown, FaKeyboard, FaRegUser, FaCode, FaUserFriends } from "react-icons/fa";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { IoMdMail } from "react-icons/io";
 import Logo from "../../components/Logo/Logo";
@@ -22,9 +22,16 @@ const Layout = () => {
             <ul className={s.iconsList}>
               <li>
                 <Link to="/">
-                  <FaKeyboard className={s.infoIcon} size={18} />
+                  <FaKeyboard className={s.infoIcon} size={20} />
                 </Link>
               </li>
+
+              <li>
+                <Link to="/multiplayer">
+                  <FaUserFriends className={s.infoIcon} size={20} />
+                </Link>
+              </li>
+              
               <li>
                 <Link to="/leaderbord">
                   <FaCrown className={s.infoIcon} size={20} />
@@ -40,6 +47,7 @@ const Layout = () => {
                   <AiTwotoneSetting className={s.infoIcon} size={18} />
                 </Link>
               </li>
+              
             </ul>
           </div>
           {isLoggedIn ? (

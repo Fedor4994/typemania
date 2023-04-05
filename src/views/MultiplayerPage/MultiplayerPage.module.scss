@@ -1,0 +1,89 @@
+.multiplayerPage {
+  margin-top: 20px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1200;
+}
+
+.recordModal {
+  display: flex;
+  border-radius: 10px;
+  padding: 50px 70px;
+  flex-direction: column;
+  position: absolute;
+  background-color: var(--table-color);
+  left: 50%;
+  top: 50%;
+  max-height: 90vh;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+}
+
+.privateGameWrapper {
+  padding: 20px;
+  background-color: var(--table-color);
+  border-radius: 10px;
+  border: 2px solid var(--main-color);
+  width: 45%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.privateTitle {
+  font-weight: 600;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--correct-color);
+  margin-bottom: 10px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.privateSubTitle {
+  font-size: 22px;
+  color: var(--correct-color);
+}
+
+.privateButton {
+  cursor: pointer;
+  background-color: var(--nav-bar-color);
+  color: var(--correct-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 45%;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid var(--main-color);
+
+  transition: 200ms all ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
+    background-color: var(--correct-color);
+    color: var(--nav-bar-color);
+    border: none;
+  }
+}

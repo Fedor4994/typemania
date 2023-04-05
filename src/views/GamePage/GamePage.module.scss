@@ -1,0 +1,249 @@
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  height: 30px;
+  width: 30px;
+  pointer-events: none;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profileWrapper {
+  width: 100%;
+  color: var(--correct-color);
+}
+
+.profileLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--correct-color);
+}
+
+.playersList {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.playerCard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.typingArea {
+  position: relative;
+  display: flex;
+  width: 99%;
+  word-break: break-all;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.gamePage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.startButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  cursor: pointer;
+  background-color: var(--nav-bar-color);
+  color: var(--correct-color);
+
+  width: 250px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+
+  transition: 200ms all ease;
+
+  &:hover {
+    background-color: var(--correct-color);
+    color: var(--nav-bar-color);
+  }
+}
+
+.nextGameButton {
+  position: absolute;
+  top: 5px;
+  right: 170px;
+
+  cursor: pointer;
+  background-color: var(--nav-bar-color);
+  color: var(--correct-color);
+
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+
+  transition: 200ms all ease;
+
+  &:hover {
+    background-color: var(--correct-color);
+    color: var(--nav-bar-color);
+  }
+}
+
+.startNotify {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 18px;
+  color: var(--correct-color);
+}
+
+.gameSubTitle {
+  margin-right: auto;
+  margin-left: 5px;
+  font-size: 22px;
+  color: var(--correct-color);
+  margin-bottom: 20px;
+}
+
+.gameCode {
+  text-decoration: underline;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1200;
+}
+
+.timerModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  border-radius: 10px;
+  padding: 15px 30px;
+  flex-direction: column;
+  position: absolute;
+  background-color: var(--table-color);
+  color: var(--correct-color);
+  left: 50%;
+  top: 50%;
+  max-height: 90vh;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+}
+
+.timerNumber {
+  font-size: 50px;
+}
+
+.userResults {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+  gap: 20px;
+}
+
+.replayButton {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+
+  cursor: pointer;
+  background-color: var(--nav-bar-color);
+  color: var(--correct-color);
+
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+
+  transition: 200ms all ease;
+
+  &:hover {
+    background-color: var(--correct-color);
+    color: var(--nav-bar-color);
+  }
+}
+
+.transactionHistory {
+  width: 100%;
+
+  th,
+  td {
+    padding: 8px;
+  }
+}
+
+.place {
+  width: 10%;
+  text-align: center;
+}
+
+.profileLink {
+  color: var(--correct-color);
+}
+
+.userBody {
+  background-color: var(--correct-color);
+  color: var(--nav-bar-color);
+
+  .profileLink {
+    color: var(--nav-bar-color);
+  }
+}
+.crownPlace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.nameCol {
+  margin-left: 50px;
+  width: 300px;
+}
+
+.tableNameWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 70px;
+  gap: 10px;
+}

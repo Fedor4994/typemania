@@ -4,6 +4,8 @@ export type User = {
   email: string;
   avatarURL?: string;
   verify?: boolean;
+  isPartyLeader?: boolean;
+  currentWordIndex?: number;
   password: string;
   createdAt: string;
 };

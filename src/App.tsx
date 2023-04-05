@@ -23,6 +23,8 @@ import ResultsPage from "./views/ResultsPage/ResultsPage";
 import LeaderboardPage from "./views/LeaderbordPage/LeaderboardPage";
 import ProfilePage from "./views/ProfilePage/ProfilePage";
 import NotFoundPage from "./views/NotFoundPage/NotFoundPage";
+import MultiplayerPage from "./views/MultiplayerPage/MultiplayerPage";
+import GamePage from "./views/GamePage/GamePage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -49,6 +51,8 @@ function App() {
           <Route path="/leaderbord" element={<LeaderboardPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/multiplayer" element={<MultiplayerPage />} />
+          <Route path="/multiplayer/:gameId" element={<GamePage />} />
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/profile/:userId" element={<ProfilePage />} />
