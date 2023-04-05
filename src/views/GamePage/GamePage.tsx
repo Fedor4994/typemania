@@ -17,6 +17,7 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import { toast } from "react-toastify";
 import { formatPercentage } from "../../utils/helpers";
 import useWords from "../../hooks/useWords";
+import TimerModal from "../../components/TimerModal/TimerModal";
 
 const GamePage = () => {
   const [gameState, setGameState] = useState<Game>({
@@ -327,14 +328,7 @@ const GamePage = () => {
         </table>
       )}
 
-      {countDown && gameState.isOpen && (
-        <div className={s.backdrop}>
-          <div className={s.timerModal}>
-            Seconds left:{" "}
-            <span className={s.timerNumber}>{Number(countDown) + 1}</span>
-          </div>
-        </div>
-      )}
+      {countDown && gameState.isOpen && <TimerModal countDown={countDown} />}
     </div>
   );
 };
