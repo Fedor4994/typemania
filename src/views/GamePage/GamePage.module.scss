@@ -1,48 +1,8 @@
-.nameWrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.avatar {
-  height: 30px;
-  width: 30px;
-  pointer-events: none;
-}
-
-.avatarImage {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.profileWrapper {
-  width: 100%;
-  color: var(--correct-color);
-}
-
-.profileLink {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--correct-color);
-}
-
 .playersList {
   display: flex;
   width: 100%;
   flex-direction: column;
   gap: 30px;
-}
-
-.playerCard {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 10px;
 }
 
 .typingArea {
@@ -64,62 +24,6 @@
   position: relative;
 }
 
-.startButton {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-
-  cursor: pointer;
-  background-color: var(--nav-bar-color);
-  color: var(--correct-color);
-
-  width: 250px;
-  height: 50px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-
-  transition: 200ms all ease;
-
-  &:hover {
-    background-color: var(--correct-color);
-    color: var(--nav-bar-color);
-  }
-}
-
-.nextGameButton {
-  position: absolute;
-  top: 5px;
-  right: 170px;
-
-  cursor: pointer;
-  background-color: var(--nav-bar-color);
-  color: var(--correct-color);
-
-  width: 150px;
-  height: 40px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-
-  transition: 200ms all ease;
-
-  &:hover {
-    background-color: var(--correct-color);
-    color: var(--nav-bar-color);
-  }
-}
-
-.startNotify {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  font-size: 18px;
-  color: var(--correct-color);
-}
-
 .gameSubTitle {
   margin-right: auto;
   margin-left: 5px;
@@ -135,36 +39,4 @@
   align-items: center;
   gap: 7px;
   font-size: 14px;
-}
-
-.userResults {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-left: auto;
-  gap: 20px;
-}
-
-.replayButton {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-
-  cursor: pointer;
-  background-color: var(--nav-bar-color);
-  color: var(--correct-color);
-
-  width: 150px;
-  height: 40px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-
-  transition: 200ms all ease;
-
-  &:hover {
-    background-color: var(--correct-color);
-    color: var(--nav-bar-color);
-  }
 }

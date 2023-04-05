@@ -11,13 +11,12 @@ import GeneratedWords from "../../components/GeneratedWords/GeneratedWords";
 import UserTyping from "../../components/UserTyping/UserTyping";
 import { useGameTyping } from "../../hooks/useGameTyping";
 import { Test } from "../../types/test";
-import { FaCrown, FaUserPlus } from "react-icons/fa";
-import { RecordTypingModal } from "../../components/RecordTyping/RecordTypingModal";
-import ProgressBar from "../../components/ProgressBar/ProgressBar";
+import { FaUserPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import useWords from "../../hooks/useWords";
 import TimerModal from "../../components/TimerModal/TimerModal";
 import GameResultsTable from "../../GameResultsTable/GameResultsTable";
+import PlayerCard from "../../components/PlayerCard/PlayerCard";
 
 const GamePage = () => {
   const [gameState, setGameState] = useState<Game>({
@@ -29,7 +28,7 @@ const GamePage = () => {
     updatedAt: "",
     words: [],
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [usersList, setUsersList] = useState<User[]>([]);
   const [showButton, setShowButton] = useState(true);
   const [countDown, setCountDown] = useState("");
@@ -132,11 +131,6 @@ const GamePage = () => {
     }
   }, [gameId, isLoggedIn]);
 
-  const startGameHandler = () => {
-    socket.emit("TIMER", { userId: currentUser._id, gameID: gameId });
-    setShowButton(false);
-  };
-
   return (
     <div className={s.gamePage}>
       {gameState.isOpen && (
@@ -177,99 +171,15 @@ const GamePage = () => {
 
       <div className={s.playersList}>
         {usersList.map((player) => (
-          <div className={s.playerCard} key={player._id}>
-            <div className={s.profileWrapper}>
-              <div className={s.nameWrapper}>
-                <a
-                  className={s.profileLink}
-                  href={`/profile/${player._id}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <div className={s.avatar}>
-                    <img
-                      className={s.avatarImage}
-                      src={
-                        player.avatarURL && player.avatarURL?.length > 100
-                          ? player.avatarURL
-                          : `https://typemania.fly.dev/${player.avatarURL}`
-                      }
-                      alt="avatar"
-                    />
-                  </div>
-                  {player.name} {currentUser._id === player._id && "(you)"}
-                </a>
-
-                {player.isPartyLeader && <FaCrown />}
-                {playerResults.map(
-                  (playerResult, index) =>
-                    playerResult.userId === player._id && (
-                      <div className={s.userResults} key={index}>
-                        <p>Time spend: {playerResult.userResults.time}s</p>
-
-                        {currentUser._id === player._id && (
-                          <>
-                            <button
-                              className={s.replayButton}
-                              onClick={() => {
-                                setIsModalOpen(true);
-                              }}
-                            >
-                              Watch replay
-                            </button>
-                            {isModalOpen && (
-                              <RecordTypingModal
-                                words={gameState.words.join(" ")}
-                                typingEvents={playerResult.userResults.record}
-                                setIsModalOpen={setIsModalOpen}
-                              />
-                            )}
-                          </>
-                        )}
-                      </div>
-                    )
-                )}
-              </div>
-            </div>
-
-            {player.isPartyLeader &&
-              player._id === currentUser._id &&
-              showButton && (
-                <button className={s.startButton} onClick={startGameHandler}>
-                  Start game
-                </button>
-              )}
-
-            {player.isPartyLeader &&
-              player._id === currentUser._id &&
-              gameState.isOver && (
-                <button
-                  className={s.nextGameButton}
-                  onClick={() => {
-                    socket.emit("NEXT_GAME", gameState._id, words);
-                  }}
-                >
-                  Next game
-                </button>
-              )}
-
-            {!player.isPartyLeader &&
-              player._id === currentUser._id &&
-              gameState.isOpen && (
-                <p className={s.startNotify}>
-                  Only leader of party can start the game
-                </p>
-              )}
-
-            {player.currentWordIndex ? (
-              <ProgressBar
-                wordIndex={player.currentWordIndex}
-                words={gameState.words.join(" ")}
-              />
-            ) : (
-              ""
-            )}
-          </div>
+          <PlayerCard
+            key={player._id}
+            player={player}
+            gameState={gameState}
+            playersResults={playerResults}
+            words={words}
+            showStartButton={showButton}
+            setShowButton={setShowButton}
+          />
         ))}
       </div>
 
