@@ -4,7 +4,7 @@ import socket from "../../utils/socketConfig";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/auth-selectors";
 import { Game } from "../../types/games";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateGame from "../../components/CreateGame/CreateGame";
 import JoinGame from "../../components/JoinGame/JoinGame";
 import custom from "../../assets/custom.svg";
@@ -105,10 +105,23 @@ const MultiplayerPage = () => {
             )}
           </div>
         ) : (
-          <p>PLEASE VERIFY YOUR ACCOUNT TO USE MULTIPLAYER MODE</p>
+          <p className={s.privateSubTitle}>
+            PLEASE VERIFY YOUR ACCOUNT TO USE MULTIPLAYER MODE
+          </p>
         )
       ) : (
-        <p>LOGIN TO USE MULTIPLAYER MODE</p>
+        <p className={s.privateSubTitle}>
+          <Link
+            style={{
+              color: "var(--correct-color)",
+              textDecoration: "underline",
+            }}
+            to="/login"
+          >
+            LOGIN TO
+          </Link>{" "}
+          USE MULTIPLAYER MODE
+        </p>
       )}
     </div>
   );
