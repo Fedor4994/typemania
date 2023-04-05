@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import s from "./GamePage.module.scss";
 import { useEffect, useState } from "react";
 import socket from "../../utils/socketConfig";
@@ -15,9 +15,9 @@ import { FaCrown, FaUserPlus } from "react-icons/fa";
 import { RecordTypingModal } from "../../components/RecordTyping/RecordTypingModal";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import { toast } from "react-toastify";
-import { formatPercentage } from "../../utils/helpers";
 import useWords from "../../hooks/useWords";
 import TimerModal from "../../components/TimerModal/TimerModal";
+import GameResultsTable from "../../GameResultsTable/GameResultsTable";
 
 const GamePage = () => {
   const [gameState, setGameState] = useState<Game>({
@@ -171,7 +171,9 @@ const GamePage = () => {
         <UserTyping words={gameState.words.join(" ")} userInput={typed} />
       </div>
 
-      <h2>{errorMessage && "The game has already started :("}</h2>
+      <h2 className={s.gameSubTitle}>
+        {errorMessage && "This game has already started :("}
+      </h2>
 
       <div className={s.playersList}>
         {usersList.map((player) => (
@@ -272,60 +274,10 @@ const GamePage = () => {
       </div>
 
       {playerResults.length !== 0 && (
-        <table className={s.transactionHistory}>
-          <thead>
-            <tr>
-              <th className={s.place}>Place</th>
-              <th className={s.nameCol}>Name</th>
-              <th>WPM</th>
-              <th>Accuracy</th>
-            </tr>
-          </thead>
-
-          {playerResults.map((elem, index) => {
-            const finishedUser = usersList.find(
-              (user) => user._id === elem.userId
-            );
-            return (
-              <tbody key={elem.userId}>
-                <tr
-                  className={`${s.tr} 
-               ${elem.userId === currentUser._id ? s.userBody : ""}`}
-                >
-                  <td>
-                    {index === 0 ? <FaCrown className={s.crown} /> : index + 1}{" "}
-                  </td>
-
-                  <td>
-                    <Link
-                      className={s.profileLink}
-                      to={`/profile/${elem.userId}`}
-                    >
-                      <div className={s.tableNameWrapper}>
-                        <div className={s.avatar}>
-                          <img
-                            className={s.avatarImage}
-                            src={
-                              finishedUser?.avatarURL &&
-                              finishedUser?.avatarURL?.length > 100
-                                ? finishedUser?.avatarURL
-                                : `https://typemania.fly.dev/${finishedUser?.avatarURL}`
-                            }
-                            alt="avatar"
-                          />
-                        </div>
-
-                        {finishedUser?.name}
-                      </div>
-                    </Link>
-                  </td>
-                  <td>{elem.userResults.wpm}</td>
-                  <td>{formatPercentage(elem.userResults.accuracy)}</td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
+        <GameResultsTable
+          playersResults={playerResults}
+          usersList={usersList}
+        />
       )}
 
       {countDown && gameState.isOpen && <TimerModal countDown={countDown} />}
