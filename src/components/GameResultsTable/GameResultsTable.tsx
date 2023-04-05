@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { User } from "../types/auth";
-import { Test } from "../types/test";
+import { User } from "../../types/auth";
+import { Test } from "../../types/test";
 import s from "./GameResultsTable.module.scss";
-import { selectUser } from "../redux/auth/auth-selectors";
+import { selectUser } from "../../redux/auth/auth-selectors";
 import { FaCrown } from "react-icons/fa";
-import { formatPercentage } from "../utils/helpers";
+import { formatPercentage } from "../../utils/helpers";
 
 const GameResultsTable = ({
   playersResults,

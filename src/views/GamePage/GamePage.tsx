@@ -15,7 +15,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import useWords from "../../hooks/useWords";
 import TimerModal from "../../components/TimerModal/TimerModal";
-import GameResultsTable from "../../GameResultsTable/GameResultsTable";
+import GameResultsTable from "../../components/GameResultsTable/GameResultsTable";
 import PlayerCard from "../../components/PlayerCard/PlayerCard";
 
 const GamePage = () => {
