@@ -35,19 +35,6 @@
   gap: 10px;
 }
 
-.avatar {
-  height: 30px;
-  width: 30px;
-  pointer-events: none;
-}
-
-.avatarImage {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .profileWrapper {
   width: 100%;
   color: var(--correct-color);

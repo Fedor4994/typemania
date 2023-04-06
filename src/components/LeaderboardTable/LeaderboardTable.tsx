@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/auth-selectors";
 import { FaCrown } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Avatar from "../Avatar/Avatar";
 
 const LeaderboardTable = ({
   leaderboard,
@@ -42,18 +43,7 @@ const LeaderboardTable = ({
                     to={`/profile/${position.user._id}`}
                   >
                     <div className={s.nameWrapper}>
-                      <div className={s.avatar}>
-                        <img
-                          className={s.avatarImage}
-                          src={
-                            position.user.avatarURL &&
-                            position.user.avatarURL?.length > 100
-                              ? position.user.avatarURL
-                              : `https://typemania.fly.dev/${position.user.avatarURL}`
-                          }
-                          alt="avatar"
-                        />
-                      </div>
+                      <Avatar user={position.user} />
 
                       {position.user.name}
                     </div>

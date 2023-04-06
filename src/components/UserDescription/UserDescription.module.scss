@@ -30,19 +30,6 @@
   background-color: var(--backgroud-color);
 }
 
-.avatar {
-  height: 110px;
-  width: 110px;
-  pointer-events: none;
-}
-
-.avatarImage {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .userWrapper {
   display: flex;
   align-items: center;

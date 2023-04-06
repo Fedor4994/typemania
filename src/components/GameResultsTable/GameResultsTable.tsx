@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
-import { User } from "../../types/auth";
+import { User, initialUser } from "../../types/auth";
 import { Test } from "../../types/test";
 import s from "./GameResultsTable.module.scss";
 import { selectUser } from "../../redux/auth/auth-selectors";
 import { FaCrown } from "react-icons/fa";
 import { formatPercentage } from "../../utils/helpers";
+import Avatar from "../Avatar/Avatar";
 
 const GameResultsTable = ({
   playersResults,
@@ -49,18 +50,7 @@ const GameResultsTable = ({
                   rel="noreferrer"
                 >
                   <div className={s.tableNameWrapper}>
-                    <div className={s.avatar}>
-                      <img
-                        className={s.avatarImage}
-                        src={
-                          finishedUser?.avatarURL &&
-                          finishedUser?.avatarURL?.length > 100
-                            ? finishedUser?.avatarURL
-                            : `https://typemania.fly.dev/${finishedUser?.avatarURL}`
-                        }
-                        alt="avatar"
-                      />
-                    </div>
+                    <Avatar user={finishedUser || initialUser} />
 
                     {finishedUser?.name}
                   </div>

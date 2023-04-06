@@ -12,6 +12,15 @@ export type User = {
 
 export type UserInfo = Omit<User, "password">;
 
+export const initialUser = {
+  _id: "",
+  name: "",
+  email: "",
+  avatarURL: "",
+  password: "",
+  createdAt: "",
+};
+
 export type Achievements = {
   speed10: boolean;
   speed30: boolean;

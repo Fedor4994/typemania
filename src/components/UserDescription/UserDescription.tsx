@@ -3,7 +3,7 @@ import { FaLink, FaPencilAlt } from "react-icons/fa";
 import { TestsDetails } from "../../types/test";
 import s from "./UserDescription.module.scss";
 import { formatPercentage } from "../../utils/helpers";
-import { UserInfo } from "../../types/auth";
+import { User, UserInfo } from "../../types/auth";
 import { useLocation } from "react-router-dom";
 import { getLeaderboardPlace } from "../../redux/auth/auth-operations";
 import { useAppDispatch } from "../../redux/store";
@@ -12,6 +12,7 @@ import { selectLeaderboardPlace } from "../../redux/auth/auth-selectors";
 import { toast } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 import UserEditModal from "../UserEditModal/UserEditModal";
+import Avatar from "../Avatar/Avatar";
 
 const UserDescription = ({
   details,
@@ -40,17 +41,8 @@ const UserDescription = ({
     <div className={s.userInfo}>
       <div className={s.mainWrapper}>
         <div className={s.userWrapper}>
-          <div className={s.avatar}>
-            <img
-              className={s.avatarImage}
-              src={
-                currentUser.avatarURL && currentUser.avatarURL?.length > 100
-                  ? currentUser.avatarURL
-                  : `https://typemania.fly.dev/${currentUser.avatarURL}`
-              }
-              alt="avatar"
-            />
-          </div>
+          <Avatar size="big" user={currentUser as User} />
+
           <div>
             <p className={s.username}>{currentUser.name}</p>
             <p className={s.joined}>

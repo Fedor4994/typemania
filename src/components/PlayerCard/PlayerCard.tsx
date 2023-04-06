@@ -9,6 +9,7 @@ import socket from "../../utils/socketConfig";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { useState } from "react";
 import { RecordTypingModal } from "../RecordTyping/RecordTypingModal";
+import Avatar from "../Avatar/Avatar";
 
 interface PlayerCardProps {
   player: User;
@@ -48,17 +49,7 @@ const PlayerCard = ({
             target="_blank"
             rel="noreferrer"
           >
-            <div className={s.avatar}>
-              <img
-                className={s.avatarImage}
-                src={
-                  player.avatarURL && player.avatarURL?.length > 100
-                    ? player.avatarURL
-                    : `https://typemania.fly.dev/${player.avatarURL}`
-                }
-                alt="avatar"
-              />
-            </div>
+            <Avatar size="medium" user={player} />
             {player.name} {currentUser._id === player._id && "(you)"}
           </a>
 

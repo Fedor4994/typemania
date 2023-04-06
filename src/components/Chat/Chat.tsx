@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/auth-selectors";
 import socket from "../../utils/socketConfig";
 import { Game } from "../../types/games";
+import Avatar from "../Avatar/Avatar";
 
 const Chat = ({
   messageList,
@@ -37,17 +38,7 @@ const Chat = ({
           const { message: messageText, user } = message;
           return (
             <li key={index} className={s.messageWrapper}>
-              <div className={s.avatar}>
-                <img
-                  className={s.avatarImage}
-                  src={
-                    user?.avatarURL && user?.avatarURL?.length > 100
-                      ? user?.avatarURL
-                      : `https://typemania.fly.dev/${user?.avatarURL}`
-                  }
-                  alt="avatar"
-                />
-              </div>
+              <Avatar size="medium" user={user} />
               <div className={s.messageInfo}>
                 <p>
                   {user.name} {user._id === currentUser._id ? "(you)" : ""}
