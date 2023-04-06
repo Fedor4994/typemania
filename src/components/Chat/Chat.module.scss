@@ -1,0 +1,88 @@
+.chatWrapper {
+  height: 300px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: var(--table-color);
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: auto;
+}
+
+.chatInput {
+  border: none;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--clue-color);
+  background-color: var(--backgroud-color);
+
+  outline: 1px solid var(--words-color);
+}
+
+.messagesList {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chatTitle {
+  margin-right: auto;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--correct-color);
+  margin-bottom: 10px;
+}
+
+.joinedUserWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 35px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--main-color);
+
+  background-color: var(--backgroud-color);
+}
+
+.messageWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--main-color);
+
+  background-color: var(--backgroud-color);
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  pointer-events: none;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message {
+  color: var(--clue-color);
+}

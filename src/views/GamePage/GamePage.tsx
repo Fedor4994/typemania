@@ -17,6 +17,7 @@ import useWords from "../../hooks/useWords";
 import TimerModal from "../../components/TimerModal/TimerModal";
 import GameResultsTable from "../../components/GameResultsTable/GameResultsTable";
 import PlayerCard from "../../components/PlayerCard/PlayerCard";
+import Chat from "../../components/Chat/Chat";
 
 const GamePage = () => {
   const [gameState, setGameState] = useState<Game>({
@@ -38,6 +39,9 @@ const GamePage = () => {
       userResults: Test;
       userId: string;
     }[]
+  >([]);
+  const [messageList, setMessageList] = useState<
+    { user: User; message: string }[]
   >([]);
   const { words, updateWords } = useWords();
 
@@ -96,6 +100,14 @@ const GamePage = () => {
     socket.on("PLAYER_FINISH", (data) => {
       setPlayerResults((prev) => [...prev, data]);
     });
+
+    socket.on(
+      "UPDATE_CHAT",
+      ({ user, message }: { user: User; message: string }) => {
+        setMessageList((prev) => [...prev, { user, message }]);
+        console.log(message);
+      }
+    );
 
     return () => {
       socket.removeAllListeners();
@@ -187,6 +199,14 @@ const GamePage = () => {
         <GameResultsTable
           playersResults={playerResults}
           usersList={usersList}
+        />
+      )}
+
+      {(gameState.isOpen || gameState.isOver) && (
+        <Chat
+          messageList={messageList}
+          usersList={usersList}
+          gameState={gameState}
         />
       )}
 
