@@ -9,8 +9,8 @@ import {
 } from "../../types/auth";
 import { AuthSlice } from "./authSlice";
 
-// axios.defaults.baseURL = "https://typemania.fly.dev/api";
-axios.defaults.baseURL = "http://localhost:8080/api";
+axios.defaults.baseURL = "https://typemania.fly.dev/api";
+// axios.defaults.baseURL = "http://localhost:8080/api";
 
 const token = {
   set(token: string | null) {
