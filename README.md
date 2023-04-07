@@ -1,6 +1,6 @@
 # About
 
-Typemania is a minimalistic and customizable typing test. It features many test modes, an account system to save your typing speed history, and user-configurable features such as themes. Typemania attempts to emulate the experience of natural keyboard typing during a typing test, by unobtrusively presenting the text prompts and displaying typed characters in-place, providing straightforward, real-time feedback on typos, speed, and accuracy.
+Typemania is a minimalistic and customizable typing test. It features many test modes, an account system to save your typing speed history, multiplayer mode (PvP with friends) and user-configurable features such as themes. Typemania attempts to emulate the experience of natural keyboard typing during a typing test, by unobtrusively presenting the text prompts and displaying typed characters in-place, providing straightforward, real-time feedback on typos, speed, and accuracy.
 Test yourself in various modes, track your progress and improve your speed.
 
 # Features
@@ -16,6 +16,7 @@ Test yourself in various modes, track your progress and improve your speed.
 - achievements
 - leaderboard
 - tests replays
+- multiplayer PvP with friends
 - hardcore mode
 - and much more
 
